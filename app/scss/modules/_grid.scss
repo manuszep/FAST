@@ -36,10 +36,6 @@ $FAST-grid-use-words: false !default;
 @function fast-grid-col-class($prefix, $number) {
     $num: fast-number-as-word($number);
 
-    @if $prefix == false {
-
-    }
-
     @if $FAST-grid-use-words {
         @if $prefix == false {
             $selector: '.#{$num}, .c#{$number}';
@@ -60,6 +56,57 @@ $FAST-grid-use-words: false !default;
 /* Mixins.
    ===================================================== */
 
+@mixin fast-grid-columns-styles($prefix: false) {
+    @if $prefix == false {
+        $prefix: '';
+    } @else {
+        $prefix: '#{$prefix}-';
+    }
+
+    .#{$prefix}start {
+        justify-content: flex-start;
+        text-align: start;
+    }
+
+    .#{$prefix}center {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .#{$prefix}end {
+        justify-content: flex-end;
+        text-align: end;
+    }
+
+    .#{$prefix}top {
+        align-items: flex-start;
+    }
+
+    .#{$prefix}middle {
+        align-items: center;
+    }
+
+    .#{$prefix}bottom {
+        align-items: flex-end;
+    }
+
+    .#{$prefix}around {
+        justify-content: space-around;
+    }
+
+    .#{$prefix}between {
+        justify-content: space-between;
+    }
+
+    .#{$prefix}first {
+        order: -1;
+    }
+
+    .#{$prefix}last {
+        order: 1;
+    }
+}
+
 @mixin fast-grid-columns($prefix, $max-columns, $use-words: false) {
     $one-column-width: (100% / $max-columns);
 
@@ -73,55 +120,16 @@ $FAST-grid-use-words: false !default;
         }
 
         @if $i < $max-columns {
-            $selector: fast-grid-col-class('#{$prefix}-offset', $i);
+            @if $prefix == false {
+                $selector: fast-grid-col-class('offset', $i);
+            } @else {
+                $selector: fast-grid-col-class('#{$prefix}-offset', $i);
+            }
 
             #{$selector} {
                 margin-left: ($one-column-width * $i);
             }
         }
-    }
-
-    .#{$prefix}-start {
-        justify-content: flex-start;
-        text-align: start;
-    }
-
-    .#{$prefix}-center {
-        justify-content: center;
-        text-align: center;
-    }
-
-    .#{$prefix}-end {
-        justify-content: flex-end;
-        text-align: end;
-    }
-
-    .#{$prefix}-top {
-        align-items: flex-start;
-    }
-
-    .#{$prefix}-middle {
-        align-items: center;
-    }
-
-    .#{$prefix}-bottom {
-        align-items: flex-end;
-    }
-
-    .#{$prefix}-around {
-        justify-content: space-around;
-    }
-
-    .#{$prefix}-between {
-        justify-content: space-between;
-    }
-
-    .#{$prefix}-first {
-        order: -1;
-    }
-
-    .#{$prefix}-last {
-        order: 1;
     }
 }
 
@@ -205,6 +213,8 @@ $FAST-grid-use-words: false !default;
         flex-direction: column-reverse;
     }
 
+    @include fast-grid-columns-styles();
+
     /**
      *  Generate columns styles for each breakpoint declared in $FAST-breakpoints-columns
      *  [1] - Get the media query data that matches the current breakpoint name and check that it exists ([1b])
@@ -233,8 +243,11 @@ $FAST-grid-use-words: false !default;
             @include fast-mq($name, $limit-query) {
                 // Generate the generic columns names (without media query prefix)
                 @include fast-grid-default-columns($columns-count, $FAST-grid-max-columns, true);
+
                 // Generate the prefixed columns names
                 @include fast-grid-columns($name, $columns-count, true);
+
+                @include fast-grid-columns-styles($name);
             }
         }
     }
