@@ -1,7 +1,7 @@
 {
-  "name": "FAST - Fast Application Styling Tools",
+  "name": "FAST",
   "version": "1.0.0",
-  "description": "",
+  "description": "Fast Application Styling Tools",
   "main": "index.js",
   "author": "Emmanuel Szep <manuszep@gmail.com>",
   "devDependencies": {
