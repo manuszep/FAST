@@ -11,8 +11,11 @@
 
 /* Variables.
    ===================================================== */
-// Base scale: 16, 20, 28, 36, 48, 62, 81, 106
+// Base scale: 16, 20, 24, 30, 36, 46, 58, 72
+
 $FAST-type-import: true !default;
+
+$FAST-phi: 1.618;
 
 $FAST-config-use-protocol: "http" !default;
 $FAST-config-base-size: 16px !default;
@@ -25,45 +28,51 @@ $FAST-base-line-height: 22px !default;
 $FAST-base-font-weight: 400 !default;
 
 $FAST-paragraph-font-size: $FAST-config-base-size !default;
-$FAST-paragraph-line-height: percentage($FAST-base-line-height / $FAST-config-base-size) !default;
+$FAST-paragraph-line-height: $FAST-base-line-height !default;
 
-$FAST-h1-font-size: 62px !default;
+$FAST-h1-font-size: 46px !default;
 $FAST-h1-font-weight: 100 !default;
 $FAST-h1-letter-spacing: -2px !default;
-$FAST-h1-line-height: percentage(70px / $FAST-h1-font-size) !default;
+$FAST-h1-line-height: 70px !default;
+$FAST-h1-margin: $FAST-base-line-height / 1.5 !default;
 
-$FAST-h2-font-size: 48px !default;
+$FAST-h2-font-size: 36px !default;
 $FAST-h2-font-weight: 300 !default;
 $FAST-h2-letter-spacing: -1px !default;
-$FAST-h2-line-height: percentage(54px / $FAST-h2-font-size) !default;
+$FAST-h2-line-height: 54px !default;
+$FAST-h2-margin: $FAST-base-line-height / 1.5 !default;
 
-$FAST-h3-font-size: 36px !default;
+$FAST-h3-font-size: 30px !default;
 $FAST-h3-font-weight: 400 !default;
 $FAST-h3-letter-spacing: 0 !default;
-$FAST-h3-line-height: percentage(42px / $FAST-h3-font-size) !default;
+$FAST-h3-line-height: 42px !default;
+$FAST-h3-margin: $FAST-base-line-height / 1.5 !default;
 
-$FAST-h4-font-size: 28px !default;
+$FAST-h4-font-size: 24px !default;
 $FAST-h4-font-weight: 400 !default;
 $FAST-h4-letter-spacing: 0 !default;
-$FAST-h4-line-height: percentage(32px / $FAST-h4-font-size) !default;
+$FAST-h4-line-height: 32px !default;
+$FAST-h4-margin: $FAST-base-line-height / 1.5 !default;
 
 $FAST-h5-font-size: 20px !default;
 $FAST-h5-font-weight: 700 !default;
 $FAST-h5-letter-spacing: 0 !default;
-$FAST-h5-line-height: percentage(26px / $FAST-h5-font-size) !default;
+$FAST-h5-line-height: $FAST-base-line-height !default;
+$FAST-h5-margin: $FAST-base-line-height / 2 !default;
 
 $FAST-h6-font-size: 16px !default;
 $FAST-h6-font-weight: 900 !default;
 $FAST-h6-letter-spacing: 0 !default;
-$FAST-h6-line-height: percentage(22px / $FAST-h6-font-size) !default;
+$FAST-h6-line-height: $FAST-base-line-height !default;
+$FAST-h6-margin: $FAST-base-line-height / 3 !default;
 
 $FAST-headings: (
-        $FAST-h1-font-size  $FAST-h1-font-weight  $FAST-h1-letter-spacing  $FAST-h1-line-height,
-        $FAST-h2-font-size  $FAST-h2-font-weight  $FAST-h2-letter-spacing  $FAST-h2-line-height,
-        $FAST-h3-font-size  $FAST-h3-font-weight  $FAST-h3-letter-spacing  $FAST-h3-line-height,
-        $FAST-h4-font-size  $FAST-h4-font-weight  $FAST-h4-letter-spacing  $FAST-h4-line-height,
-        $FAST-h5-font-size  $FAST-h5-font-weight  $FAST-h5-letter-spacing  $FAST-h5-line-height,
-        $FAST-h6-font-size  $FAST-h6-font-weight  $FAST-h6-letter-spacing  $FAST-h6-line-height
+        $FAST-h1-font-size  $FAST-h1-font-weight  $FAST-h1-letter-spacing  $FAST-h1-line-height  $FAST-h1-margin,
+        $FAST-h2-font-size  $FAST-h2-font-weight  $FAST-h2-letter-spacing  $FAST-h2-line-height  $FAST-h2-margin,
+        $FAST-h3-font-size  $FAST-h3-font-weight  $FAST-h3-letter-spacing  $FAST-h3-line-height  $FAST-h3-margin,
+        $FAST-h4-font-size  $FAST-h4-font-weight  $FAST-h4-letter-spacing  $FAST-h4-line-height  $FAST-h4-margin,
+        $FAST-h5-font-size  $FAST-h5-font-weight  $FAST-h5-letter-spacing  $FAST-h5-line-height  $FAST-h5-margin,
+        $FAST-h6-font-size  $FAST-h6-font-weight  $FAST-h6-letter-spacing  $FAST-h6-line-height  $FAST-h6-margin
 ) !default;
 
 
@@ -85,7 +94,7 @@ $FAST-headings: (
         letter-spacing: $letter-spacing;
     }
     @if $line-height != false {
-        line-height: $line-height;
+        @include fast-rem(line-height, $line-height);
     }
     @if $margin-bottom != false {
         @include fast-rem(margin-bottom, $margin-bottom);
@@ -116,7 +125,7 @@ $FAST-headings: (
         font-family: $FAST-font-family;
         font-size: 1em;
         font-weight: $FAST-base-font-weight;
-        line-height: $FAST-paragraph-line-height;
+        @include fast-rem(line-height, $FAST-paragraph-line-height);
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -129,7 +138,7 @@ $FAST-headings: (
         $font-weight: nth($heading, 2);
         $letter-spacing: nth($heading, 3);
         $line-height: nth($heading, 4);
-        $margin-bottom: $FAST-base-line-height;
+        $margin-bottom: nth($heading, 5);
 
         @if $font-weight == $FAST-base-font-weight {
             $font-weight: false;
@@ -145,5 +154,11 @@ $FAST-headings: (
 
     p {
         @include fast-type-set(false);
+    }
+
+    .lead {
+        font-size: 1.375em;
+        font-weight: 100;
+        @include fast-rem(line-height, $FAST-base-line-height * 1.188);
     }
 }
