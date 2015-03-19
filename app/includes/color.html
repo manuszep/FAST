@@ -1,0 +1,30 @@
+{% include "variables.tpl" %}
+
+<style>
+    .cell {
+        text-align: center;
+    }
+
+    .content {
+        padding: .5em 0;
+        margin: .25em;
+    }
+</style>
+
+<h2>Background</h2>
+<div class="row">
+    {% for entry in fast_color_list %}
+    <div class="cell c2">
+        <div class="content bg-{{entry.name}}">.{{entry.name}}</div>
+    </div>
+    {% endfor %}
+</div>
+
+<h2>Text</h2>
+<div class="row">
+    {% for entry in fast_color_list %}
+    <div class="cell c2">
+        <div class="content color-{{entry.name}}">.{{entry.name}}</div>
+    </div>
+    {% endfor %}
+</div>
