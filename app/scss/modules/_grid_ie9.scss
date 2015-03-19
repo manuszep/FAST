@@ -1,0 +1,160 @@
+/**
+ *  Tested on windows 7 - IE9 (see snapshots)
+ *  https://saucelabs.com/jobs/b0331c80fc434cbea8309028b12903c1/0002screenshot.png
+ *  https://saucelabs.com/jobs/b0331c80fc434cbea8309028b12903c1/0003screenshot.png
+ *  https://saucelabs.com/jobs/b0331c80fc434cbea8309028b12903c1/0004screenshot.png
+ */
+$FAST-grid-import: false;
+
+@import "grid";
+
+@mixin fast-grid-columns-styles($prefix: false) {
+    @if $prefix == false {
+        $prefix: '';
+    } @else {
+        $prefix: '#{$prefix}-';
+    }
+
+    .#{$prefix}start {
+        text-align: left;
+    }
+
+    .#{$prefix}center {
+        text-align: center;
+    }
+
+    .#{$prefix}end {
+        text-align: right;
+    }
+
+    .#{$prefix}top > * {
+        vertical-align: top;
+    }
+
+    .#{$prefix}middle > * {
+        vertical-align: middle;
+    }
+
+    .#{$prefix}bottom > * {
+        vertical-align: bottom;
+    }
+
+    .#{$prefix}around, .#{$prefix}between {
+        text-align: justify;
+    }
+}
+
+@mixin fast-grid-columns($prefix, $max-columns, $use-words: false) {
+    $one-column-width: (100% / $max-columns);
+
+    @for $i from 1 through $max-columns {
+        $num: fast-number-as-word($i);
+        $selector: fast-grid-col-class($prefix, $i);
+
+        #{$selector} {
+            width: ($one-column-width * $i);
+        }
+
+        @if $i < $max-columns {
+            @if $prefix == false {
+                $selector: fast-grid-col-class('offset', $i);
+            } @else {
+                $selector: fast-grid-col-class('#{$prefix}-offset', $i);
+            }
+
+            #{$selector} {
+                margin-left: ($one-column-width * $i);
+            }
+        }
+    }
+}
+
+/**
+ *  Set sizes for all the columns without prefixes, based on the ($vol-count) available columns.
+ *  [1] - We want to redefine every column class name unprefixed.
+ *        So we loop on the max-columns.
+ *  [2] - When a column number is above the current available columns, we store it for later
+ *  [3] - Now that all the exceding columns are grouped, we flatten them as a selector and set the rule to 100%
+ */
+@mixin fast-grid-default-columns($col-count, $col-max, $use-words: false) {
+    $maxed-columns: ();
+
+    @for $i from 1 through $col-max { // [1]
+        $num: fast-number-as-word($i);
+        $selector: fast-grid-col-class(false, $i);
+
+        @if ($i < $col-count) {
+            $w: ((100% / $col-count) * $i);
+
+            #{$selector} {
+                width: $w;
+            }
+        } @else {
+            $tmp: $maxed-columns;
+            $maxed-columns: append($maxed-columns, '#{$selector}'); // [2]
+        }
+    }
+
+    @if length($maxed-columns) > 0 {
+        #{fast-list-join($maxed-columns, ',')} { // [3]
+            width: 100%;
+        }
+    }
+}
+
+.row {
+    font-size: 0;
+}
+
+.col {
+    display: inline-block;
+    font-size: 16px;
+    width: 100% / $FAST-grid-max-columns;
+}
+
+.row.reverse {
+    direction: rtl;
+}
+
+.col.reverse {
+    direction: rtl;
+}
+
+@include fast-grid-columns-styles();
+
+/**
+ *  Generate columns styles for each breakpoint declared in $FAST-breakpoints-columns
+ *  [1] - Get the media query data that matches the current breakpoint name and check that it exists ([1b])
+ *  [2] - If the current breakpoints covers less columns than the maximum, the excedent columns will all be 100%.
+ *        Prepare a list to hold the classes names for these columns and group them later.
+ */
+@for $i from 1 through length($FAST-breakpoints-columns) {
+    $bp-columns: nth($FAST-breakpoints-columns, $i);
+    $name: nth($bp-columns, 1);
+    $columns-count: nth($bp-columns, 2);
+
+    $bp: fast-get-list-value-by-name($FAST-breakpoints, $name); // [1]
+
+    @if $bp != false { // [1b]
+        $min: nth($bp, 2);
+        $max: nth($bp, 3);
+        $maxed-columns: (); // [2]
+        $limit-query: true;
+
+        // If this is the last media query, we don't want a max-width
+        @if $i == length($FAST-breakpoints-columns) {
+            $limit-query: false;
+        }
+
+        // Start the media query
+        @include fast-mq($name, $limit-query) {
+            // Generate the generic columns names (without media query prefix)
+            @include fast-grid-default-columns($columns-count, $FAST-grid-max-columns, true);
+
+            // Generate the prefixed columns names
+            @include fast-grid-columns($name, $columns-count, true);
+
+            @include fast-grid-columns-styles($name);
+        }
+    }
+}
