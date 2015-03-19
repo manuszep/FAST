@@ -1,0 +1,228 @@
+/*-------------------------------------------------------*\
+    #FAST Toolkit
+\*-------------------------------------------------------*/
+
+/*
+ *  Provide a set of tools for other modules
+ */
+
+/* Variables.
+   ===================================================== */
+
+$FAST-base-size: 16px !default;
+$FAST-breakpoints: (
+    //  name        min-width   max-width
+        "tiny"      false       640px,
+        "small"     641px       1024px,
+        "medium"    1025px      1140px,
+        "large"     1141px      false
+) !default;
+
+
+/* Functions.
+   ===================================================== */
+
+/*  fast-em
+ *  This function converts a size in pixels to em's
+ */
+@function fast-em($target, $font-size: $FAST-base-size) {
+    @if $target == false {
+        @return ($font-size * 1em);
+    }
+
+    @return (($target / $font-size) * 1em);
+}
+
+/*  fast-number-as-word
+ *  Convert an integer to the corresponding word
+ */
+@function fast-number-as-word($number) {
+    $w: "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty", "twenty-one", "twenty-two", "twenty-three", "twenty-four", "twenty-five", "twenty-six", "twenty-seven", "twenty-eight", "twenty-nine", "thirty", "thirty-one", "thirty-two", "thirty-three", "thirty-four", "thirty-five", "thirty-six";
+
+    @return nth($w, $number);
+}
+
+/*  fast-build-mq
+ *  Build a media query based on a minimum and maximum size
+ */
+@function fast-build-mq($min: false, $max: false) {
+    @if $min == false and $max == false {
+        @return '@media only screen';
+    }
+
+    $part1: "";
+    $middle: "";
+    $part2: "";
+
+    @if $min {
+        $part1: "(min-width: #{$min})";
+    }
+
+    @if $max {
+        $part2: "(max-width: #{$max})";
+    }
+
+    @if $min and $max {
+        $middle: " and ";
+    }
+
+    $current_mq: $part1 + $middle + $part2;
+
+    @return 'only screen and #{$current_mq}';
+}
+
+/**
+ *  Returns the first item of a list
+ */
+@function fast-get-first-list-value($list) {
+    @return nth($list, 1);
+}
+
+/**
+ *  Returns the last item of a list
+ */
+@function fast-get-last-list-value($list) {
+    @return nth($list, length($list));
+}
+
+/**
+ *  Finds the last occurence of a value in a list and returns it's index
+ *  Sass @for loops can’t decrement.
+ *  Thus, we have to use a ugly workaround to make the loop increment on negative value,
+ *  then use the absolute value of $i. Not cool but it works.
+ */
+@function fast-get-last-list-index($list, $value) {
+    @for $i from length($list)*-1 through -1 {
+        @if nth($list, abs($i)) == $value {
+            @return abs($i);
+        }
+    }
+
+    @return null;
+}
+
+/**
+ *  Finds the first occurence of a value in a list and returns it's index
+ *  Sass has a built-in function for it but we provide a wrapper to match the fast-get-last-list-index
+ */
+@function fast-get-first-list-index($list, $value) {
+    @return index($list, $value)
+}
+
+/**
+ *  Add a value at the beginning of a list
+ */
+@function fast-list-prepend($list, $value) {
+    @return join($value, $list);
+}
+
+/**
+ *  Converts a list into a string with the given separator
+ */
+@function fast-list-join($list, $glue: '', $is-nested: false) {
+    $result: null;
+
+    @if length($list) == 0 {
+        @return "";
+    }
+    @for $i from 1 through length($list) {
+        $e: nth($list, $i);
+
+        @if type-of($e) == list {
+            $result: $result#{to-string($e, $glue, true)};
+        }
+
+        @else {
+            $result: if($i != length($list) or $is-nested, $result#{$e}#{$glue}, $result#{$e});
+        }
+    }
+
+    @return $result;
+}
+
+/**
+ *  Loops through a list, reads the first element of each value and compares to the $name attribute.
+ *  If the name matches, it returns the current list item.
+ */
+@function fast-get-list-value-by-name($list, $name) {
+    @for $i from 1 through length($list) {
+        $item: nth($list, $i);
+        $item-name: nth($item, 1);
+
+        @if $item-name == $name {
+            @return $item;
+        }
+    }
+
+    @return false;
+}
+
+
+/* Mixins.
+   ===================================================== */
+
+/*  fast-rem
+ *  Sets a rule in pixels (as a fallback) and in rem (for modern browsers)
+ */
+@mixin fast-rem($rule: font-size, $value: $FAST-base-size) {
+    #{$rule}: $value;
+    #{$rule}: (($value / $FAST-base-size) * 1rem);
+}
+
+/*  fast-build-mq
+ *  Declares a media query with a min and max width and includes the content
+ */
+@mixin fast-build-mq($min: false, $max: false) {
+    $mq: fast-build-mq($min, $max);
+
+    @media #{$mq} {
+        @content;
+    }
+}
+
+/*  fast-mq
+ *  Declares a media query based on a name and includes the content
+ *  The second argument allows to scope a min-width and above.
+ */
+@mixin fast-mq($name, $use_max: false) {
+    @each $bp in $FAST-breakpoints {
+        $bp-name: nth($bp, 1);
+        $min: nth($bp, 2);
+        $max: nth($bp, 3);
+
+        @if $use_max == false {
+            $max: false;
+        }
+
+        @if $bp-name == $name {
+            @include fast-build-mq($min, $max) {
+                @content;
+            }
+        }
+    }
+}
+
+/*  fast-mq-retina
+ *  Declares a media query for retina devices
+ */
+@mixin fast-mq-retina {
+    @media
+    only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (min--moz-device-pixel-ratio: 2),
+    only screen and (-o-min-device-pixel-ratio: 2/1),
+    only screen and (min-device-pixel-ratio: 2),
+    only screen and (min-resolution: 192dpi),
+    only screen and (min-resolution: 2dppx) {
+        @content;
+    }
+}
+
+/*  fast-mq-print
+ *  Declares a media query for print devices
+ */
+@mixin fast-mq-print {
+    @media print {
+        @content;
+    }
+}
+

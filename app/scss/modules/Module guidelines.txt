@@ -1,0 +1,58 @@
+Each module has it's own SCSS file.
+The module name is singular
+
+Basic module template :
+
+--------------------------------------------------------- CODE ---------------------------------------------------------
+
+/*-------------------------------------------------------*\
+    #FAST Module name
+
+    @depends on
+        - FAST-module-name
+\*-------------------------------------------------------*/
+
+/*
+ *  Module description and remarks
+ */
+
+/* Variables.
+   ===================================================== */
+
+$FAST-module-name-import: true !default;
+
+
+/* Functions.
+   ===================================================== */
+
+
+/* Mixins.
+   ===================================================== */
+
+
+/* Placeholders.
+   ===================================================== */
+
+
+/* Styles.
+   ===================================================== */
+   @if $FAST-module-name-import {
+
+   }
+
+------------------------------------------------------- END CODE -------------------------------------------------------
+
+
+- Each module should allow being included with as few dependencies as possible.
+- Every variables used in the module should be declared inside the variable block (with the !default argument)
+  Even if the variable belongs to another module, they should be declared with default values here.
+  If that other module is indeed imported, it will override the current defaults.
+- Functions and mixins should be made as specific as possible. The parts of those functions and mixins that can be
+  generalized should go in a global utilities module.
+- Each module styles should be wrapped inside an @if $FAST-module-name-import {} to allow importing the module's
+  variables, functions and mixins withtout importing the styles.
+- Styles that could be reused somewhere else, can be first declared as placeholders and then extended to avoid
+  duplication (both in the SASS and in the final CSS).
+- Variables that may be useful in the module's JS files should be injected in both with the task runner.
+  - Add a json file named /app/data/modules/module-name.json
+  - Import the variables in the variable block with the line <%= json_vars %>

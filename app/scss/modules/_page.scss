@@ -1,0 +1,60 @@
+/*-------------------------------------------------------*\
+    #FAST Page
+
+    @depends on
+        - FAST-Toolkit
+\*-------------------------------------------------------*/
+
+/*
+ *  Define main page and wrapper behviour
+ */
+
+/* Variables.
+   ===================================================== */
+$FAST-page-import: true !default;
+
+$FAST-breakpoints: (
+    //  name        min-width   max-width
+        "tiny"      false       640px,
+        "small"     641px       1024px,
+        "medium"    1025px      1140px,
+        "large"     1141px      false
+) !default;
+
+/* Functions.
+   ===================================================== */
+
+
+/* Mixins.
+   ===================================================== */
+
+
+/* Placeholders.
+   ===================================================== */
+
+
+/* Styles.
+   ===================================================== */
+@if $FAST-page-import {
+    .wrapper {
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    /**
+     *  Loop through each breakpoint and set the wrapper size to the min-width of that breakpoint
+     *  [1] : If a min-width is specified, wrap the rule in a media query.
+     */
+    @each $bp in $FAST-breakpoints {
+        $name: nth($bp, 1);
+        $min: nth($bp, 2);
+
+        @if $min != false { // [1]
+            @include fast-mq($name) {
+                .wrapper {
+                    width: $min;
+                }
+            }
+        }
+    }
+}

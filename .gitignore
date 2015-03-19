@@ -1,0 +1,11 @@
+node_modules
+tmp
+dist
+.npm-debug.log
+
+# OS X
+.DS_Store
+
+# Jetbrains specific
+.idea/
+.idea_modules/

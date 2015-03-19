@@ -1,0 +1,53 @@
+Each module has it's own JS file.
+The module name is singular
+
+Basic module template :
+
+--------------------------------------------------------- CODE ---------------------------------------------------------
+
+var FAST = FAST || {};
+
+/**
+ *  FAST.ModuleName
+ *
+ *  @depends on
+ *      - jQuery
+ *      - FAST.ModuleName
+ */
+
+(function(F, $, undefined) {
+    var M = F.ModuleName = {};
+
+    /**
+     *  Private area
+     */
+    var _private_var = ...;
+    var _private_var2 = ...;
+
+    var _private_method = function() {...};
+
+    /**
+     *  Public area
+     */
+    var var = ...;
+    var var2 = ...;
+
+    var method = function() {...};
+
+    /**
+     *  Module declarations
+     */
+    F.ModuleName = {
+        prop: var,
+        prop_2: var2,
+        method: method
+    };
+})(FAST, jQuery);
+
+------------------------------------------------------- END CODE -------------------------------------------------------
+
+
+- Each module should allow being included with as few dependencies as possible.
+- Variables that may be useful in the module's SCSS files should be injected in both with the task runner.
+  - Add a json file named /app/data/modules/module-name.json
+  - Import the variables in the variable block with the line <%= json_vars %>

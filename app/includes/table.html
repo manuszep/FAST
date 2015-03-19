@@ -1,0 +1,130 @@
+{% include "variables.tpl" %}
+
+{% macro table(classes, responsive, responsive_small, data) %}
+{% set resp_class = "" %}
+
+{% if responsive %}
+{% if responsive_small %}
+{% set resp_class = "small-table-resp" %}
+{% endif %}
+
+{% set resp_class += " tiny-table-resp " + responsive %}
+
+<div class="{{ resp_class }}">
+    {% endif %}
+
+    <table{% if classes %} class="{{classes}}"{% endif %}>
+    {% if data.thead %}
+    <thead>
+        <tr>
+            {% for entry in data.thead %}
+            <{{ entry.type }}>{{ entry.value }}</{{ entry.type }}>
+                                                 {% endfor %}
+        </tr>
+    </thead>
+    {% endif %}
+    {% if data.tfoot %}
+    <tfoot>
+        <tr>
+            {% for entry in data.tfoot %}
+            <{{ entry.type }}>{{ entry.value }}</{{ entry.type }}>
+                                                 {% endfor %}
+        </tr>
+    </tfoot>
+    {% endif %}
+    {% if data.tfoot %}
+    <tbody>
+        {% for row in data.tbody %}
+        <tr>
+            {% for entry in row %}
+            <{{ entry.type }}>{{ entry.value }}</{{ entry.type }}>
+        {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+    {% endif %}
+    </table>
+
+    {% if responsive %}
+</div>
+{% endif %}
+{% endmacro %}
+
+{% macro classInput(name) %}
+<label for="fld-class-{{name}}"><input type="checkbox" name="fld-class-{{name}}" id="fld-class-{{name}}" data-attr="class" value="{{name}}" /> .{{name}}</label>
+{% endmacro %}
+
+{% macro colorInput(name) %}
+<label for="fld-color-{{name}}"><input type="radio" name="fld-color" id="fld-color-{{name}}" data-attr="class" value="{{name}}" /> .{{name}}</label>
+{% endmacro %}
+
+{% macro divInput(name, txt) %}
+<label for="fld-div-{{name}}"><input type="checkbox" name="fld-div-{{name}}" id="fld-div-{{name}}" data-attr="div" value="{{name}}" /> {{txt}}</label>
+{% endmacro %}
+
+<style name="Demo styles">
+    body {
+        overflow-x: hidden;
+    }
+</style>
+
+<h2>Setup table</h2>
+<div id="styler">
+    <p><strong>Classes : </strong>
+        {{classInput("contrast")}}
+        {{classInput("breathe")}}
+        {{classInput("compact")}}
+        {{classInput("zebra")}}
+        {{classInput("bordered")}}
+        {{classInput("spaced")}}
+    </p>
+    <p><strong>Colors : </strong>
+        {{colorInput("highlight")}}
+        {% for color in colors %}
+        {{colorInput(color)}}
+        {% endfor %}
+    </p>
+    <p><strong>Responsive : </strong>
+        {{divInput("tiny-table-resp", "For tiny screens")}}
+        {{divInput("small-table-resp", "For small screens")}}
+    </p>
+    <p><strong>Responsive mode (requires responsive) : </strong>
+        {{divInput("scroll", "Optimize horizontal scroll")}}
+    </p>
+</div>
+<h2>Table playground</h2>
+<div id="playground">
+    <div>
+        {{ table(false, false, false, data_table) }}
+    </div>
+</div>
+
+{% addJS %}
+<script>
+    var wrapper = $('#playground > div');
+    var table = $('#playground table');
+    var inputs = $('#styler input');
+
+    inputs.on("change", function(e) {
+        var div_class = "";
+        var table_class = "";
+
+        inputs.each(function() {
+            var chk = $(this).prop('checked');
+            var target = ($(this).data('attr') == 'div') ? div_class : table_class;
+            var cls = $(this).val();
+
+            if (chk) {
+                if ($(this).data('attr') == 'div') {
+                    div_class += " " + cls;
+                } else {
+                    table_class += " " + cls;
+                }
+            }
+        });
+
+        wrapper.attr("class", div_class);
+        table.attr("class", table_class);
+    });
+</script>
+{% endaddJS %}

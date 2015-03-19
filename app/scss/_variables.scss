@@ -1,0 +1,55 @@
+/*------------------------------------*\
+    #FROST Variables
+\*------------------------------------*/
+
+$FAST-config-use-protocol: "http";
+
+$FAST-config-base-size: 16px !default;
+
+$FAST-config-color-list: (
+        "blue-mike"         #103184,
+        "blue-congress"     #004893,
+        "blue-fun"          #2253AF,
+        "blue-navy"         #0060D6,
+        "blue-havelock"     #4A89DC,
+        "blue-cornflower"   #5D9CEC,
+
+        "blue-summer-sky"   #3BAFDA,
+        "blue-picton"       #4FC1E9,
+
+        "red-fp"            #C70000,
+        "red-crimson"       #E30000,
+        "red-torch"         #FF1821,
+
+        "orange-burnt"      #D35400,
+        "orange-zest"       #E67E22,
+
+        "yellow-pastel"     #F6BB42,
+        "yellow-kournikova" #FFCE54,
+
+        "green-apple"       #66AF44,
+        "green-mantis"      #8CC152,
+        "green-pistachio"   #A0D468,
+        "green-keppel"      #37BC9B,
+        "green-shamrock"    #48CFAD,
+
+        "grey-mine-shaft"   #333333,
+        "grey-shuttle"      #616367,
+        "grey-aluminium"    #999999,
+        "grey-magnesium"    #B3B3B3,
+        "grey-white"        #EFEBEA,
+        "grey-concrete"     #F2F2F2,
+
+        "grey-mako"         #434A54,
+        "grey-nevada"       #656D78,
+        "grey-casper"       #AAB2BD,
+        "grey-zumthor"      #CCD1D9,
+        "grey-mystic"       #E6E9ED,
+        "grey-haze"         #F5F7FA,
+
+        "white"             #fff,
+        "black"             #000
+
+) !default;
+
+$FAST-grid-use-words: true;
