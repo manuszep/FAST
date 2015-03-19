@@ -31,39 +31,45 @@ $FAST-h1-font-size: 62px !default;
 $FAST-h1-font-weight: 100 !default;
 $FAST-h1-letter-spacing: -2px !default;
 $FAST-h1-line-height: percentage(70px / $FAST-h1-font-size) !default;
+$FAST-h1-spacing-top: $FAST-base-line-height !default;
 
 $FAST-h2-font-size: 48px !default;
 $FAST-h2-font-weight: 300 !default;
 $FAST-h2-letter-spacing: -1px !default;
 $FAST-h2-line-height: percentage(54px / $FAST-h2-font-size) !default;
+$FAST-h2-spacing-top: $FAST-base-line-height * 2 !default;
 
 $FAST-h3-font-size: 36px !default;
 $FAST-h3-font-weight: 400 !default;
 $FAST-h3-letter-spacing: 0 !default;
 $FAST-h3-line-height: percentage(42px / $FAST-h3-font-size) !default;
+$FAST-h3-spacing-top: $FAST-base-line-height * 2 !default;
 
 $FAST-h4-font-size: 28px !default;
 $FAST-h4-font-weight: 400 !default;
 $FAST-h4-letter-spacing: 0 !default;
 $FAST-h4-line-height: percentage(32px / $FAST-h4-font-size) !default;
+$FAST-h4-spacing-top: $FAST-base-line-height !default;
 
 $FAST-h5-font-size: 20px !default;
 $FAST-h5-font-weight: 700 !default;
 $FAST-h5-letter-spacing: 0 !default;
 $FAST-h5-line-height: percentage(26px / $FAST-h5-font-size) !default;
+$FAST-h5-spacing-top: $FAST-base-line-height !default;
 
 $FAST-h6-font-size: 16px !default;
 $FAST-h6-font-weight: 900 !default;
 $FAST-h6-letter-spacing: 0 !default;
 $FAST-h6-line-height: percentage(22px / $FAST-h6-font-size) !default;
+$FAST-h6-spacing-top: $FAST-base-line-height !default;
 
 $FAST-headings: (
-        $FAST-h1-font-size  $FAST-h1-font-weight  $FAST-h1-letter-spacing  $FAST-h1-line-height,
-        $FAST-h2-font-size  $FAST-h2-font-weight  $FAST-h2-letter-spacing  $FAST-h2-line-height,
-        $FAST-h3-font-size  $FAST-h3-font-weight  $FAST-h3-letter-spacing  $FAST-h3-line-height,
-        $FAST-h4-font-size  $FAST-h4-font-weight  $FAST-h4-letter-spacing  $FAST-h4-line-height,
-        $FAST-h5-font-size  $FAST-h5-font-weight  $FAST-h5-letter-spacing  $FAST-h5-line-height,
-        $FAST-h6-font-size  $FAST-h6-font-weight  $FAST-h6-letter-spacing  $FAST-h6-line-height
+        $FAST-h1-font-size  $FAST-h1-font-weight  $FAST-h1-letter-spacing  $FAST-h1-line-height  $FAST-h1-spacing-top,
+        $FAST-h2-font-size  $FAST-h2-font-weight  $FAST-h2-letter-spacing  $FAST-h2-line-height  $FAST-h2-spacing-top,
+        $FAST-h3-font-size  $FAST-h3-font-weight  $FAST-h3-letter-spacing  $FAST-h3-line-height  $FAST-h3-spacing-top,
+        $FAST-h4-font-size  $FAST-h4-font-weight  $FAST-h4-letter-spacing  $FAST-h4-line-height  $FAST-h4-spacing-top,
+        $FAST-h5-font-size  $FAST-h5-font-weight  $FAST-h5-letter-spacing  $FAST-h5-line-height  $FAST-h5-spacing-top,
+        $FAST-h6-font-size  $FAST-h6-font-weight  $FAST-h6-letter-spacing  $FAST-h6-line-height  $FAST-h6-spacing-top
 ) !default;
 
 
@@ -74,7 +80,7 @@ $FAST-headings: (
 /* Mixins.
    ===================================================== */
 
-@mixin fast-type-set($size: $FAST-config-base-size, $margin-bottom: $FAST-base-line-height, $line-height: false, $weight: false, $letter-spacing: false) {
+@mixin fast-type-set($size: $FAST-config-base-size, $margin-bottom: $FAST-base-line-height, $margin-top: false, $line-height: false, $weight: false, $letter-spacing: false) {
     @if $size != false {
         @include fast-rem(font-size, $size);
     }
@@ -89,6 +95,9 @@ $FAST-headings: (
     }
     @if $margin-bottom != false {
         @include fast-rem(margin-bottom, $margin-bottom);
+    }
+    @if $margin-top != false {
+        @include fast-rem(margin-top, $margin-top);
     }
 }
 
@@ -130,6 +139,7 @@ $FAST-headings: (
         $letter-spacing: nth($heading, 3);
         $line-height: nth($heading, 4);
         $margin-bottom: $FAST-base-line-height;
+        $margin-top: nth($heading, 5);
 
         @if $font-weight == $FAST-base-font-weight {
             $font-weight: false;
@@ -139,7 +149,7 @@ $FAST-headings: (
         }
 
         h#{$i} {
-            @include fast-type-set($font-size, $margin-bottom, $line-height, $font-weight, $letter-spacing);
+            @include fast-type-set($font-size, $margin-bottom, $margin-top, $line-height, $font-weight, $letter-spacing);
         }
     }
 
