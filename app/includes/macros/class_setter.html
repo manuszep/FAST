@@ -41,7 +41,7 @@
 {% endmacro %}
 
 {% macro fastClassSetterInc(title, data, group, target) %}
-    <div class="fast-class-setter-group">
+    <div class="fast-class-setter-group col">
         <p><strong>{{title}} : </strong>
         {% for item in data %}
             {{fastClassSetterIncItem(group, item, target)}}
@@ -50,24 +50,33 @@
     </div>
 {% endmacro %}
 
-{% macro fastClassSetterExc(title, data, group, target) %}
-    <div class="fast-class-setter-group">
-        <p><strong>{{title}} : </strong>
+{% macro fastClassSetterExc(title, data, group, target, select) %}
+    <div class="fast-class-setter-group col">
+    <p><strong>{{title}} : </strong>
+    {% if select %}
+        <select data-target="{{target}}">
+            <option>select...</option>
+            {% for item in data %}
+                <option value="{{item}}">{{item}}</option>
+            {% endfor %}
+        </select>
+    {% else %}
         {% for item in data %}
             {{fastClassSetterExcItem(group, item, target)}}
         {% endfor %}
         </p>
+    {% endif %}
     </div>
 {% endmacro %}
 
 {% macro fastClassSetter(data) %}
-    <div class="fast-class-setter">
+    <div class="fast-class-setter row">
         {% for item in data %}
             {% if item.type == 'inc' %}
                 {{fastClassSetterInc(item.title, item.data, item.group, item.target)}}
             {% endif %}
             {% if item.type == 'exc' %}
-                {{fastClassSetterExc(item.title, item.data, item.group, item.target)}}
+                {{fastClassSetterExc(item.title, item.data, item.group, item.target, item.select)}}
             {% endif %}
         {% endfor %}
     </div>
@@ -75,22 +84,42 @@
 
 {% storeAt "javascripts" %}
     <script>
-        $('body').on("change", "input", function(e) {
+        $('body').on("change", "input, select", function(e) {
             var input = $(e.target);
-            var inputs = input.parents('.fast-class-setter-group').find('input');
 
-            inputs.each(function() {
-                var $input = $(this);
-                var target = $($input.data('target'));
-                var chk = $input.prop('checked');
-                var cls = $input.val();
+            if (input.prop("tagName").toLowerCase() == 'select') {
+                var target = $(input.data('target'));
+                input.find('option').each(function()
+                {
+                    var cls = $(this).val();
+                    var chk = this.selected;
 
-                if (chk) {
-                    target.addClass(cls);
-                } else {
-                    target.removeClass(cls);
-                }
-            });
+                    if (cls == '' || cls == 'none') {
+                        return;
+                    }
+
+                    if (chk) {
+                        target.addClass(cls);
+                    } else {
+                        target.removeClass(cls);
+                    }
+                });
+            } else {
+                var inputs = input.parents('.fast-class-setter-group').find('input');
+
+                inputs.each(function () {
+                    var $input = $(this);
+                    var target = $($input.data('target'));
+                    var chk = $input.prop('checked');
+                    var cls = $input.val();
+
+                    if (chk) {
+                        target.addClass(cls);
+                    } else {
+                        target.removeClass(cls);
+                    }
+                });
+            }
         });
     </script>
 {% endstoreAt %}

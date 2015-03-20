@@ -64,6 +64,16 @@ $FAST-grid-use-words: false !default;
         $prefix: '#{$prefix}-';
     }
 
+    @for $i from 1 through $FAST-grid-max-columns {
+        .#{$prefix}order#{$i} {
+            order: $i
+        }
+
+        .#{$prefix}order-#{$i} {
+            order: -$i
+        }
+    }
+
     .#{$prefix}start {
         justify-content: flex-start;
         text-align: start;
@@ -97,14 +107,6 @@ $FAST-grid-use-words: false !default;
 
     .#{$prefix}between {
         justify-content: space-between;
-    }
-
-    .#{$prefix}first {
-        order: -1;
-    }
-
-    .#{$prefix}last {
-        order: 1;
     }
     /* End of fast-grid-columns-styles */
 }
@@ -177,9 +179,14 @@ $FAST-grid-use-words: false !default;
     padding-right: ($FAST-gutter / 2);
 }
 
+@mixin fast-grid-content-spacing-remove {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 @mixin fast-grid-container-spacing {
-    padding-left: ($FAST-gutter / 2);
-    padding-right: ($FAST-gutter / 2);
+    margin-left: -($FAST-gutter / 2);
+    margin-right: -($FAST-gutter / 2);
 }
 
 
@@ -190,8 +197,12 @@ $FAST-grid-use-words: false !default;
 /* Styles.
    ===================================================== */
 @if $FAST-grid-import {
-    .wrapper {
+    .wrapper, h1 {
         @include fast-grid-content-spacing;
+    }
+
+    .wrapper h1 {
+        @include fast-grid-content-spacing-remove;
     }
 
     .row {

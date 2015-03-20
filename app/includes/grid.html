@@ -1,13 +1,14 @@
 {% include "macros/class_setter.html" %}
 
 <style type="text/css" name="demo styles">
-    .row {
+    .debug.row {
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#220000FF, endColorstr=#220000FF);
         background: rgba(0,0,255,.1);
-        padding: 8px 0;
+        padding-top: 8px;
+        padding-bottom: 8px;
     }
 
-    .col {
+    .debug .col {
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#220000FF, endColorstr=#220000FF);
         background: rgba(0,0,255,.1);
         background-clip: content-box;
@@ -17,425 +18,476 @@
     }
 </style>
 
-<h2>Simple grid</h2>
-<div class="row" id="demo-row-1">
-    <div class="col">
-        1
+<section class="deco-dots">
+    <h2>Simple grid</h2>
+    <div class="row debug" id="demo-row-1">
+        <div class="col">
+            1
+        </div>
+        <div class="col">
+            2
+        </div>
+        <div class="col">
+            3
+        </div>
+        <div class="col">
+            4
+        </div>
+        <div class="col">
+            5
+        </div>
+        <div class="col">
+            6
+        </div>
+        <div class="col">
+            7
+        </div>
+        <div class="col">
+            8
+        </div>
+        <div class="col">
+            9
+        </div>
+        <div class="col">
+            10
+        </div>
+        <div class="col">
+            11
+        </div>
+        <div class="col">
+            12
+        </div>
     </div>
-    <div class="col">
-        2
-    </div>
-    <div class="col">
-        3
-    </div>
-    <div class="col">
-        4
-    </div>
-    <div class="col">
-        5
-    </div>
-    <div class="col">
-        6
-    </div>
-    <div class="col">
-        7
-    </div>
-    <div class="col">
-        8
-    </div>
-    <div class="col">
-        9
-    </div>
-    <div class="col">
-        10
-    </div>
-    <div class="col">
-        11
-    </div>
-    <div class="col">
-        12
-    </div>
-</div>
+</section>
 
 
-<h2>Sizing columns</h2>
-<div class="row">
-    <div class="col c1">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c2">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c3">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c4">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c5">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c6">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c7">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c8">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c9">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c10">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c11">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c12">
-        Col
-    </div>
-</div>
+<section>
+    <h2>Sizing columns</h2>
 
-<h2>Targeting screen sizes</h2>
-<div class="row">
-    <div class="col tiny-1 small-1 medium-1">
-        Col
+    <div class="row debug">
+        <div class="col c1">
+            Col
+        </div>
     </div>
-    <div class="col tiny-3 small-7 medium-11">
-        Col
+    <div class="row debug">
+        <div class="col c2">
+            Col
+        </div>
     </div>
-    <div class="col tiny-2 small-2 medium-2">
-        Col
+    <div class="row debug">
+        <div class="col c3">
+            Col
+        </div>
     </div>
-    <div class="col tiny-2 small-6 medium-10">
-        Col
+    <div class="row debug">
+        <div class="col c4">
+            Col
+        </div>
     </div>
-    <div class="col tiny-3 small-3 medium-3">
-        Col
+    <div class="row debug">
+        <div class="col c5">
+            Col
+        </div>
     </div>
-    <div class="col tiny-1 small-5 medium-9">
-        Col
+    <div class="row debug">
+        <div class="col c6">
+            Col
+        </div>
     </div>
-    <div class="col tiny-4 small-4 medium-4">
-        Col
+    <div class="row debug">
+        <div class="col c7">
+            Col
+        </div>
     </div>
-    <div class="col tiny-4 small-4 medium-8">
-        Col
+    <div class="row debug">
+        <div class="col c8">
+            Col
+        </div>
     </div>
-    <div class="col tiny-4 small-5 medium-5">
-        Col
+    <div class="row debug">
+        <div class="col c9">
+            Col
+        </div>
     </div>
-    <div class="col tiny-4 small-3 medium-7">
-        Col
+    <div class="row debug">
+        <div class="col c10">
+            Col
+        </div>
     </div>
-    <div class="col tiny-4 small-6 medium-6">
-        Col
+    <div class="row debug">
+        <div class="col c11">
+            Col
+        </div>
     </div>
-    <div class="col tiny-4 small-2 medium-6">
-        Col
+    <div class="row debug">
+        <div class="col c12">
+            Col
+        </div>
     </div>
-    <div class="col tiny-4 small-7 medium-7">
-        Col
-    </div>
-    <div class="col tiny-4 small-1 medium-5">
-        Col
-    </div>
-    <div class="col tiny-4 small-8 medium-8">
-        Col
-    </div>
-    <div class="col tiny-4 small-8 medium-4">
-        Col
-    </div>
-    <div class="col tiny-4 small-8 medium-9">
-        Col
-    </div>
-    <div class="col tiny-4 small-8 medium-3">
-        Col
-    </div>
-    <div class="col tiny-4 small-8 medium-10">
-        Col
-    </div>
-    <div class="col tiny-4 small-8 medium-2">
-        Col
-    </div>
-    <div class="col tiny-4 small-8 medium-11">
-        Col
-    </div>
-    <div class="col tiny-4 small-8 medium-1">
-        Col
-    </div>
-    <div class="col tiny-4 small-8 medium-12">
-        Col
-    </div>
-</div>
+</section>
 
-<div class="row">
-    <div class="col tiny-2 small-1 medium-4">
-        Col
-    </div>
-    <div class="col tiny-1 small-5 medium-3">
-        Col
-    </div>
-    <div class="col tiny-1 small-2 medium-5">
-        Col
-    </div>
-</div>
+<section>
+    <h2>Targeting screen sizes</h2>
 
-<h2>Offsets</h2>
-<div class="row">
-    <div class="col c1 tiny-offset-3 small-offset-7 medium-offset-11">
-        Col
+    <div class="row debug">
+        <div class="col tiny-1 small-1 medium-1">
+            Col
+        </div>
+        <div class="col tiny-3 small-7 medium-11">
+            Col
+        </div>
+        <div class="col tiny-2 small-2 medium-2">
+            Col
+        </div>
+        <div class="col tiny-2 small-6 medium-10">
+            Col
+        </div>
+        <div class="col tiny-3 small-3 medium-3">
+            Col
+        </div>
+        <div class="col tiny-1 small-5 medium-9">
+            Col
+        </div>
+        <div class="col tiny-4 small-4 medium-4">
+            Col
+        </div>
+        <div class="col tiny-4 small-4 medium-8">
+            Col
+        </div>
+        <div class="col tiny-4 small-5 medium-5">
+            Col
+        </div>
+        <div class="col tiny-4 small-3 medium-7">
+            Col
+        </div>
+        <div class="col tiny-4 small-6 medium-6">
+            Col
+        </div>
+        <div class="col tiny-4 small-2 medium-6">
+            Col
+        </div>
+        <div class="col tiny-4 small-7 medium-7">
+            Col
+        </div>
+        <div class="col tiny-4 small-1 medium-5">
+            Col
+        </div>
+        <div class="col tiny-4 small-8 medium-8">
+            Col
+        </div>
+        <div class="col tiny-4 small-8 medium-4">
+            Col
+        </div>
+        <div class="col tiny-4 small-8 medium-9">
+            Col
+        </div>
+        <div class="col tiny-4 small-8 medium-3">
+            Col
+        </div>
+        <div class="col tiny-4 small-8 medium-10">
+            Col
+        </div>
+        <div class="col tiny-4 small-8 medium-2">
+            Col
+        </div>
+        <div class="col tiny-4 small-8 medium-11">
+            Col
+        </div>
+        <div class="col tiny-4 small-8 medium-1">
+            Col
+        </div>
+        <div class="col tiny-4 small-8 medium-12">
+            Col
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col c2 tiny-offset-2 small-offset-6 medium-offset-10">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c3 tiny-offset-1 small-offset-5 medium-offset-9">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c4 small-offset-4 medium-offset-8">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c5 small-offset-3 medium-offset-7">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c6 small-offset-2 medium-offset-6">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c7 small-offset-1 medium-offset-5">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c8 medium-offset-4">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c9 medium-offset-3">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c10 medium-offset-2">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c11 medium-offset-1">
-        Col
-    </div>
-</div>
-<div class="row">
-    <div class="col c12">
-        Col
-    </div>
-</div>
 
-<h2>Nesting grids</h2>
-<div class="row">
-    <div class="col tiny-2 small-4 medium-6">
-        <div class="row">
-            <div class="col tiny-2 small-3 medium-4">
-                sub-col
+    <div class="row debug">
+        <div class="col tiny-2 small-1 medium-4">
+            Col
+        </div>
+        <div class="col tiny-1 small-5 medium-3">
+            Col
+        </div>
+        <div class="col tiny-1 small-2 medium-5">
+            Col
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Offsets</h2>
+
+    <div class="row debug">
+        <div class="col c1 tiny-offset-3 small-offset-7 medium-offset-11">
+            Col
+        </div>
+    </div>
+    <div class="row debug">
+        <div class="col c2 tiny-offset-2 small-offset-6 medium-offset-10">
+            Col
+        </div>
+    </div>
+    <div class="row debug">
+        <div class="col c3 tiny-offset-1 small-offset-5 medium-offset-9">
+            Col
+        </div>
+    </div>
+    <div class="row debug">
+        <div class="col c4 small-offset-4 medium-offset-8">
+            Col
+        </div>
+    </div>
+    <div class="row debug">
+        <div class="col c5 small-offset-3 medium-offset-7">
+            Col
+        </div>
+    </div>
+    <div class="row debug">
+        <div class="col c6 small-offset-2 medium-offset-6">
+            Col
+        </div>
+    </div>
+    <div class="row debug">
+        <div class="col c7 small-offset-1 medium-offset-5">
+            Col
+        </div>
+    </div>
+    <div class="row debug">
+        <div class="col c8 medium-offset-4">
+            Col
+        </div>
+    </div>
+    <div class="row debug">
+        <div class="col c9 medium-offset-3">
+            Col
+        </div>
+    </div>
+    <div class="row debug">
+        <div class="col c10 medium-offset-2">
+            Col
+        </div>
+    </div>
+    <div class="row debug">
+        <div class="col c11 medium-offset-1">
+            Col
+        </div>
+    </div>
+    <div class="row debug">
+        <div class="col c12">
+            Col
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Nesting grids</h2>
+
+    <div class="row debug">
+        <div class="col tiny-2 small-4 medium-6">
+            <div class="row">
+                <div class="col tiny-2 small-3 medium-4">
+                    sub-col
+                </div>
+                <div class="col tiny-1 small-2 medium-2">
+                    sub-col
+                </div>
+                <div class="col tiny-1 small-3 medium-6">
+                    sub-col
+                </div>
             </div>
-            <div class="col tiny-1 small-2 medium-2">
-                sub-col
-            </div>
-            <div class="col tiny-1 small-3 medium-6">
-                sub-col
+        </div>
+        <div class="col tiny-2 small-4 medium-6">
+            <div class="row">
+                <div class="col tiny-2 small-4 medium-6">
+                    sub-col
+                </div>
+                <div class="col tiny-2 small-4 medium-6">
+                    sub-col
+                </div>
             </div>
         </div>
     </div>
-    <div class="col tiny-2 small-4 medium-6">
-        <div class="row">
-            <div class="col tiny-2 small-4 medium-6">
-                sub-col
-            </div>
-            <div class="col tiny-2 small-4 medium-6">
-                sub-col
-            </div>
+</section>
+
+<section>
+    <h2>Alignment</h2>
+    {{fastClassSetter(
+        [
+            {
+                title: 'Align horizontal',
+                type: 'exc',
+                group: 'demo_align',
+                target: '#demo-align',
+                data: [
+                    'start',
+                    'center',
+                    'end'
+                ]
+            }
+        ]
+    )}}
+    <div class="row debug" id="demo-align">
+        <div class="col tiny-2 small-3 medium-4">
+            Col
         </div>
     </div>
-</div>
+</section>
 
-<h2>Alignment</h2>
-<h3>*-start</h3>
-<div class="row tiny-start small-start medium-start">
-    <div class="col tiny-2 small-3 medium-4">
-        Col
+<section>
+    <h2>Vertical alignment</h2>
+    {{fastClassSetter(
+        [
+            {
+                title: 'Align vertical',
+                type: 'exc',
+                group: 'demo_valign',
+                target: '#demo-valign',
+                data: [
+                    'none',
+                    'top',
+                    'middle',
+                    'bottom'
+                ]
+            }
+        ]
+    )}}
+    <div class="row debug" id="demo-valign">
+        <div class="col tiny-2 small-4 medium-6">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+        <div class="col tiny-2 small-4 medium-6">
+            Col
+        </div>
     </div>
-</div>
-<h3>*-center</h3>
-<div class="row tiny-center small-center medium-center">
-    <div class="col tiny-2 small-3 medium-4">
-        Col
-    </div>
-</div>
-<h3>*-end</h3>
-<div class="row tiny-end small-end medium-end">
-    <div class="col tiny-2 small-3 medium-4">
-        Col
-    </div>
-</div>
+</section>
 
-<h2>Vertical alignment</h2>
-<h3>*-top</h3>
-<div class="row tiny-top small-top medium-top">
-    <div class="col tiny-2 small-4 medium-6">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<section>
+    <h2>Distribution</h2>
+    {{fastClassSetter(
+        [
+            {
+                title: 'Distribute',
+                type: 'exc',
+                group: 'demo_distribute',
+                target: '#demo-distribute',
+                data: [
+                    'none',
+                    'around',
+                    'between'
+                ]
+            }
+        ]
+    )}}
+    <div class="row debug" id="demo-distribute">
+        <div class="col tiny-1 small-2 medium-3">
+            Col
+        </div>
+        <div class="col tiny-1 small-2 medium-3">
+            Col
+        </div>
+        <div class="col tiny-1 small-2 medium-3">
+            Col
+        </div>
     </div>
-    <div class="col tiny-2 small-4 medium-6">
-        Col
-    </div>
-</div>
-<h3>*-middle</h3>
-<div class="row tiny-middle small-middle medium-middle">
-    <div class="col tiny-2 small-4 medium-6">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </div>
-    <div class="col tiny-2 small-4 medium-6">
-        Col
-    </div>
-</div>
-<h3>*-bottom</h3>
-<div class="row tiny-bottom small-bottom medium-bottom">
-    <div class="col tiny-2 small-4 medium-6">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </div>
-    <div class="col tiny-2 small-4 medium-6">
-        Col
-    </div>
-</div>
+</section>
 
-<h2>Distribution</h2>
-<h3>*-around</h3>
-<div class="row tiny-around small-around medium-around">
-    <div class="col tiny-1 small-2 medium-3">
-        Col
+<section>
+    <h2>Ordering</h2>
+    {% set order_classes = ['order-1','order-2','order-3','order-4','order-5','order-6','order-7','order-8','order-9','order-10','order-11','order-12','order1','order2','order3','order4','order5','order6','order7','order8','order9','order10','order11','order12'] %}
+    {{fastClassSetter(
+        [
+            {
+                title: 'Order column 1',
+                type: 'exc',
+                group: 'demo_order_col_1',
+                target: '#demo-order-col-1',
+                select: true,
+                data: order_classes
+            },
+            {
+                title: 'Order column 2',
+                type: 'exc',
+                group: 'demo_order_col_2',
+                target: '#demo-order-col-2',
+                select: true,
+                data: order_classes
+            },
+            {
+                title: 'Order column 3',
+                type: 'exc',
+                group: 'demo_order_col_3',
+                target: '#demo-order-col-3',
+                select: true,
+                data: order_classes
+            },
+            {
+                title: 'Order column 4',
+                type: 'exc',
+                group: 'demo_order_col_4',
+                target: '#demo-order-col-4',
+                select: true,
+                data: order_classes
+            }
+        ]
+    )}}
+    <div class="row debug">
+        <div class="col tiny-1 small-2 medium-3" id="demo-order-col-1">
+            Col 1
+        </div>
+        <div class="col tiny-1 small-2 medium-3" id="demo-order-col-2">
+            Col 2
+        </div>
+        <div class="col tiny-1 small-2 medium-3" id="demo-order-col-3">
+            Col 3
+        </div>
+        <div class="col tiny-1 small-2 medium-3" id="demo-order-col-4">
+            Col 4
+        </div>
     </div>
-    <div class="col tiny-1 small-2 medium-3">
-        Col
-    </div>
-    <div class="col tiny-1 small-2 medium-3">
-        Col
-    </div>
-</div>
-<h3>*-between</h3>
-<div class="row tiny-between small-between medium-between">
-    <div class="col tiny-1 small-2 medium-3">
-        Col
-    </div>
-    <div class="col tiny-1 small-2 medium-3">
-        Col
-    </div>
-    <div class="col tiny-1 small-2 medium-3">
-        Col
-    </div>
-</div>
+</section>
 
-<h2>Ordering</h2>
-
-<div class="row">
-    <div class="col tiny-1 small-2 medium-3 tiny-last small-last medium-last">
-        Col 1
+<section>
+    <h2>Reversing</h2>
+    {{fastClassSetter(
+        [
+            {
+                title: 'Reverse row',
+                type: 'inc',
+                group: 'demo_reversing',
+                target: '#demo-reversing',
+                data: [
+                    'reverse'
+                ]
+            },
+            {
+                title: 'Reverse column 3',
+                type: 'inc',
+                group: 'demo_reversing_column',
+                target: '#demo-reversing-column',
+                data: [
+                    'reverse'
+                ]
+            }
+        ]
+    )}}
+    <div class="row debug" id="demo-reversing">
+        <div class="col">
+            Col 1
+        </div>
+        <div class="col">
+            Col 2
+        </div>
+        <div class="col" id="demo-reversing-column">
+            <div>Col 3 a</div>
+            <div>Col 3 b</div>
+        </div>
+        <div class="col">
+            Col 4
+        </div>
     </div>
-    <div class="col tiny-1 small-2 medium-3">
-        Col 2
-    </div>
-    <div class="col tiny-1 small-2 medium-3">
-        Col 3
-    </div>
-    <div class="col tiny-1 small-2 medium-3 tiny-first small-first medium-first">
-        Col 4
-    </div>
-</div>
-
-<h2>Reversing</h2>
-{{fastClassSetter(
-    [
-        {
-            title: 'Reverse row',
-            type: 'inc',
-            group: 'demo_reversing',
-            target: '#demo-reversing',
-            data: [
-                'reverse'
-            ]
-        },
-        {
-            title: 'Reverse column 3',
-            type: 'inc',
-            group: 'demo_reversing_column',
-            target: '#demo-reversing-column',
-            data: [
-                'reverse'
-            ]
-        }
-    ]
-)}}
-<div class="row" id="demo-reversing">
-    <div class="col">
-        Col 1
-    </div>
-    <div class="col">
-        Col 2
-    </div>
-    <div class="col" id="demo-reversing-column">
-        <div>Col 3 a</div>
-        <div>Col 3 b</div>
-    </div>
-    <div class="col">
-        Col 4
-    </div>
-</div>
+</section>

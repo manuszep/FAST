@@ -36,8 +36,9 @@ $FAST-breakpoints: (
 /* Styles.
    ===================================================== */
 @if $FAST-page-import {
-    .wrapper {
-        margin: 0 auto;
+    .wrapper, h1 {
+        margin-left: auto;
+        margin-right: auto;
         width: 100%;
     }
 
@@ -51,7 +52,7 @@ $FAST-breakpoints: (
 
         @if $min != false { // [1]
             @include fast-mq($name) {
-                .wrapper {
+                .wrapper, h1 {
                     width: $min;
                 }
             }
