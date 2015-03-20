@@ -38,11 +38,6 @@ $FAST-button-default-color-name: #E6E9ED !default;
    ===================================================== */
 @mixin fast-button-fill-color($color: $FAST-button-default-color-name) {
     @include fast-background-color($color);
-    border-color: fast-color-safe-darken($color, 10%);
-
-    &:hover {
-        //@include fast-background-color(fast-color-safe-darken($color, 10%));
-    }
 }
 
 
