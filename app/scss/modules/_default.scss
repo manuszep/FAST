@@ -10,6 +10,9 @@
    ===================================================== */
 $FAST-default-import: true !default;
 
+$FAST-default-spacing-v: 22px;
+$FAST-big-spacing-v: 66px;
+
 /* Functions.
    ===================================================== */
 
@@ -25,5 +28,7 @@ $FAST-default-import: true !default;
 /* Styles.
    ===================================================== */
 @if $FAST-default-import {
-
+   section {
+      @include fast-rem(padding, $FAST-big-spacing-v 0);
+   }
 }
