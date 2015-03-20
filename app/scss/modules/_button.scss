@@ -1,0 +1,52 @@
+/*-------------------------------------------------------*\
+    #FAST Button
+
+    @depends on
+        - FAST-toolkit
+        - FAST-color
+\*-------------------------------------------------------*/
+
+/* Variables.
+   ===================================================== */
+
+$FAST-button-import: true !default;
+
+$FAST-button-line-height: 22px !default;
+$FAST-button-height: 44px !default;
+
+$FAST-button-colors: (
+        "primary"         #8CC152,
+        "secondary"       #0060D6,
+        "neutral"         #E6E9ED,
+        "danger"          #E30000,
+        "warning"         #FFCE54,
+
+        "cyan"            #3BAFDA,
+        "turquoise"       #37BC9B,
+        "black"           #000
+) !default;
+
+$FAST-button-default-color-name: "neutral" !default;
+
+
+/* Functions.
+   ===================================================== */
+
+
+/* Mixins.
+   ===================================================== */
+
+
+/* Placeholders.
+   ===================================================== */
+
+
+/* Styles.
+   ===================================================== */
+@if $FAST-button-import {
+    .btn {
+        display: inline-block;
+        @include fast-background-color(fast-color-get($FAST-button-default-color-name, $FAST-button-colors));
+        @include fast-rem(padding, (($FAST-button-height - $FAST-button-line-height) / 2));
+    }
+}
