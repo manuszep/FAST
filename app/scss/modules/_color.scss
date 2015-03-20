@@ -64,7 +64,8 @@ $FAST-color-text-dark: #333 !default;
 
 $FAST-color-contrast-threshold: 55% !default;
 
-$FAST-color-lightness-gap: 95% !default;
+$FAST-color-lightness-cap: 95% !default;
+$FAST-color-darkness-cap: 15% !default;
 
 /* Functions.
    ===================================================== */
@@ -79,15 +80,26 @@ $FAST-color-lightness-gap: 95% !default;
    @return if(lightness($color) < $threshold, $light, $dark)
 }
 
-// Lighten a color with a maximum of $FAST-color-lightness-gap (%) lightness
+// Lighten a color with a maximum of $FAST-color-lightness-cap (%) lightness
 @function fast-color-safe-lighten($color, $amount) {
    $new-color: lighten($color, $amount);
 
-   @if (lightness($new-color) < $FAST-color-lightness-gap and lightness($new-color) > $FAST-color-lightness-gap) {
-      @return hsl(hue($color), saturation($color), $FAST-color-lightness-gap);
+   @if (lightness($new-color) > $FAST-color-lightness-cap) {
+      @return hsl(hue($color), saturation($color), $FAST-color-lightness-cap);
    }
 
-   @return lighten($color, $amount);
+   @return $new-color;
+}
+
+// Darken a color with a minimum of $FAST-color-darkness-cap (%) lightness
+@function fast-color-safe-darken($color, $amount) {
+   $new-color: darken($color, $amount);
+
+   @if (lightness($new-color) < $FAST-color-darkness-cap) {
+      @return hsl(hue($color), saturation($color), $FAST-color-darkness-cap);
+   }
+
+   @return $new-color;
 }
 
 // Sets the lightness of a color without altering other properties
