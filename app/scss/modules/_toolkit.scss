@@ -165,8 +165,13 @@ $FAST-breakpoints: (
  *  Sets a rule in pixels (as a fallback) and in rem (for modern browsers)
  */
 @mixin fast-rem($rule: font-size, $value: $FAST-base-size) {
+    $list: ();
+
+    @each $val in $value {
+        $list: append($list, (($val / $FAST-base-size) * 1rem));
+    }
     #{$rule}: $value;
-    #{$rule}: (($value / $FAST-base-size) * 1rem);
+    #{$rule}: $list;
 }
 
 /*  fast-build-mq
