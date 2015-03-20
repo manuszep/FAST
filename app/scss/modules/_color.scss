@@ -70,8 +70,8 @@ $FAST-color-lightness-gap: 95% !default;
    ===================================================== */
 
 // Returns a color code by name
-@function fast-color-get($name) {
-   @return fast-get-list-value-by-name($FAST-color-list, $name);
+@function fast-color-get($name, $list: $FAST-color-list) {
+   @return nth(fast-get-list-value-by-name($list, $name), 2);
 }
 
 // Provide light or dark color to get an optimal contrast against a background color
