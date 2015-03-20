@@ -57,6 +57,7 @@ $FAST-grid-use-words: false !default;
    ===================================================== */
 
 @mixin fast-grid-columns-styles($prefix: false) {
+    /* Start of fast-grid-columns-styles */
     @if $prefix == false {
         $prefix: '';
     } @else {
@@ -105,13 +106,14 @@ $FAST-grid-use-words: false !default;
     .#{$prefix}last {
         order: 1;
     }
+    /* End of fast-grid-columns-styles */
 }
 
-@mixin fast-grid-columns($prefix, $max-columns, $use-words: false) {
+@mixin fast-grid-columns($prefix, $max-columns) {
+    /* Start of fast-grid-columns */
     $one-column-width: (100% / $max-columns);
 
     @for $i from 1 through $max-columns {
-        $num: fast-number-as-word($i);
         $selector: fast-grid-col-class($prefix, $i);
 
         #{$selector} {
@@ -131,6 +133,7 @@ $FAST-grid-use-words: false !default;
             }
         }
     }
+    /* End of fast-grid-columns */
 }
 
 /**
@@ -140,11 +143,11 @@ $FAST-grid-use-words: false !default;
  *  [2] - When a column number is above the current available columns, we store it for later
  *  [3] - Now that all the exceding columns are grouped, we flatten them as a selector and set the rule to 100%
  */
-@mixin fast-grid-default-columns($col-count, $col-max, $use-words: false) {
+@mixin fast-grid-default-columns($col-count, $col-max) {
+    /* Start of fast-grid-default-columns */
     $maxed-columns: ();
 
     @for $i from 1 through $col-max { // [1]
-        $num: fast-number-as-word($i);
         $selector: fast-grid-col-class(false, $i);
 
         @if ($i < $col-count) {
@@ -166,6 +169,7 @@ $FAST-grid-use-words: false !default;
             max-width: 100%;
         }
     }
+    /* End of fast-grid-default-columns */
 }
 
 @mixin fast-grid-content-spacing {
@@ -222,6 +226,7 @@ $FAST-grid-use-words: false !default;
      *        Prepare a list to hold the classes names for these columns and group them later.
      */
     @for $i from 1 through length($FAST-breakpoints-columns) {
+        /* Start of Breakpoints loop */
         $bp-columns: nth($FAST-breakpoints-columns, $i);
         $name: nth($bp-columns, 1);
         $columns-count: nth($bp-columns, 2);
@@ -242,13 +247,14 @@ $FAST-grid-use-words: false !default;
             // Start the media query
             @include fast-mq($name, $limit-query) {
                 // Generate the generic columns names (without media query prefix)
-                @include fast-grid-default-columns($columns-count, $FAST-grid-max-columns, true);
+                @include fast-grid-default-columns($columns-count, $FAST-grid-max-columns);
 
                 // Generate the prefixed columns names
-                @include fast-grid-columns($name, $columns-count, true);
+                @include fast-grid-columns($name, $columns-count);
 
                 @include fast-grid-columns-styles($name);
             }
         }
+        /* End of Breakpoints loop */
     }
 }

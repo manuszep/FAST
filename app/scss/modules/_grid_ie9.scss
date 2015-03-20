@@ -1,13 +1,19 @@
 /**
  *  Tested on windows 7 - IE9 (see snapshots)
- *  https://saucelabs.com/jobs/b0331c80fc434cbea8309028b12903c1/0002screenshot.png
- *  https://saucelabs.com/jobs/b0331c80fc434cbea8309028b12903c1/0003screenshot.png
- *  https://saucelabs.com/jobs/b0331c80fc434cbea8309028b12903c1/0004screenshot.png
+ *  Tested on windows 7 - IE8
+ *  https://saucelabs.com/jobs/b0331c80fc434cbea8309028b12903c1/0002screenshot.png?auth=334ff499fb9c3594d7ed8bc29461fcc5
+ *  https://saucelabs.com/jobs/b0331c80fc434cbea8309028b12903c1/0003screenshot.png?auth=334ff499fb9c3594d7ed8bc29461fcc5
+ *  https://saucelabs.com/jobs/b0331c80fc434cbea8309028b12903c1/0004screenshot.png?auth=334ff499fb9c3594d7ed8bc29461fcc5
  */
 $FAST-grid-import: false;
 
 @import "grid";
 
+/**
+ *  TODO: Slightly refactor the general mixins
+ *  - Add a parameter for legacy styles
+ *  - Add conditions to output modern or legacy styles where needed.
+ */
 @mixin fast-grid-columns-styles($prefix: false) {
     @if $prefix == false {
         $prefix: '';
@@ -120,41 +126,15 @@ $FAST-grid-import: false;
     direction: rtl;
 }
 
+/* Include the unprefixed grid styles */
 @include fast-grid-columns-styles();
+@include fast-grid-default-columns($FAST-grid-max-columns, $FAST-grid-max-columns);
 
-/**
- *  Generate columns styles for each breakpoint declared in $FAST-breakpoints-columns
- *  [1] - Get the media query data that matches the current breakpoint name and check that it exists ([1b])
- *  [2] - If the current breakpoints covers less columns than the maximum, the excedent columns will all be 100%.
- *        Prepare a list to hold the classes names for these columns and group them later.
- */
-@for $i from 1 through length($FAST-breakpoints-columns) {
-    $bp-columns: nth($FAST-breakpoints-columns, $i);
-    $name: nth($bp-columns, 1);
-    $columns-count: nth($bp-columns, 2);
+/* Find last grid breakpoint values */
+$last-grid-breakpoint: fast-get-last-list-value($FAST-breakpoints-columns);
+$name: nth($last-grid-breakpoint, 1);
+$columns-count: nth($last-grid-breakpoint, 2);
 
-    $bp: fast-get-list-value-by-name($FAST-breakpoints, $name); // [1]
-
-    @if $bp != false { // [1b]
-        $min: nth($bp, 2);
-        $max: nth($bp, 3);
-        $maxed-columns: (); // [2]
-        $limit-query: true;
-
-        // If this is the last media query, we don't want a max-width
-        @if $i == length($FAST-breakpoints-columns) {
-            $limit-query: false;
-        }
-
-        // Start the media query
-        @include fast-mq($name, $limit-query) {
-            // Generate the generic columns names (without media query prefix)
-            @include fast-grid-default-columns($columns-count, $FAST-grid-max-columns, true);
-
-            // Generate the prefixed columns names
-            @include fast-grid-columns($name, $columns-count, true);
-
-            @include fast-grid-columns-styles($name);
-        }
-    }
-}
+/* Apply prefixed styles only for the last breakpoint because we don't want responsiveness in IE9 ! */
+@include fast-grid-columns($name, $columns-count);
+@include fast-grid-columns-styles($name);
