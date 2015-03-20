@@ -13,20 +13,21 @@ $FAST-button-import: true !default;
 
 $FAST-button-line-height: 22px !default;
 $FAST-button-height: 44px !default;
+$FAST-button-padding-h: 22px !default;
 
 $FAST-button-colors: (
         "primary"         #8CC152,
         "secondary"       #0060D6,
-        "neutral"         #E6E9ED,
         "danger"          #E30000,
         "warning"         #FFCE54,
 
         "cyan"            #3BAFDA,
         "turquoise"       #37BC9B,
-        "black"           #000
+        "black"           #000,
+        "white"           #fff
 ) !default;
 
-$FAST-button-default-color-name: "neutral" !default;
+$FAST-button-default-color-name: #E6E9ED !default;
 
 
 /* Functions.
@@ -35,6 +36,14 @@ $FAST-button-default-color-name: "neutral" !default;
 
 /* Mixins.
    ===================================================== */
+@mixin fast-button-fill-color($color: $FAST-button-default-color-name) {
+    @include fast-background-color($color);
+    border-color: fast-color-safe-darken($color, 10%);
+
+    &:hover {
+        //@include fast-background-color(fast-color-safe-darken($color, 10%));
+    }
+}
 
 
 /* Placeholders.
@@ -45,8 +54,32 @@ $FAST-button-default-color-name: "neutral" !default;
    ===================================================== */
 @if $FAST-button-import {
     .btn {
+        @include fast-button-fill-color;
+        @include fast-rem(padding, (($FAST-button-height - $FAST-button-line-height) / 2) $FAST-button-padding-h);
+        box-shadow: inset 0px 0px 0px 0 rgba(0, 0, 0, .2);
+        border-radius: 2px;
+        cursor: pointer;
         display: inline-block;
-        @include fast-background-color(fast-color-get($FAST-button-default-color-name, $FAST-button-colors));
-        @include fast-rem(padding, (($FAST-button-height - $FAST-button-line-height) / 2));
+        font-size: .875em;
+        letter-spacing: 1px;
+        opacity: .75;
+        text-align: center;
+        text-transform: uppercase;
+        transition: opacity .2s, box-shadow .1s linear;
+    }
+
+    .btn:hover {
+        box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, .2);
+        opacity: 1;
+    }
+
+    @for $i from 1 through length($FAST-button-colors) {
+        $item: nth($FAST-button-colors, $i);
+        $name: nth($item, 1);
+        $color: nth($item, 2);
+
+        .btn-#{$name} {
+            @include fast-button-fill-color($color);
+        }
     }
 }
