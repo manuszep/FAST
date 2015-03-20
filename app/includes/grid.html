@@ -1,3 +1,5 @@
+{% include "macros/class_setter.html" %}
+
 <style type="text/css" name="demo styles">
     .row {
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#220000FF, endColorstr=#220000FF);
@@ -16,42 +18,42 @@
 </style>
 
 <h2>Simple grid</h2>
-<div class="row">
+<div class="row" id="demo-row-1">
     <div class="col">
-        Col
+        1
     </div>
     <div class="col">
-        Col
+        2
     </div>
     <div class="col">
-        Col
+        3
     </div>
     <div class="col">
-        Col
+        4
     </div>
     <div class="col">
-        Col
+        5
     </div>
     <div class="col">
-        Col
+        6
     </div>
     <div class="col">
-        Col
+        7
     </div>
     <div class="col">
-        Col
+        8
     </div>
     <div class="col">
-        Col
+        9
     </div>
     <div class="col">
-        Col
+        10
     </div>
     <div class="col">
-        Col
+        11
     </div>
     <div class="col">
-        Col
+        12
     </div>
 </div>
 
@@ -383,6 +385,7 @@
 </div>
 
 <h2>Ordering</h2>
+
 <div class="row">
     <div class="col tiny-1 small-2 medium-3 tiny-last small-last medium-last">
         Col 1
@@ -399,14 +402,36 @@
 </div>
 
 <h2>Reversing</h2>
-<div class="row reverse">
+{{fastClassSetter(
+    [
+        {
+            title: 'Reverse row',
+            type: 'inc',
+            group: 'demo_reversing',
+            target: '#demo-reversing',
+            data: [
+                'reverse'
+            ]
+        },
+        {
+            title: 'Reverse column 3',
+            type: 'inc',
+            group: 'demo_reversing_column',
+            target: '#demo-reversing-column',
+            data: [
+                'reverse'
+            ]
+        }
+    ]
+)}}
+<div class="row" id="demo-reversing">
     <div class="col">
         Col 1
     </div>
     <div class="col">
         Col 2
     </div>
-    <div class="col reverse">
+    <div class="col" id="demo-reversing-column">
         <div>Col 3 a</div>
         <div>Col 3 b</div>
     </div>

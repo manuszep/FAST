@@ -39,14 +39,24 @@ var swig_opts = {
     },
     setup: function(swig) {
         swig.setTag(
-            'addJS',
+            'storeAt',
             function(str, line, parser, types, stack, options, swig) {
+                parser.on(types.STRING, function (token) {
+                    this.out.push(token.match);
+                    return;
+                });
+
                 return true;
             },
             function(compiler, args, content, parents, options, blockName) {
                 var comp = content[0].replace(/\\/g, '\\\\').replace(/\n|\r/g, '\\n').replace(/"/g, '\\"');
-                var output = 'if (typeof _ctx.end_js == "undefined") {_ctx.end_js = [];} _ctx.end_js.push("' + comp + '");';
-                return output;
+                return 'if (typeof _ctx.storeAt == "undefined") {\n' +
+                    '   _ctx.storeAt = {};\n' +
+                    '}\n' +
+                    'if (typeof _ctx.storeAt[' + args[0] + '] == "undefined") {\n' +
+                    '   _ctx.storeAt[' + args[0] + '] = [];\n' +
+                    '}\n' +
+                    '_ctx.storeAt[' + args[0] + '].push("' + comp + '");\n';
             },
             true,
             true

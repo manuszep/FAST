@@ -1,0 +1,96 @@
+{#
+    Usage:
+    ------
+
+    {{fastClassSetter(
+        [
+            {
+                title: 'Title',
+                type: 'inc',
+                group: 'group_name',
+                target: '#selector',
+                data: [
+                    'class-name1',
+                    'class-name2'
+                ]
+            },
+            {
+                title: 'Title2',
+                type: 'exc',
+                group: 'group_name2',
+                target: '#selector2',
+                data: [
+                    'class-name1',
+                    'class-name2'
+                ]
+            }
+        ]
+    )}}
+
+    Remarks:
+    --------
+    - Make sure to use a different group name for each set
+#}
+
+{% macro fastClassSetterIncItem(group, name, target) %}
+<label for="{{group}}-{{name}}"><input type="checkbox" name="{{group}}-{{name}}" id="{{group}}-{{name}}" data-group-name="{{group}}" data-attr="class" data-target="{{target}}" value="{{name}}" /> .{{name}}</label>
+{% endmacro %}
+
+{% macro fastClassSetterExcItem(group, name, target) %}
+<label for="{{group}}-{{name}}"><input type="radio" name="{{group}}" id="{{group}}-{{name}}" data-attr="class" data-target="{{target}}" value="{{name}}" /> .{{name}}</label>
+{% endmacro %}
+
+{% macro fastClassSetterInc(title, data, group, target) %}
+    <div class="fast-class-setter-group">
+        <p><strong>{{title}} : </strong>
+        {% for item in data %}
+            {{fastClassSetterIncItem(group, item, target)}}
+        {% endfor %}
+        </p>
+    </div>
+{% endmacro %}
+
+{% macro fastClassSetterExc(title, data, group, target) %}
+    <div class="fast-class-setter-group">
+        <p><strong>{{title}} : </strong>
+        {% for item in data %}
+            {{fastClassSetterExcItem(group, item, target)}}
+        {% endfor %}
+        </p>
+    </div>
+{% endmacro %}
+
+{% macro fastClassSetter(data) %}
+    <div class="fast-class-setter">
+        {% for item in data %}
+            {% if item.type == 'inc' %}
+                {{fastClassSetterInc(item.title, item.data, item.group, item.target)}}
+            {% endif %}
+            {% if item.type == 'exc' %}
+                {{fastClassSetterExc(item.title, item.data, item.group, item.target)}}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% storeAt "javascripts" %}
+    <script>
+        $('body').on("change", "input", function(e) {
+            var input = $(e.target);
+            var inputs = input.parents('.fast-class-setter-group').find('input');
+
+            inputs.each(function() {
+                var $input = $(this);
+                var target = $($input.data('target'));
+                var chk = $input.prop('checked');
+                var cls = $input.val();
+
+                if (chk) {
+                    target.addClass(cls);
+                } else {
+                    target.removeClass(cls);
+                }
+            });
+        });
+    </script>
+{% endstoreAt %}

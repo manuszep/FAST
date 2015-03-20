@@ -99,7 +99,7 @@
     </div>
 </div>
 
-{% addJS %}
+{% storeAt "javascripts" %}
 <script>
     var wrapper = $('#playground > div');
     var table = $('#playground table');
@@ -127,4 +127,4 @@
         table.attr("class", table_class);
     });
 </script>
-{% endaddJS %}
+{% endstoreAt %}

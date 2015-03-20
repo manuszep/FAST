@@ -23,9 +23,11 @@
     {% block content %}{% endblock %}
 </div>
 
+{% block javascripts %}
 <script src="{{ root_prefix }}js/libs/jquery-1.11.2.js"></script>
 <script src="{{ root_prefix }}js/main.js"></script>
-{% for script in end_js -%}
+{% endblock %}
+{% for script in storeAt.javascripts -%}
 {%- autoescape false -%}
 {{- script -}}
 {%- endautoescape -%}
