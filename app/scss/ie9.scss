@@ -1,4 +1,6 @@
-@import "modules/toolkit";
 $FAST-page-import: false;
+
+@import "modules/toolkit";
 @import "modules/page";
+@import "modules/type_ie9";
 @import "modules/grid_ie9";
