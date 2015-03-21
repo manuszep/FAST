@@ -24,6 +24,8 @@ $FAST-font-url: '//fonts.googleapis.com/css?family=Roboto:100,300,400,700,900,30
 
 $FAST-font-family:   "Roboto", "Segoe UI", "Helvetica Neue", Frutiger, "Frutiger Linotype", "Dejavu Sans", Arial, sans-serif !default;
 
+$FAST-type-default-color: #333 !default;
+
 $FAST-base-line-height: 22px !default;
 $FAST-base-font-weight: 400 !default;
 
@@ -122,6 +124,7 @@ $FAST-headings: (
     }
 
     body {
+        color: $FAST-type-default-color;
         font-family: $FAST-font-family;
         font-size: 1em;
         font-weight: $FAST-base-font-weight;

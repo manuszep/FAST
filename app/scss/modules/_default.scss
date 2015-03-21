@@ -24,10 +24,27 @@ $FAST-big-spacing-v: 66px;
 /* Placeholders.
    ===================================================== */
 
+%clearfix {
+   &:before,
+   &:after {
+      content: " ";
+      display: table;
+   }
+
+   &:after {
+      clear: both;
+   }
+
+}
+
 
 /* Styles.
    ===================================================== */
 @if $FAST-default-import {
+   .clearfix {
+      @extend %clearfix;
+   }
+
    section {
       @include fast-rem(padding, $FAST-big-spacing-v 0);
    }
