@@ -1,17 +1,36 @@
 var gulp = require('gulp');
 var clean = require('gulp-clean');
-var watch = require('gulp-watch');
 var plumber = require('gulp-plumber');
 var sourcemaps = require('gulp-sourcemaps');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
-var connect = require('gulp-connect');
 var frontMatter = require('gulp-front-matter');
 var gulp_swig = require('gulp-swig');
 var through = require('through2');
 var casperJs = require('gulp-casperjs');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
+var iconfont = require('gulp-iconfont');
+var gutil = require('gulp-util');
+var jsonSass = require('./node_modules/json-sass/lib/jsToSassString');
+var path = require('path');
+
+function gulpJsonSass(config) {
+    var stream = through.obj(function(file, enc, cb) {
+        var parsedJSON = JSON.parse(file.contents);
+        var name = path.basename(file.path, '.json');
+        var dirname = path.dirname(file.path);
+        var sass = '$FAST-data-' + name + ': ' + jsonSass(parsedJSON) + ";";
+        file.contents = Buffer(sass);
+        file.path = dirname + "/_" + name + ".scss";
+        // make sure the file goes through the next gulp plugin
+        this.push(file);
+        cb();
+    });
+
+    // returning the file stream
+    return stream;
+}
 
 function handleError(err) {
     console.log(err.toString());
@@ -31,6 +50,16 @@ var relative_path = function() {
         this.push(file);
         cb();
     });
+};
+
+var stringToFile = function (filename, string) {
+    var src = require('stream').Readable({ objectMode: true });
+
+    src._read = function () {
+        this.push(new gutil.File({ cwd: "", base: "", path: filename, contents: new Buffer(string) }));
+        this.push(null);
+    };
+    return src;
 };
 
 var swig_opts = {
@@ -64,8 +93,31 @@ var swig_opts = {
     }
 };
 
+gulp.task('icons', function() {
+    var sources = 'app/icons/**/*.svg';
+
+    gulp.src(sources)
+        .pipe(iconfont({
+            fontName: 'fast-icons',
+            appendCodepoints: false
+        }))
+        .on('codepoints', function(codepoints, options) {
+            var data = JSON.stringify({codepoints: codepoints, options: options});
+
+            return stringToFile('icons.json', data)
+                .pipe(gulp.dest('app/data/generated'))
+        })
+        .pipe(gulp.dest('tmp/fonts'));
+});
+
 gulp.task('styles', function() {
     var sources = 'app/scss/**/*.scss';
+
+    gulp.src(['app/data/generated/**/*.json'])
+        .pipe(gulpJsonSass({
+            prefix: '$FAST-data: '
+        }))
+        .pipe(gulp.dest('app/scss/generated'));
 
     return gulp.src(sources)
         .pipe(plumber())
