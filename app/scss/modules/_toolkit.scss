@@ -22,6 +22,21 @@ $FAST-breakpoints: (
 /* Functions.
    ===================================================== */
 
+/**
+ *  Fetch nested keys
+ *
+ *  @param {Map} $map - Map
+ *  @param {Arglist} $keys - Keys to fetch
+ *  @return {*}
+ */
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+
+    @return $map;
+}
+
 /*  fast-em
  *  This function converts a size in pixels to em's
  */
@@ -228,5 +243,27 @@ $FAST-breakpoints: (
 @mixin fast-mq-print {
     @media print {
         @content;
+    }
+}
+
+@mixin fast-rotate($degrees, $rotation) {
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=#{$rotation});
+    transform: rotate($degrees);
+}
+
+@mixin fast-flip($horiz, $vert, $rotation) {
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=#{$rotation});
+    transform: scale($horiz, $vert);
+}
+
+/* Animations.
+   ===================================================== */
+
+@keyframes fast-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(359deg);
     }
 }

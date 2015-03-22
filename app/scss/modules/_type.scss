@@ -164,4 +164,12 @@ $FAST-headings: (
         font-weight: 100;
         @include fast-rem(line-height, $FAST-base-line-height * 1.188);
     }
+
+    .normal-case.normal-case {
+        text-transform: none;
+    }
+
+    .upper-case.upper-case {
+        text-transform: uppercase;
+    }
 }

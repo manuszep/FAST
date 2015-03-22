@@ -14,6 +14,18 @@ var iconfont = require('gulp-iconfont');
 var gutil = require('gulp-util');
 var jsonSass = require('./node_modules/json-sass/lib/jsToSassString');
 var path = require('path');
+var glob = require( 'glob' );
+
+var json_data = {};
+
+glob.sync( 'app/data/**/*.json' ).forEach( function( file ) {
+    var ns = path.dirname(file).replace('app/data/', '').replace('/', '-');
+    var v = path.basename(file, '.json');
+
+    json_data[ns] = json_data[ns] || {};
+
+    json_data[ns][v] = require(path.resolve(file));
+});
 
 function gulpJsonSass(config) {
     var stream = through.obj(function(file, enc, cb) {
@@ -36,6 +48,19 @@ function handleError(err) {
     console.log(err.toString());
     this.emit('end');
 }
+
+var json_to_data = function() {
+    return through.obj(function (file, enc, cb) {
+        var parts_count = file.path.replace(root, '').replace(/^\/|\/$/g, '').split( '/' ).length;
+        var relative_parts = new Array( parts_count ).join( "../" );
+
+        file.data = file.data || {};
+
+        file.data.data = json_data;
+        this.push(file);
+        cb();
+    });
+};
 
 var relative_path = function() {
     var root = __dirname + '/app/pages/';
@@ -102,6 +127,11 @@ gulp.task('icons', function() {
             appendCodepoints: false
         }))
         .on('codepoints', function(codepoints, options) {
+            // Convert all codepoints to hexadecimal
+            for (var i = 0; i < codepoints.length; i++) {
+                codepoints[i].codepoint = codepoints[i].codepoint.toString(16);
+            }
+
             var data = JSON.stringify({codepoints: codepoints, options: options});
 
             return stringToFile('icons.json', data)
@@ -149,6 +179,7 @@ var html = function(path, dest) {
         .pipe(plumber())
         .pipe(frontMatter({ property: 'data' }))
         .pipe(relative_path())
+        .pipe(json_to_data())
         .pipe(gulp_swig(swig_opts))
         .pipe(gulp.dest(dest))
         .pipe(reload({stream: true}));
@@ -168,6 +199,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task('prepareServer', ['clean'], function() {
+    gulp.start('icons');
     gulp.start('styles');
     gulp.start('scripts');
     gulp.start('html');

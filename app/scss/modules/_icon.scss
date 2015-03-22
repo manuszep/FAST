@@ -1,0 +1,170 @@
+/*-------------------------------------------------------*\
+    #FAST Icon
+
+    @depends on
+        - FAST-toolkit
+\*-------------------------------------------------------*/
+@import "../generated/icons";
+
+/* Variables.
+   ===================================================== */
+
+$FAST-icon-import: true !default;
+
+$FAST-icon-font-path: "../fonts/" !default;
+$FAST-icon-font-name: map-deep-get($FAST-data-icons, options, fontName) !default;
+$FAST-icon-codepoints: map-get($FAST-data-icons, codepoints) !default;
+$fast-icon-base-font-size: 16px !default;
+$FAST-icon-li-width: (30em / 14) !default;
+$FAST-icon-border-color: #eee !default;
+
+
+/* Functions.
+   ===================================================== */
+
+
+/* Mixins.
+   ===================================================== */
+
+@mixin fast-icon {
+    display: inline-block;
+    font: normal normal normal #{$fast-icon-base-font-size}/1 $FAST-icon-font-name;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translate(0, 0);
+}
+
+
+/* Placeholders.
+   ===================================================== */
+
+
+/* Styles.
+   ===================================================== */
+@if $FAST-icon-import {
+    @font-face {
+        font-family: '#{$FAST-icon-font-name}';
+        src: url('#{$FAST-icon-font-path}#{$FAST-icon-font-name}.eot'); /* IE9 Compat Modes */
+        src: url('#{$FAST-icon-font-path}#{$FAST-icon-font-name}.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        //url('webfont.woff2') format('woff2'), /* Super Modern Browsers */
+        url('#{$FAST-icon-font-path}#{$FAST-icon-font-name}.woff') format('woff'), /* Pretty Modern Browsers */
+        url('#{$FAST-icon-font-path}#{$FAST-icon-font-name}.ttf')  format('truetype'), /* Safari, Android, iOS */
+        url('#{$FAST-icon-font-path}#{$FAST-icon-font-name}.svg#svgFontName') format('svg'); /* Legacy iOS */
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    .ico {
+        @include fast-icon;
+    }
+
+    // Larger icons
+    .ico-lg {
+        font-size: (4em / 3);
+        line-height: (3em / 4);
+        vertical-align: -15%;
+    }
+
+    .ico-2x {
+        font-size: 2em;
+    }
+
+    .ico-3x {
+        font-size: 3em;
+    }
+
+    .ico-4x {
+        font-size: 4em;
+    }
+
+    .ico-5x {
+        font-size: 5em;
+    }
+
+    .ico-fw {
+        width: (18em / 14);
+        text-align: center;
+    }
+
+    .ico-ul {
+        padding-left: 0;
+        margin-left: $FAST-icon-li-width;
+        list-style-type: none;
+        > li { position: relative; }
+    }
+
+    .ico-li {
+        position: absolute;
+        left: -$FAST-icon-li-width;
+        width: $FAST-icon-li-width;
+        top: (2em / 14);
+        text-align: center;
+        &.ico-lg {
+            left: -$FAST-icon-li-width + (4em / 14);
+        }
+    }
+
+    .ico-border {
+        padding: .2em .25em .15em;
+        border: .08em solid $FAST-icon-border-color;
+        border-radius: .1em;
+    }
+
+    .ico-spin {
+        animation: fast-spin 2s infinite linear;
+    }
+
+    .ico-pulse {
+        animation: fast-spin 1s infinite steps(8);
+    }
+
+    .ico-rotate-90  {
+        @include fast-rotate(90deg, 1);
+    }
+
+    .ico-rotate-180 {
+        @include fast-rotate(180deg, 2);
+    }
+
+    .ico-rotate-270 {
+        @include fast-rotate(270deg, 3);
+    }
+
+    .ico-flip-horizontal {
+        @include fast-flip(-1, 1, 0);
+    }
+
+    .ico-flip-vertical   {
+        @include fast-flip(1, -1, 2);
+    }
+
+    .ico-stack {
+        position: relative;
+        display: inline-block;
+        width: 2em;
+        height: 2em;
+        line-height: 2em;
+        vertical-align: middle;
+    }
+
+    .ico-stack-1x, .ico-stack-2x {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .ico-stack-1x {
+        line-height: inherit;
+    }
+
+    .ico-stack-2x {
+        font-size: 2em;
+    }
+
+    @each $codepoint, $code in $FAST-icon-codepoints {
+        .ico-#{map-get($codepoint, name)}:before { content: '\#{map-get($codepoint, codepoint)}'; }
+    }
+}
