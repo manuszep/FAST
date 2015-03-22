@@ -11,7 +11,8 @@
 
 $FAST-button-import: true !default;
 
-$FAST-button-line-height: 22px !default;
+$FAST-button-base-line-height: 22px !default;
+$FAST-button-line-height: $FAST-button-base-line-height * .7272;
 $FAST-button-height: 44px !default;
 $FAST-button-padding-h: 22px !default;
 
@@ -66,6 +67,7 @@ $FAST-button-default-color: #E6E9ED !default;
         cursor: pointer;
         display: inline-block;
         font-size: .875em;
+        line-height: $FAST-button-line-height;
         letter-spacing: 1px;
         opacity: .75;
         text-align: center;
@@ -98,7 +100,7 @@ $FAST-button-default-color: #E6E9ED !default;
     }
 
     .btn-small {
-        @include fast-rem(padding, 0 ($FAST-button-padding-h / 2));
+        @include fast-rem(padding, (($FAST-button-height - $FAST-button-line-height) / 8) ($FAST-button-padding-h / 2));
         box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0);
         letter-spacing: 0;
         text-transform: none;
