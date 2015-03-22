@@ -1,1 +1,20 @@
-<span class="ico ico-adjust">{{data.generated.icons.codepoints[0].name}}</span>
+<style>
+    .ico-demo .ico-5x {
+        background-color: #333;
+        border-radius: 50%;
+        color: #fff;
+        display: block;
+        height: 1.7em;
+        margin: .5em auto .25em auto;
+        padding: .35em;
+        width: 1.7em;
+    }
+</style>
+<div class="row">
+    {% for cp in data.generated.icons.codepoints %}
+        <div class="col c3 ico-demo center">
+            <span class="ico ico-5x ico-{{ cp.name }}"></span>
+            <span class="ico ico-{{ cp.name }}"></span> <span>.ico-{{ cp.name }}</span>
+        </div>
+    {% endfor %}
+</div>

@@ -124,7 +124,8 @@ gulp.task('icons', function() {
     gulp.src(sources)
         .pipe(iconfont({
             fontName: 'fast-icons',
-            appendCodepoints: false
+            appendCodepoints: false,
+            descent: 70
         }))
         .on('codepoints', function(codepoints, options) {
             // Convert all codepoints to hexadecimal
