@@ -215,9 +215,9 @@ $FAST-grid-use-words: false !default;
 
     .col {
         @include fast-grid-content-spacing;
-        display: flex;
-        flex: 1 1 auto;
-        flex-direction: column;
+        /*display: flex;
+        flex: 1 1 auto;*/ // Display flex on columns makes everything look like it's inline !
+        //flex-direction: column; // This causes the content to flow vertically
     }
 
     .row.reverse {
