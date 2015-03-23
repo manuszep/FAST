@@ -217,6 +217,10 @@ $FAST-grid-import: true !default;
         flex-direction: column-reverse;
     }
 
+    .col > :last-child {
+        margin-bottom: $FAST-line-height * 2;
+    }
+
     @include fast-grid-columns-styles();
 
     /**
