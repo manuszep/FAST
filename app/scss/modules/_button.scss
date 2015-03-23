@@ -62,7 +62,7 @@ $FAST-button-import: true !default;
         }
     }
 
-    [class^="btn-border-"], [class*=" btn-border-"] {
+    [class^="btn-border"], [class*=" btn-border"] {
         background-color: transparent;
         border-radius: 3px;
         box-shadow: inset 0 0 0 2px currentColor;
@@ -77,7 +77,7 @@ $FAST-button-import: true !default;
         }
     }
 
-    .btn-border-neutral {
+    .btn-border {
         @include fast-button-bordered($FAST-button-default-color);
     }
 
@@ -96,10 +96,9 @@ $FAST-button-import: true !default;
         @include fast-rem(padding, ($FAST-button-height - $FAST-button-line-height) $FAST-button-padding-h * 2);
     }
 
-    @for $i from 1 through length($FAST-button-colors) {
-        $item: nth($FAST-button-colors, $i);
-        $name: nth($item, 1);
-        $color: nth($item, 2);
+    @each $btn-color in map-get($FAST-data-button, "colors") {
+        $name: nth($btn-color, 1);
+        $color: nth($btn-color, 2);
 
         .btn-#{$name} {
             @include fast-button-fill-color($color);

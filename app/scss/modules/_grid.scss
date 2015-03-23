@@ -92,6 +92,14 @@ $FAST-grid-import: true !default;
     .#{$prefix}between {
         justify-content: space-between;
     }
+
+    .row.#{$prefix}reverse {
+        flex-direction: row-reverse;
+    }
+
+    .col.#{$prefix}reverse {
+        flex-direction: column-reverse;
+    }
     /* End of fast-grid-columns-styles */
 }
 
@@ -207,18 +215,6 @@ $FAST-grid-import: true !default;
     .column {
         display: flex;
         flex-direction: column;
-    }
-
-    .row.reverse {
-        flex-direction: row-reverse;
-    }
-
-    .col.reverse {
-        flex-direction: column-reverse;
-    }
-
-    .col > :last-child {
-        margin-bottom: $FAST-line-height * 2;
     }
 
     @include fast-grid-columns-styles();

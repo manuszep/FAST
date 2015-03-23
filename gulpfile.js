@@ -146,7 +146,7 @@ gulp.task('icons', function() {
 gulp.task('styles', function() {
     var sources = 'app/scss/**/*.scss';
 
-    gulp.src(['app/data/generated/**/*.json'])
+    gulp.src(['app/data/generated/**/*.json', 'app/data/common/**/*.json'])
         .pipe(gulpJsonSass({
             prefix: '$FAST-data: '
         }))

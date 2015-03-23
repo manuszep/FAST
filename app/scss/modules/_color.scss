@@ -87,6 +87,22 @@ $FAST-color-import: true !default;
       background: linear-gradient(to right,  #ffffff 0%,#ffffff 50%,#f5f7fa 50%,#f5f7fa 100%);
    }
 
+   .split-bg-rev {
+       background: transparent;
+       background: linear-gradient(to left,  #ffffff 0%,#ffffff 50%,#f5f7fa 50%,#f5f7fa 100%);
+   }
+
+   $FAST-color-split-bg-dark: fast-color-safe-darken(#3BAFDA, 100%);
+   .split-bg-dark {
+      background: transparent;
+      background: linear-gradient(to right,  #ffffff 0%,#ffffff 50%,$FAST-color-split-bg-dark 50%,$FAST-color-split-bg-dark 100%);
+   }
+
+   .split-bg-dark-rev {
+      background: transparent;
+      background: linear-gradient(to left,  #ffffff 0%,#ffffff 50%,$FAST-color-split-bg-dark 50%,$FAST-color-split-bg-dark 100%);
+   }
+
    @for $i from 1 through length($FAST-breakpoints-columns) {
       /* Start of Breakpoints loop */
       $bp-columns: nth($FAST-breakpoints-columns, $i);
@@ -103,6 +119,21 @@ $FAST-color-import: true !default;
          .#{$name}-split-bg {
             background: transparent;
             background: linear-gradient(to right,  #ffffff 0%,#ffffff 50%,#f5f7fa 50%,#f5f7fa 100%);
+         }
+
+         .#{$name}-split-bg-rev {
+            background: transparent;
+            background: linear-gradient(to left,  #ffffff 0%,#ffffff 50%,#f5f7fa 50%,#f5f7fa 100%);
+         }
+
+         .#{$name}-split-bg-dark {
+            background: transparent;
+            background: linear-gradient(to right,  #ffffff 0%,#ffffff 50%,$FAST-color-split-bg-dark 50%,$FAST-color-split-bg-dark 100%);
+         }
+
+         .#{$name}-split-bg-dark-rev {
+            background: transparent;
+            background: linear-gradient(to left,  #ffffff 0%,#ffffff 50%,$FAST-color-split-bg-dark 50%,$FAST-color-split-bg-dark 100%);
          }
       }
    }

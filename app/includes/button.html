@@ -1,221 +1,166 @@
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
 
-<section class="deco-separator-line">
-    <div class="row center">
-        <div class="col">
-            <p><a class="btn btn-large">Button</a></p>
+<p>All buttons support the following colors:
+   {% for key, color in data.common.button.colors %}
+<a class="btn btn-{{key}} btn-small">.btn-{{key}}</a>
+{% endfor %}
+</p>
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Large buttons</h2>
+            <p>A button can be made larger with the <code>.btn-large</code> class.</p>
+{% highlight 'html' %}
+<a class="btn btn-large">Button</a>{% endhighlight %}
         </div>
-        <div class="col">
-            <p><a class="btn btn-primary btn-large">Button</a></p>
-        </div>
-        <div class="col">
-            <p><a class="btn btn-secondary btn-large">Button</a></p>
-        </div>
-        <div class="col">
-            <p><a class="btn btn-danger btn-large">Button</a></p>
-        </div>
-        <div class="col">
-            <p><a class="btn btn-warning btn-large">Button</a></p>
-        </div>
-        <div class="col">
-            <p><a class="btn btn-cyan btn-large">Button</a></p>
-        </div>
-        <div class="col">
-            <p><a class="btn btn-turquoise btn-large">Button</a></p>
-        </div>
-        <div class="col">
-            <p><a class="btn btn-black btn-large">Button</a></p>
-        </div>
-        <div class="col">
-            <p><a class="btn btn-white btn-large">Button</a></p>
+        <div class="col medium-6">
+            <div class="row center">
+                <div class="col">
+                    <p><a class="btn btn-large">Button</a></p>
+                </div>
+                {% for key, color in data.common.button.colors %}
+                <div class="col">
+                    <p><a class="btn btn-{{key}} btn-large">Button</a></p>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </section>
-<section class="deco-separator-line">
-<div class="row center">
-    <div class="col">
-        <p><a class="btn btn-border-neutral btn-large">Button</a></p>
+
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle medium-reverse">
+        <div class="col medium-6">
+            <h2>Large & Hollow</h2>
+            <p>To make hollow buttons, simply use the color class with the <code>border</code> prefix.</p>
+            <p>Note that the last button is barely visible because it's white. It should be displayed on a dark background</p>
+            <p>Example: <code>.btn-border-primary</code></p>
+            {% highlight 'html' %}
+<a class="btn btn-large btn-border-primary">Button</a>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <div class="row center">
+                <div class="col">
+                    <p><a class="btn btn-border btn-large">Button</a></p>
+                </div>
+                {% for key, color in data.common.button.colors %}
+                <div class="col">
+                    <p><a class="btn btn-border-{{key}} btn-large">Button</a></p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-    <div class="col">
-        <p><a class="btn btn-border-primary btn-large">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-secondary btn-large">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-danger btn-large">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-warning btn-large">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-cyan btn-large">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-turquoise btn-large">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-black btn-large">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-white btn-large">Button</a></p>
-    </div>
-</div>
 </section>
-<section class="deco-separator-line">
-<div class="row center">
-    <div class="col">
-        <p><a class="btn">Button</a></p>
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Default button</h2>
+            {% highlight 'html' %}<a class="btn">Button</a>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <div class="row center">
+                <div class="col">
+                    <p><a class="btn">Button</a></p>
+                </div>
+                {% for key, color in data.common.button.colors %}
+                <div class="col">
+                    <p><a class="btn btn-{{key}}">Button</a></p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-    <div class="col">
-        <p><a class="btn btn-primary">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-secondary">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-danger">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-warning">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-cyan">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-turquoise">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-black">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-white">Button</a></p>
-    </div>
-</div>
 </section>
-<section class="deco-separator-line">
-<div class="row center">
-    <div class="col">
-        <p><a class="btn btn-border-neutral">Button</a></p>
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle medium-reverse">
+        <div class="col medium-6">
+            <h2>Hollow buttons</h2>
+            {% highlight 'html' %}<a class="btn btn-border">Button</a>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <div class="row center">
+                <div class="col">
+                    <p><a class="btn btn-border">Button</a></p>
+                </div>
+                {% for key, color in data.common.button.colors %}
+                <div class="col">
+                    <p><a class="btn btn-border-{{key}}">Button</a></p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-    <div class="col">
-        <p><a class="btn btn-border-primary">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-secondary">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-danger">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-warning">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-cyan">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-turquoise">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-black">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-white">Button</a></p>
-    </div>
-</div>
 </section>
-<section class="deco-separator-line">
-<div class="row center">
-    <div class="col">
-        <p><a class="btn btn-small">Button</a></p>
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Small buttons</h2>
+            {% highlight 'html' %}<a class="btn btn-small">Button</a>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <div class="row center">
+                <div class="col">
+                    <p><a class="btn btn-small">Button</a></p>
+                </div>
+                {% for key, color in data.common.button.colors %}
+                <div class="col">
+                    <p><a class="btn btn-{{key}} btn-small">Button</a></p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-    <div class="col">
-        <p><a class="btn btn-primary btn-small">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-secondary btn-small">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-danger btn-small">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-warning btn-small">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-cyan btn-small">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-turquoise btn-small">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-black btn-small">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-white btn-small">Button</a></p>
-    </div>
-</div>
 </section>
-<section class="deco-separator-line">
-<div class="row center">
-    <div class="col">
-        <p><a class="btn btn-border-neutral btn-small">Button</a></p>
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle medium-reverse">
+        <div class="col medium-6">
+            <h2>Hollow & small</h2>
+            {% highlight 'html' %}<a class="btn btn-small btn-border-secondary">Button</a>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <div class="row center">
+                <div class="col">
+                    <p><a class="btn btn-border-neutral btn-small">Button</a></p>
+                </div>
+                {% for key, color in data.common.button.colors %}
+                <div class="col">
+                    <p><a class="btn btn-border-{{key}} btn-small">Button</a></p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-    <div class="col">
-        <p><a class="btn btn-border-primary btn-small">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-secondary btn-small">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-danger btn-small">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-warning btn-small">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-cyan btn-small">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-turquoise btn-small">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-black btn-small">Button</a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-border-white btn-small">Button</a></p>
-    </div>
-</div>
 </section>
-<section class="deco-separator-line">
-<div class="row center">
-    <div class="col">
-        <p><a class="btn"><strong>Button</strong><br /><span>Button message</span></a></p>
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Button's text</h2>
+            <p><code>span</code>, <code>br</code>, <code>strong</code> and <code>small</code> tags can be used inside the button's markup.</p>
+            <p>The text in normal and large buttons is capitalised but the <code>normal-case</code> class can revert to normal case.</p>
+            {% highlight 'html' %}
+<a class="btn"><strong>Button</strong><br /><span>Button message</span></a>
+<a class="btn"><strong>Button</strong><br /><small>Button message</small></a>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <div class="row center">
+                <div class="col">
+                    <p><a class="btn"><strong>Button</strong><br /><span>Button message</span></a></p>
+                </div>
+                {% set size = 'span' %}
+                {% for key, color in data.common.button.colors %}
+                {% if size == 'small' %}
+                {% set size = 'span' %}
+                {% else %}
+                {% set size = 'small' %}
+                {% endif %}
+                <div class="col">
+                    <p><a class="btn btn-{{key}}"><strong>Button</strong><br /><{{size}}>Button message</{{size}}></a></p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-    <div class="col">
-        <p><a class="btn btn-primary"><strong>Button</strong><br /><span>Button message</span></a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-secondary"><strong>Button</strong><br /><span>Button message</span></a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-danger"><strong>Button</strong><br /><span>Button message</span></a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-warning"><strong>Button</strong><br /><span>Button message</span></a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-cyan"><strong>Button</strong><br /><small>Button message</small></a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-turquoise"><strong>Button</strong><br /><small>Button message</small></a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-black"><strong>Button</strong><br /><small>Button message</small></a></p>
-    </div>
-    <div class="col">
-        <p><a class="btn btn-white"><strong>Button</strong><br /><span>Button message</span></a></p>
-    </div>
-</div>
 </section>
 <section class="deco-separator-line">
 

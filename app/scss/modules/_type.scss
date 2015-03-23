@@ -122,6 +122,7 @@ $FAST-type-import: true !default;
         font-size: 95%;
     }
     code {
+        @include fast-type-set(false);
         background: $FAST-code-bg-color;
         padding: 0 4px;
         font-size: 85%;
@@ -136,11 +137,13 @@ $FAST-type-import: true !default;
         white-space: pre;
         white-space: pre-wrap;
     }
-    pre code {
+    pre code, .hljs {
         padding: 0;
         color: inherit;
         background-color: transparent;
         border: 0;
+        border-radius: 0;
+        border-left: 3px solid #ddd;
     }
 
     blockquote {
