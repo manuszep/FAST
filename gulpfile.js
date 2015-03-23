@@ -92,6 +92,8 @@ var swig_opts = {
         cache: false
     },
     setup: function(swig) {
+        require('swig-highlight').apply(swig);
+
         swig.setTag(
             'storeAt',
             function(str, line, parser, types, stack, options, swig) {
