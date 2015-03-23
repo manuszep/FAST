@@ -18,20 +18,37 @@ $FAST-deco-import: true !default;
 
 /* Placeholders.
    ===================================================== */
-
+%deco-separator-line-pseudo {
+    background-color: rgba(0, 0, 0, .15);
+    background: linear-gradient(to right, rgba(0,0,0,0) 15%,rgba(0,0,0,0.1) 50%,rgba(0,0,0,0.01) 85%);
+    bottom: 0;
+    display: block;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#03000000',GradientType=1 );
+    content: " ";
+    height: 1px;
+    left: 0;
+    margin: 0 auto 0;
+    position: absolute;
+    width: 100%;
+}
 
 /* Styles.
    ===================================================== */
 @if $FAST-deco-import {
     .deco-separator-line {
+        position: relative;
+
         &:after {
-            background-color: rgba(0, 0, 0, .15);
-            background: linear-gradient(to right, rgba(0,0,0,0) 15%,rgba(0,0,0,0.1) 50%,rgba(0,0,0,0.01) 85%);
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#03000000',GradientType=1 );
-            content: "";
-            height: 1px;
-            margin: 0 auto ($FAST-line-height * 2) 0;
-            width: 100%;
+            @extend %deco-separator-line-pseudo;
+        }
+    }
+    .deco-separator-line-pre {
+        position: relative;
+
+        &:before {
+            @extend %deco-separator-line-pseudo;
+            bottom: auto;
+            top: 0;
         }
     }
 }

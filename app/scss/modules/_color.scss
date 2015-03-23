@@ -81,4 +81,29 @@ $FAST-color-import: true !default;
          color: $color;
       }
    }
+
+   .split-bg {
+      background: transparent;
+      background: linear-gradient(to right,  #ffffff 0%,#ffffff 50%,#f5f7fa 50%,#f5f7fa 100%);
+   }
+
+   @for $i from 1 through length($FAST-breakpoints-columns) {
+      /* Start of Breakpoints loop */
+      $bp-columns: nth($FAST-breakpoints-columns, $i);
+      $name: nth($bp-columns, 1);
+      $columns-count: nth($bp-columns, 2);
+      $limit-query: true;
+
+      // If this is the last media query, we don't want a max-width
+      @if $i == length($FAST-breakpoints-columns) {
+         $limit-query: false;
+      }
+
+      @include fast-mq($name, $limit-query) {
+         .#{$name}-split-bg {
+            background: transparent;
+            background: linear-gradient(to right,  #ffffff 0%,#ffffff 50%,#f5f7fa 50%,#f5f7fa 100%);
+         }
+      }
+   }
 }

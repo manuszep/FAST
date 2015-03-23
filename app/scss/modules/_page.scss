@@ -26,6 +26,10 @@ $FAST-page-import: true !default;
 /* Styles.
    ===================================================== */
 @if $FAST-page-import {
+    body {
+        overflow-x: hidden;
+    }
+
     .wrapper, h1 {
         margin-left: auto;
         margin-right: auto;
@@ -44,6 +48,14 @@ $FAST-page-import: true !default;
             @include fast-mq($name) {
                 .wrapper, h1 {
                     width: $min;
+                }
+
+                .unwrap {
+                    margin-left: calc((#{$min} - 100vw) / 2);
+                    margin-right: 0;
+                    padding-right: calc((100vw - #{$min}) / 2);
+                    padding-left: calc((100vw - #{$min}) / 2);
+                    width: 100vw;
                 }
             }
         }

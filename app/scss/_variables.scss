@@ -68,7 +68,7 @@ $FAST-color-text-light: #fff !default;
 $FAST-color-text-dark: #333 !default;
 
 $FAST-code-color: #C70000 !default;
-$FAST-code-bg-color: #F5F7FA !default;
+$FAST-code-bg-color: transparent !default;
 
 $FAST-color-contrast-threshold: 55% !default;
 
@@ -83,7 +83,7 @@ $FAST-breakpoints: (
         "large"     1141px      false
 ) !default;
 
-$FAST-gutter: 22px !default;
+$FAST-gutter: 30px !default;
 
 $FAST-breakpoints-columns: (
     //  name        col-count
@@ -118,6 +118,7 @@ $FAST-paragraph-line-height: $FAST-line-height !default;
 $FAST-blockquote-color: #616367;
 $FAST-blockquote-style: italic;
 $FAST-blockquote-spacing: 0 $FAST-gutter $FAST-line-height $FAST-gutter;
+$FAST-blockquote-font-family: Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif;;
 
 $FAST-h1: (
     font-size: 46px,

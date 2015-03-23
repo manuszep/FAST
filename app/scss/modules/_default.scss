@@ -41,6 +41,6 @@ $FAST-default-import: true !default;
    }
 
    section {
-      @include fast-rem(padding, $FAST-spacing-v-xl 0);
+      @include fast-rem(padding, $FAST-spacing-v-xl 0 $FAST-spacing-v 0);
    }
 }
