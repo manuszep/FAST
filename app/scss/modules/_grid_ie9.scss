@@ -115,7 +115,7 @@ $FAST-grid-import: false;
 .col {
     display: inline-block;
     font-size: 16px;
-    width: 100% / $FAST-max-columns;
+    //width: 100% / $FAST-max-columns;
 }
 
 .row.reverse {
