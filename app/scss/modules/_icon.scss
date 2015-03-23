@@ -172,29 +172,51 @@ $FAST-icon-codepoints: map-get($FAST-data-icons, codepoints) !default;
 
     ul {
         list-style: none;
+        li {
+            position: relative;
+        }
+
+        li:before {
+            @extend %ico;
+            @extend %ico-chevron-right;
+            color: fast-color-get('blue-xl');
+            font-size: .625em;
+            left: - $FAST-gutter;
+            line-height: $FAST-icon-list-adjust-vertical;
+            position: absolute;
+            text-align: center;
+            width: .75em;
+        }
+
+        li li:before {
+            @extend %ico-circle-blank;
+        }
+
+        li li li:before {
+            @extend %ico-minus;
+        }
     }
 
-    li {
-        position: relative;
+    blockquote {
+        &:before {
+            @extend %ico;
+            @extend %ico-quote-left;
+            color: fast-color-get('turquoise');
+            float: left;
+            padding-right: .5em;
+        }
+
+        :last-child {
+            margin-bottom: 0;
+        }
     }
 
-    li:before {
-        @extend %ico;
-        @extend %ico-chevron-right;
-        color: fast-color-get('blue-xl');
-        font-size: .625em;
-        left: - $FAST-gutter;
-        line-height: $FAST-icon-list-adjust-vertical;
-        position: absolute;
-        text-align: center;
-        width: .75em;
-    }
-
-    li li:before {
-        @extend %ico-circle-blank;
-    }
-
-    li li li:before {
-        @extend %ico-minus;
+    cite {
+        &:before {
+            @extend %ico;
+            @extend %ico-minus;
+            margin-right: .5em;
+            color: fast-color-get('turquoise');
+        }
     }
 }

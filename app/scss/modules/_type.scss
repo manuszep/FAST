@@ -89,6 +89,15 @@ $FAST-type-import: true !default;
         }
     }
 
+    a {
+        color: fast-color-get('blue');
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
     p {
         @include fast-type-set(false);
     }
@@ -99,11 +108,11 @@ $FAST-type-import: true !default;
         @include fast-rem(line-height, $FAST-line-height * 1.188);
     }
 
-    .normal-case.normal-case {
+    .normal-case.normal-case { //double the class name for more specificity
         text-transform: none;
     }
 
-    .upper-case.upper-case {
+    .upper-case.upper-case { //double the class name for more specificity
         text-transform: uppercase;
     }
 
@@ -137,20 +146,11 @@ $FAST-type-import: true !default;
     blockquote {
         @include fast-rem(margin, $FAST-blockquote-spacing);
         color: $FAST-blockquote-color;
+        display: inline-block;
+        font-family: $FAST-blockquote-font-family;
+        font-size: 1.125em;
         font-style: $FAST-blockquote-style;
         text-align: center;
-
-        &:before {
-            @extend %ico;
-            @extend %ico-quote-left;
-            color: fast-color-get('turquoise');
-            float: left;
-            padding-right: .5em;
-        }
-
-        :last-child {
-            margin-bottom: 0;
-        }
 
         cite {
             display: block;
@@ -160,13 +160,6 @@ $FAST-type-import: true !default;
     cite {
         font-style: italic;
         text-align: right;
-
-        &:before {
-            @extend %ico;
-            @extend %ico-minus;
-            margin-right: .5em;
-            color: fast-color-get('turquoise');
-        }
     }
 
     ul, ol {
