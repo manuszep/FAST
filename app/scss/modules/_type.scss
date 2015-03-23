@@ -106,4 +106,74 @@ $FAST-type-import: true !default;
     .upper-case.upper-case {
         text-transform: uppercase;
     }
+
+    code,
+    pre {
+        font-family: "PT Mono", Menlo, "Courier New", monospace;
+        font-size: 95%;
+    }
+    code {
+        background: $FAST-code-bg-color;
+        padding: 0 4px;
+        font-size: 85%;
+        color: $FAST-code-color;
+        border-radius: .2rem;
+    }
+
+    pre {
+        display: block;
+        margin: 0 0 1rem;
+        line-height: 1.4;
+        white-space: pre;
+        white-space: pre-wrap;
+    }
+    pre code {
+        padding: 0;
+        color: inherit;
+        background-color: transparent;
+        border: 0;
+    }
+
+    blockquote {
+        @include fast-rem(margin, $FAST-blockquote-spacing);
+        color: $FAST-blockquote-color;
+        font-style: $FAST-blockquote-style;
+        text-align: center;
+
+        &:before {
+            @extend %ico;
+            @extend %ico-quote-left;
+            color: fast-color-get('turquoise');
+            float: left;
+            padding-right: .5em;
+        }
+
+        :last-child {
+            margin-bottom: 0;
+        }
+
+        cite {
+            display: block;
+        }
+    }
+
+    cite {
+        font-style: italic;
+        text-align: right;
+
+        &:before {
+            @extend %ico;
+            @extend %ico-minus;
+            margin-right: .5em;
+            color: fast-color-get('turquoise');
+        }
+    }
+
+    ul, ol {
+        @include fast-type-set(false);
+
+        ul, ol {
+            margin-bottom: 0;
+        }
+    }
 }
