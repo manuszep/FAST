@@ -1,0 +1,18 @@
+[class^="btn-border-"], [class*=" btn-border-"] {
+    border: 2px solid currentColor;
+    padding: (((($FAST-button-height - $FAST-button-line-height) / 2) - 2px) ($FAST-button-padding-h - 3px));
+
+    &.btn-large {
+        border-width: 3px;
+        padding: ((($FAST-button-height - $FAST-button-line-height) - 3px) (($FAST-button-padding-h * 2) - 3px));
+    }
+
+    &.btn-small {
+        border-width: 1px;
+        padding: (((($FAST-button-height - $FAST-button-line-height) / 8) - 1px) (($FAST-button-padding-h / 2) - 1px));
+    }
+
+    &:hover {
+        border-color: transparent;
+    }
+}
