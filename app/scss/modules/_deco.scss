@@ -5,12 +5,7 @@
         - FAST-toolkit
 \*-------------------------------------------------------*/
 
-/* Variables.
-   ===================================================== */
-
 $FAST-deco-import: true !default;
-
-$FAST-deco-line-height: 22px !default;
 
 
 /* Functions.
@@ -35,7 +30,7 @@ $FAST-deco-line-height: 22px !default;
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#03000000',GradientType=1 );
             content: "";
             height: 1px;
-            margin: $FAST-deco-line-height auto ($FAST-deco-line-height * 2) 0;
+            margin: $FAST-line-height auto ($FAST-line-height * 2) 0;
             width: 100%;
         }
     }

@@ -6,18 +6,9 @@
 \*-------------------------------------------------------*/
 @import "../generated/icons";
 
-/* Variables.
-   ===================================================== */
-
 $FAST-icon-import: true !default;
-
-$FAST-icon-font-path: "../fonts/" !default;
 $FAST-icon-font-name: map-deep-get($FAST-data-icons, options, fontName) !default;
 $FAST-icon-codepoints: map-get($FAST-data-icons, codepoints) !default;
-$FAST-icon-base-font-size: 16px !default;
-$FAST-icon-base-line-height: 22px !default;
-$FAST-icon-li-width: (30em / 14) !default;
-$FAST-icon-border-color: #eee !default;
 
 
 /* Functions.
@@ -29,7 +20,7 @@ $FAST-icon-border-color: #eee !default;
 
 @mixin fast-icon {
     display: inline-block;
-    font: normal normal normal #{$FAST-icon-base-font-size}/1 $FAST-icon-font-name;
+    font: normal normal normal #{$FAST-base-size}/1 $FAST-icon-font-name;
     font-size: inherit;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;

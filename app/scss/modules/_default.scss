@@ -6,12 +6,7 @@
  *  Provide basic and general styles
  */
 
-/* Variables.
-   ===================================================== */
 $FAST-default-import: true !default;
-
-$FAST-default-spacing-v: 22px;
-$FAST-big-spacing-v: 66px;
 
 /* Functions.
    ===================================================== */
@@ -46,6 +41,6 @@ $FAST-big-spacing-v: 66px;
    }
 
    section {
-      @include fast-rem(padding, $FAST-big-spacing-v 0);
+      @include fast-rem(padding, $FAST-spacing-v-xl 0);
    }
 }

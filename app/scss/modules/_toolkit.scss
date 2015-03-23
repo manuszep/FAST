@@ -6,19 +6,6 @@
  *  Provide a set of tools for other modules
  */
 
-/* Variables.
-   ===================================================== */
-
-$FAST-base-size: 16px !default;
-$FAST-breakpoints: (
-    //  name        min-width   max-width
-        "tiny"      false       640px,
-        "small"     641px       1024px,
-        "medium"    1025px      1140px,
-        "large"     1141px      false
-) !default;
-
-
 /* Functions.
    ===================================================== */
 

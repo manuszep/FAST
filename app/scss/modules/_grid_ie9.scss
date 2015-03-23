@@ -115,7 +115,7 @@ $FAST-grid-import: false;
 .col {
     display: inline-block;
     font-size: 16px;
-    width: 100% / $FAST-grid-max-columns;
+    width: 100% / $FAST-max-columns;
 }
 
 .row.reverse {
@@ -128,7 +128,7 @@ $FAST-grid-import: false;
 
 /* Include the unprefixed grid styles */
 @include fast-grid-columns-styles();
-@include fast-grid-default-columns($FAST-grid-max-columns, $FAST-grid-max-columns);
+@include fast-grid-default-columns($FAST-max-columns, $FAST-max-columns);
 
 /* Find last grid breakpoint values */
 $last-grid-breakpoint: fast-get-last-list-value($FAST-breakpoints-columns);

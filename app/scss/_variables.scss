@@ -1,7 +1,173 @@
 /*------------------------------------*\
-    #FROST Variables
+    #FAST Variables
 \*------------------------------------*/
 
-$FAST-config-use-protocol: "http";
+$FAST-use-protocol: "http" !default;
 
-$FAST-config-base-size: 16px !default;
+$FAST-color-list: (
+        "blue-xxd"        #103184,
+        "blue-xd"         #004893,
+        "blue-d"          #2253AF,
+        "blue"            #0060D6,
+        "blue-l"          #4A89DC,
+        "blue-xl"         #5D9CEC,
+
+        "cyan"            #3BAFDA,
+        "cyan-l"          #4FC1E9,
+
+        "red-d"           #C70000,
+        "red"             #E30000,
+        "red-l"           #FF1821,
+
+        "orange-d"        #D35400,
+        "orange"          #E67E22,
+
+        "yellow-d"        #F6BB42,
+        "yellow"          #FFCE54,
+
+        "green-d"         #66AF44,
+        "green"           #8CC152,
+        "green-l"         #A0D468,
+
+        "turquoise"       #37BC9B,
+        "turquoise-l"     #48CFAD,
+
+        "grey-xd"         #333333,
+        "grey-d"          #616367,
+        "grey"            #999999,
+        "grey-l"          #B3B3B3,
+        "grey-xl"         #EFEBEA,
+        "grey-xxl"        #F2F2F2,
+
+        "cold-grey-xd"    #434A54,
+        "cold-grey-d"     #656D78,
+        "cold-grey"       #AAB2BD,
+        "cold-grey-l"     #CCD1D9,
+        "cold-grey-xl"    #E6E9ED,
+        "cold-grey-xxl"   #F5F7FA,
+
+        "white"           #fff,
+        "black"           #000
+) !default;
+
+$FAST-button-colors: (
+        "primary"         #8CC152,
+        "secondary"       #0060D6,
+        "danger"          #E30000,
+        "warning"         #FFCE54,
+
+        "cyan"            #3BAFDA,
+        "turquoise"       #37BC9B,
+        "black"           #000,
+        "white"           #fff
+) !default;
+
+$FAST-button-default-color: #E6E9ED !default;
+
+$FAST-color-text-light: #fff !default;
+$FAST-color-text-dark: #333 !default;
+
+$FAST-color-contrast-threshold: 55% !default;
+
+$FAST-color-lightness-cap: 95% !default;
+$FAST-color-darkness-cap: 15% !default;
+
+$FAST-breakpoints: (
+    //  name        min-width   max-width
+        "tiny"      false       640px,
+        "small"     641px       1024px,
+        "medium"    1025px      1140px,
+        "large"     1141px      false
+) !default;
+
+$FAST-gutter: 22px !default;
+
+$FAST-breakpoints-columns: (
+    //  name        col-count
+        "tiny"      4,
+        "small"     8,
+        "medium"    12
+) !default;
+
+$FAST-min-columns: 4 !default;
+$FAST-max-columns: 12 !default;
+$FAST-grid-use-words: false !default;
+
+$FAST-font-url: '//fonts.googleapis.com/css?family=Roboto:100,300,400,700,900,300italic,400italic,700italic' !default;
+$FAST-font-family:   "Roboto", "Segoe UI", "Helvetica Neue", Frutiger, "Frutiger Linotype", "Dejavu Sans", Arial, sans-serif !default;
+
+$FAST-type-default-color: $FAST-color-text-dark !default;
+
+$FAST-phi: 1.618 !default;
+$FAST-base-size: 16px !default;
+// Base scale: 16, 20, 24, 30, 36, 46, 58, 72
+
+$FAST-line-height: 22px !default;
+$FAST-font-weight: 400 !default;
+
+$FAST-paragraph-font-size: $FAST-base-size !default;
+$FAST-paragraph-line-height: $FAST-line-height !default;
+
+$FAST-h1: (
+    font-size: 46px,
+    font-weight: 100,
+    letter-spacing: -2px,
+    line-height: 70px,
+    margin: $FAST-line-height / 1.5
+) !default;
+
+$FAST-h2: (
+        font-size: 36px,
+        font-weight: 300,
+        letter-spacing: -1px,
+        line-height: 54px,
+        margin: $FAST-line-height / 1.5
+) !default;
+
+$FAST-h3: (
+        font-size: 30px,
+        font-weight: 400,
+        letter-spacing: 0,
+        line-height: 42px,
+        margin: $FAST-line-height / 1.5
+) !default;
+
+$FAST-h4: (
+        font-size: 24px,
+        font-weight: 400,
+        letter-spacing: 0,
+        line-height: 32px,
+        margin: $FAST-line-height / 1.5
+) !default;
+
+$FAST-h5: (
+        font-size: 20px,
+        font-weight: 700,
+        letter-spacing: 0,
+        line-height: 22px,
+        margin: $FAST-line-height / 2
+) !default;
+
+$FAST-h6: (
+        font-size: 16px,
+        font-weight: 900,
+        letter-spacing: 0,
+        line-height: 22px,
+        margin: $FAST-line-height / 3
+) !default;
+
+$FAST-headings: ($FAST-h1, $FAST-h2, $FAST-h3, $FAST-h4, $FAST-h5, $FAST-h6) !default;
+
+$FAST-button-line-height: $FAST-base-size !default;
+$FAST-button-height: $FAST-line-height * 2 !default;
+$FAST-button-padding-h: $FAST-gutter !default;
+
+$FAST-spacing-v: $FAST-line-height !default;
+$FAST-spacing-v-xs: $FAST-spacing-v / 2 !default;
+$FAST-spacing-v-s: $FAST-spacing-v / 1.5 !default;
+$FAST-spacing-v-l: $FAST-spacing-v * 2 !default;
+$FAST-spacing-v-xl: $FAST-spacing-v * 3 !default;
+
+$FAST-icon-font-path: "../fonts/" !default;
+$FAST-icon-li-width: (30em / 14) !default;
+$FAST-icon-border-color: #eee !default;

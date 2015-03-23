@@ -12,23 +12,7 @@
  * This defines the grid system with columns, rows and repsonsive tools
  */
 
-/* Variables.
-   ===================================================== */
-
 $FAST-grid-import: true !default;
-
-$FAST-gutter: 22px !default;
-
-$FAST-breakpoints-columns: (
-    //  name        col-count
-        "tiny"      4,
-        "small"     8,
-        "medium"    12
-) !default;
-
-$FAST-grid-min-columns: nth(fast-get-first-list-value($FAST-breakpoints-columns), 2) !default;
-$FAST-grid-max-columns: nth(fast-get-last-list-value($FAST-breakpoints-columns), 2) !default;
-$FAST-grid-use-words: false !default;
 
 
 /* Functions.
@@ -64,7 +48,7 @@ $FAST-grid-use-words: false !default;
         $prefix: '#{$prefix}-';
     }
 
-    @for $i from 1 through $FAST-grid-max-columns {
+    @for $i from 1 through $FAST-max-columns {
         .#{$prefix}order#{$i} {
             order: $i
         }
@@ -192,7 +176,9 @@ $FAST-grid-use-words: false !default;
 
 /* Placeholders.
    ===================================================== */
-
+%col-spacing {
+    @include fast-grid-content-spacing;
+}
 
 /* Styles.
    ===================================================== */
@@ -215,9 +201,12 @@ $FAST-grid-use-words: false !default;
 
     .col {
         @include fast-grid-content-spacing;
-        /*display: flex;
-        flex: 1 1 auto;*/ // Display flex on columns makes everything look like it's inline !
-        //flex-direction: column; // This causes the content to flow vertically
+        flex: 1 1 auto;
+    }
+
+    .column {
+        display: flex;
+        flex-direction: column;
     }
 
     .row.reverse {
@@ -258,7 +247,7 @@ $FAST-grid-use-words: false !default;
             // Start the media query
             @include fast-mq($name, $limit-query) {
                 // Generate the generic columns names (without media query prefix)
-                @include fast-grid-default-columns($columns-count, $FAST-grid-max-columns);
+                @include fast-grid-default-columns($columns-count, $FAST-max-columns);
 
                 // Generate the prefixed columns names
                 @include fast-grid-columns($name, $columns-count);

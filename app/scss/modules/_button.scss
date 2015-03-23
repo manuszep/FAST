@@ -11,25 +11,6 @@
 
 $FAST-button-import: true !default;
 
-$FAST-button-base-line-height: 22px !default;
-$FAST-button-line-height: $FAST-button-base-line-height * .7272;
-$FAST-button-height: 44px !default;
-$FAST-button-padding-h: 22px !default;
-
-$FAST-button-colors: (
-        "primary"         #8CC152,
-        "secondary"       #0060D6,
-        "danger"          #E30000,
-        "warning"         #FFCE54,
-
-        "cyan"            #3BAFDA,
-        "turquoise"       #37BC9B,
-        "black"           #000,
-        "white"           #fff
-) !default;
-
-$FAST-button-default-color: #E6E9ED !default;
-
 
 /* Functions.
    ===================================================== */

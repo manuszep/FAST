@@ -9,17 +9,7 @@
  *  Define main page and wrapper behviour
  */
 
-/* Variables.
-   ===================================================== */
 $FAST-page-import: true !default;
-
-$FAST-breakpoints: (
-    //  name        min-width   max-width
-        "tiny"      false       640px,
-        "small"     641px       1024px,
-        "medium"    1025px      1140px,
-        "large"     1141px      false
-) !default;
 
 /* Functions.
    ===================================================== */
