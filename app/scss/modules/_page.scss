@@ -26,7 +26,12 @@ $FAST-page-import: true !default;
 /* Styles.
    ===================================================== */
 @if $FAST-page-import {
+    html{
+        height: 100%;
+    }
+
     body {
+        min-height: 100%;
         overflow-x: hidden;
     }
 
@@ -51,10 +56,10 @@ $FAST-page-import: true !default;
                 }
 
                 .unwrap {
-                    margin-left: calc((#{$min} - 100vw) / 2);
+                    margin-left: calc(((#{$min} - 100vw) / 2) - (#{$FAST-gutter} / 2));
                     margin-right: 0;
-                    padding-right: calc((100vw - #{$min}) / 2);
-                    padding-left: calc((100vw - #{$min}) / 2);
+                    padding-right: calc(((100vw - #{$min}) / 2) + (#{$FAST-gutter} / 2));
+                    padding-left: calc(((100vw - #{$min}) / 2) + (#{$FAST-gutter} / 2));
                     width: 100vw;
                 }
             }

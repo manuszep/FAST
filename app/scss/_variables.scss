@@ -77,6 +77,11 @@ $FAST-color-contrast-threshold: 55% !default;
 $FAST-color-lightness-cap: 95% !default;
 $FAST-color-darkness-cap: 15% !default;
 
+$FAST-border-color: #E6E9ED;
+$FAST-border-width: 1px;
+$FAST-border-style: solid;
+$FAST-border: $FAST-border-width $FAST-border-style $FAST-border-color;
+
 $FAST-breakpoints: (
     //  name        min-width   max-width
         "tiny"      false       640px,
@@ -117,10 +122,10 @@ $FAST-font-weight: 400 !default;
 $FAST-paragraph-font-size: $FAST-base-size !default;
 $FAST-paragraph-line-height: $FAST-line-height !default;
 
-$FAST-blockquote-color: #616367;
+$FAST-blockquote-color: #616367 !default;
 $FAST-blockquote-style: italic;
 $FAST-blockquote-spacing: 0 $FAST-gutter $FAST-line-height $FAST-gutter;
-$FAST-blockquote-font-family: Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif;;
+$FAST-blockquote-font-family: Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif;
 
 $FAST-h1: (
     font-size: 46px,
