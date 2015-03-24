@@ -1,0 +1,39 @@
+/*-------------------------------------------------------*\
+    #FAST Layout
+
+    @depends on
+        - FAST-toolkit
+\*-------------------------------------------------------*/
+
+/*
+ *  Module description and remarks
+ */
+
+$FAST-layout-import: true !default;
+
+
+/* Functions.
+   ===================================================== */
+
+
+/* Mixins.
+   ===================================================== */
+
+
+/* Placeholders.
+   ===================================================== */
+
+
+/* Styles.
+   ===================================================== */
+@if $FAST-layout-import {
+    body, .layout {
+        display: flex;
+        flex-direction: column;
+
+        > .main-content {
+            display: flex;
+            flex-grow: 1;
+        }
+    }
+}

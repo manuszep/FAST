@@ -20,9 +20,21 @@
     {% endblock %}
 </head>
 <body>
-<div class="wrapper">
-    {% block content %}{% endblock %}
-</div>
+    <header class="main-header">
+        <div class="wrapper">
+            <p>test</p>
+        </div>
+    </header>
+    <div class="main-content">
+        <div class="wrapper">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    <footer class="main-footer">
+        <div class="wrapper">
+            test
+        </div>
+    </footer>
 
 {% block javascripts %}
 <script src="{{ root_prefix }}js/libs/jquery-1.11.2.js"></script>
