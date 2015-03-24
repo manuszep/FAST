@@ -149,7 +149,6 @@ $FAST-type-import: true !default;
     blockquote {
         @include fast-rem(margin, $FAST-blockquote-spacing);
         color: $FAST-blockquote-color;
-        display: inline-block;
         font-family: $FAST-blockquote-font-family;
         font-size: 1.125em;
         font-style: $FAST-blockquote-style;
