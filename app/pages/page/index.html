@@ -3,10 +3,7 @@ title: "Page"
 ---
 
 {% extends '../../layouts/main.html' %}
-{% block title %}{{title}}{% endblock %}
 
 {% block content %}
-<h1>{{title}}</h1>
-
-{% include "../../includes/page.html" %}
+    {% include "../../includes/page.html" %}
 {% endblock %}
