@@ -24,6 +24,48 @@ $FAST-header-import: true !default;
    ===================================================== */
 @if $FAST-header-import {
     .main-header {
-        border-bottom: $FAST-border;
+        @include fast-background-color($FAST-header-color);
+        @include fast-background-anchor-color($FAST-header-color);
+        margin-bottom: $FAST-line-height * 2;
+        padding: ($FAST-line-height / 2) 0;
+
+        &.fixed {
+            position: fixed;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .row {
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        nav {
+            padding: 0 ($FAST-gutter / 2);
+        }
+
+        ul {
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            &:before {
+                content: none;
+            }
+
+            margin: 0;
+            padding: 0 .5em;
+        }
+    }
+
+    .logo {
+        @include fast-rem(font-size, $FAST-font-size-l);
+        font-weight: 100;
+        letter-spacing: 1px;
+        line-height: 2.2;
+        padding: 0 ($FAST-gutter / 2);
+        text-transform: uppercase;
     }
 }

@@ -108,6 +108,12 @@ $FAST-type-import: true !default;
         @include fast-rem(line-height, $FAST-line-height * 1.188);
     }
 
+    .dimmed {
+        font-size: $FAST-base-size-s;
+        font-weight: 200;
+        opacity: .6;
+    }
+
     .normal-case.normal-case { //double the class name for more specificity
         text-transform: none;
     }

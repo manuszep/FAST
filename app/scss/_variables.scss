@@ -72,6 +72,11 @@ $FAST-color-text-dark: #333 !default;
 $FAST-code-color: #C70000 !default;
 $FAST-code-bg-color: transparent !default;
 
+$FAST-anchor-color: #0060D6 !default;
+$FAST-anchor-color-rev: #fff !default;
+$FAST-anchor-hover-color: #0060D6 !default;
+$FAST-anchor-hover-color-rev: #5D9CEC !default;
+
 $FAST-color-contrast-threshold: 55% !default;
 
 $FAST-color-lightness-cap: 95% !default;
@@ -81,6 +86,9 @@ $FAST-border-color: #E6E9ED;
 $FAST-border-width: 1px;
 $FAST-border-style: solid;
 $FAST-border: $FAST-border-width $FAST-border-style $FAST-border-color;
+
+$FAST-header-color: #434A54;
+$FAST-footer-color: #434A54;
 
 $FAST-breakpoints: (
     //  name        min-width   max-width
@@ -112,6 +120,7 @@ $FAST-phi: 1.618 !default;
 $FAST-base-size: 16px !default;
 // Base scale: 16, 20, 24, 30, 36, 46, 58, 72
 
+$FAST-type-size-s: .875em;
 $FAST-font-size-l: 1.25em;
 $FAST-font-size-xl: 1.5em;
 $FAST-font-size-xxl: 1.875em;
@@ -191,3 +200,5 @@ $FAST-icon-font-path: "../fonts/" !default;
 $FAST-icon-li-width: (30em / 14) !default;
 $FAST-icon-border-color: #eee !default;
 $FAST-icon-list-adjust-vertical: 20px !default;
+
+$FAST-header-spacing: $FAST-line-height * 2;

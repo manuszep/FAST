@@ -1,0 +1,40 @@
+/*-------------------------------------------------------*\
+    #FAST Footer
+
+    @depends on
+        - FAST-Toolkit
+\*-------------------------------------------------------*/
+
+/*
+ *  Module description and remarks
+ */
+
+$FAST-footer-import: true !default;
+
+
+/* Functions.
+   ===================================================== */
+
+
+/* Mixins.
+   ===================================================== */
+
+
+/* Placeholders.
+   ===================================================== */
+
+
+/* Styles.
+   ===================================================== */
+@if $FAST-footer-import {
+    .main-footer {
+        @include fast-background-color($FAST-footer-color);
+        @include fast-background-anchor-color($FAST-footer-color);
+        margin-top: $FAST-line-height * 2;
+        padding: ($FAST-line-height / 2) 0;
+
+        .col :last-child {
+            margin-bottom: 0;
+        }
+    }
+}

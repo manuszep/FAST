@@ -60,6 +60,16 @@ $FAST-color-import: true !default;
    color: fast-color-contrast($color);
 }
 
+@mixin fast-background-anchor-color ($color) {
+   a {
+      color: fast-color-contrast($color, $FAST-anchor-color, $FAST-anchor-color-rev);
+
+      &:hover {
+         color: fast-color-contrast($color, $FAST-anchor-hover-color, $FAST-anchor-hover-color-rev);
+      }
+   }
+}
+
 
 /* Placeholders.
    ===================================================== */
