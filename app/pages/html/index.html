@@ -10,7 +10,7 @@ title: "HTML"
 
 <section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg">
 <div class="row middle">
-    <div class="col c6">
+    <div class="col medium-6">
         <h2>Syntax</h2>
         <ul>
             <li>Use soft tabs with four spaces — they're the only way to guarantee code renders the same in any environment.</li>
@@ -20,7 +20,7 @@ title: "HTML"
             <li>Don’t omit optional closing tags (e.g. <code>&lt;/li&gt;</code> or <code>&lt;/body&gt;</code>).</li>
         </ul>
     </div>
-    <div class="col c6">
+    <div class="col medium-6">
         {% highlight 'html' %}
 <!DOCTYPE html>
 <html>
@@ -37,11 +37,11 @@ title: "HTML"
 </section>
 <section class="unwrap deco-separator-line medium-split-bg">
 <div class="row middle">
-    <div class="col c6">
+    <div class="col medium-6">
         <h2>HTML5 doctype</h2>
         <p>Enforce standards mode and more consistent rendering in every browser possible with this simple doctype at the beginning of every HTML page.</p>
     </div>
-    <div class="col c6">
+    <div class="col medium-6">
         {% highlight 'html' %}
 <!DOCTYPE html>
 <html>
@@ -53,7 +53,7 @@ title: "HTML"
 </section>
 <section class="unwrap deco-separator-line medium-split-bg">
     <div class="row middle">
-        <div class="col c6">
+        <div class="col medium-6">
             <h2>Language attribute</h2>
 
             <p>From the HTML5 spec:</p>
@@ -69,7 +69,7 @@ title: "HTML"
             <p>Head to Sitepoint for a <a href="http://reference.sitepoint.com/html/lang-codes">list of language
                                                                                                 codes</a>.</p>
         </div>
-        <div class="col c6">
+        <div class="col medium-6">
             {% highlight 'html' %}
 <html lang="en-us">
     <!-- ... -->
@@ -80,7 +80,7 @@ title: "HTML"
 
 <section class="unwrap deco-separator-line medium-split-bg">
     <div class="row middle">
-        <div class="col c6">
+        <div class="col medium-6">
             <h2>IE compatibility mode</h2>
 
             <p>Internet Explorer supports the use of a document compatibility <code>&lt;meta&gt;</code> tag to specify
@@ -90,7 +90,7 @@ title: "HTML"
             <p>For more information, <a href="http://stackoverflow.com/questions/6771258/whats-the-difference-if-meta-http-equiv-x-ua-compatible-content-ie-edge-e">read this awesome Stack Overflow article</a>.
             </p>
         </div>
-        <div class="col c6">
+        <div class="col medium-6">
             {% highlight 'html' %}
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">{% endhighlight %}
         </div>
@@ -99,14 +99,14 @@ title: "HTML"
 
 <section class="unwrap deco-separator-line medium-split-bg">
     <div class="row middle">
-        <div class="col c6">
+        <div class="col medium-6">
             <h2>Character encoding</h2>
 
             <p>Quickly and easily ensure proper rendering of your content by declaring an explicit character encoding.
                When doing so, you may avoid using character entities in your HTML, provided their encoding matches that
                of the document (generally UTF-8).</p>
         </div>
-        <div class="col c6">
+        <div class="col medium-6">
             {% highlight 'html' %}
 <head>
     <meta charset="UTF-8">
@@ -117,14 +117,14 @@ title: "HTML"
 
 <section class="unwrap deco-separator-line medium-split-bg">
     <div class="row middle">
-        <div class="col c6">
+        <div class="col medium-6">
             <h2>CSS and JavaScript includes</h2>
 
             <p>Per HTML5 spec, typically there is no need to specify a <code>type</code> when including CSS and
                JavaScript files as <code>text/css</code> and <code>text/javascript</code> are their respective defaults.
             </p>
         </div>
-        <div class="col c6">
+        <div class="col medium-6">
 {% highlight 'html' %}
 <!-- External CSS -->
 <link rel="stylesheet" href="code-guide.css">
@@ -142,7 +142,7 @@ title: "HTML"
 
 <section class="unwrap deco-separator-line medium-split-bg">
     <div class="row middle">
-        <div class="col c6">
+        <div class="col medium-6">
             <h2>Boolean attributes</h2>
 
             <p>A boolean attribute is one that needs no declared value. XHTML required you to declare a value, but HTML5
@@ -161,7 +161,7 @@ title: "HTML"
             </blockquote>
             <p>In short, don't add a value.</p>
         </div>
-        <div class="col c6">
+        <div class="col medium-6">
 {% highlight 'html' %}
 <input type="text" disabled>
 
@@ -176,13 +176,13 @@ title: "HTML"
 
 <section class="unwrap deco-separator-line medium-split-bg">
     <div class="row middle">
-        <div class="col c6">
+        <div class="col medium-6">
             <h2>Reducing markup</h2>
 
             <p>Whenever possible, avoid superfluous parent elements when writing HTML. Many times this requires
                iteration and refactoring, but produces less HTML. Take the following example:</p>
         </div>
-        <div class="col c6">
+        <div class="col medium-6">
             {% highlight 'html' %}
 <!-- Not so great -->
 <span class="avatar">

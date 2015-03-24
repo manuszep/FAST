@@ -1,86 +1,202 @@
-<h1>Heading level 1</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-<h2>Heading level 2</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-<h3>Heading level 3</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-<h4>Heading level 4</h4>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-<h5>Heading level 5</h5>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-<h6>Heading level 6</h6>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg">
+    <div class="row middle medium-reverse">
+        <div class="col medium-6">
+            <h2>Headings</h2>
+            <p>There are six levels of headings but most documents should only need two or three.</p>
+            <p>When the heading levels are correctly used, they define the outline of the document</p>
+            {% highlight 'html' %}
+<h1>Heading level 1</h1> - Document
+<h2>Heading level 2</h2> - Section 1
+<h3>Heading level 3</h3> - Section 1.1
+<h4>Heading level 4</h4> - Section 1.1.1
+<h5>Heading level 5</h5> - Section 1.1.1.1
+<h6>Heading level 6</h6> - Section 1.1.1.1.1{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <h1>Heading level 1</h1>
+            <h2>Heading level 2</h2>
+            <h3>Heading level 3</h3>
+            <h4>Heading level 4</h4>
+            <h5>Heading level 5</h5>
+            <h6>Heading level 6</h6>
+        </div>
+    </div>
+</section>
 
-<h2>Lead paragraph</h2>
-<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+<section class="unwrap deco-separator-line  medium-split-bg">
+    <div class="row middle medium-reverse">
+        <div class="col medium-6">
+            <h2>Paragraph</h2>
+            <p>The <code>p</code> tag is a block level element. It's used to wrap text and structure the content.</p>
+            <p>The class <code>lead</code> is generally used for the first paragraph of a section. To highlight the intro of the text.</p>
+            {% highlight 'html' %}
+<p class="lead">...</p>
+<p>...</p>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+        </div>
+    </div>
+</section>
 
-<h2>Anchors</h2>
-<ul>
-    <li>Lorem ipsum <a href="#">dolor sit amet</a>, consectetur adipicing elit.</li>
-</ul>
+<section class="unwrap deco-separator-line  medium-split-bg">
+    <div class="row middle medium-reverse">
+        <div class="col medium-6">
+            <h2>Anchors</h2>
+            <p>Anchors can link to pages, documents, external sites or sections in the current page.</p>
+            <p>The stylesheet tries to apply the right style, according to the link protocol or extension. The default styles being the internal page link.</p>
+            {% highlight 'html' %}
+<a href="link.html">Simple link</a>
+<a href="http://example.com">External link</a>
+<a href="#link">Anchor</a>
+<a href="link.pdf">PDF document</a>
+<a href="link.doc">Word document</a>
+<a href="link.xls">Excel document</a>
+<a href="link.ppt">Powerpoint document</a>
+<a href="link.jpg">Image</a>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <ul>
+                <li><a href="link.html">Simple link</a></li>
+                <li><a href="http://example.com">External link</a></li>
+                <li><a href="#link">Anchor</a></li>
+                <li><a href="link.pdf">PDF document</a></li>
+                <li><a href="link.doc">Word document</a></li>
+                <li><a href="link.xls">Excel document</a></li>
+                <li><a href="link.ppt">Powerpoint document</a></li>
+                <li><a href="link.jpg">Image</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
 
-<h2>Text variations</h2>
-<div class="upper-case">
-    <p>This div contains text written with normal case but it is converted to upper case.<br />
-    To revert to normal case within this div the class <span class="normal-case"><code>normal-case</code> comes in handy</span></p>
-</div>
-<h2>Code</h2>
-<p>Code can be used inline like in this paragraph <code>&lt;code&gt;...&lt;/code&gt;</code></p>
-<pre>
-    <code>
-Inside of a &lt;pre&gt; tag, the code can be displayed as a block.
+<section class="unwrap deco-separator-line  medium-split-bg">
+    <div class="row middle medium-reverse">
+        <div class="col medium-6">
+            <h2>Text styles</h2>
+            <p>The style of text can be modified with the following classes or tags:</p>
+            <p>Note that the <code>b</code> tag is not in the list because the <code>strong</code> tag does the same job and has more semantical meaning.</p>
+            {% highlight 'html' %}<span class="upper-case">Upper cased</span>
+<span class="normal-case">Revert to normal case</span>
+<small>Small text</small>
+<span class="t-large">Large text</span>
+<span class="t-xlarge">Big text</span>
+<span class="t-xxlarge">Huge text</span>
+<span class="dimmed">Dimmed text</span>
+<code>code</code>
+<i>Italicized text</i>
+<strong>Strong text</strong>
+<ins>Inserted text</ins>
+<del>Removed text</del>
+<mark>Marked text</mark>
+Text in <sup>sup</sup> and <sub>sub</sub>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <ul>
+                <li><span class="upper-case">Upper cased</span></li>
+                <li><span class="normal-case">Revert to normal case</span></li>
+                <li><small>Small text</small></li>
+                <li><span class="t-large">Large text</span></li>
+                <li><span class="t-xlarge">Big text</span></li>
+                <li><span class="t-xxlarge">Huge text</span></li>
+                <li><span class="dimmed">Dimmed text</span></li>
+                <li><code>code</code></li>
+                <li><i>Italicized text</i></li>
+                <li><strong>Strong text</strong></li>
+                <li><ins>Inserted text</ins></li>
+                <li><del>Removed text</del></li>
+                <li><mark>Marked text</mark></li>
+                <li>Text in <sup>sup</sup> and <sub>sub</sub></li>
+            </ul>
+        </div>
+    </div>
+</section>
 
-    The formatting
-    is resected.
-        All spaces are     preserved
-    </code>
-</pre>
-<h2>Blockquote</h2>
+<section class="unwrap deco-separator-line  medium-split-bg">
+    <div class="row middle medium-reverse">
+        <div class="col medium-6">
+            <h2>Blockquotes</h2>
+            <p>When quoting somebody, it's good to make it obvious and to cite the name of the author.</p>
+            {% highlight 'html' %}
 <p>Someone said:</p>
-        <blockquote>
-            <p>Why was the XHTML bird an invalid?<br />- Because it wasn’t nested properly.</p>
-            <cite>Somebody on the internets</cite>
-        </blockquote>
-<h2>Lists</h2>
-<ul>
-    <li>List item</li>
-    <li>List item 2</li>
-    <li>List item 3
-        <ul>
-            <li>List item 3.1</li>
-            <li>List item 3.2
-                <ul>
-                    <li>List item 3.2.1</li>
-                    <li>List item 3.2.2</li>
-                    <li>List item 3.2.3</li>
-                </ul>
-            </li>
-            <li>List item 3.3</li>
-            <li>List item 3.4</li>
-        </ul>
-    </li>
-    <li>List item 4</li>
-    <li>List item 5</li>
-</ul>
-<ol>
-    <li>List item</li>
-    <li>List item 2</li>
-    <li>List item 3
-        <ol>
-            <li>List item 3.1</li>
-            <li>List item 3.2
-                <ol>
-                    <li>List item 3.2.1</li>
-                    <li>List item 3.2.2</li>
-                    <li>List item 3.2.3</li>
-                </ol>
-            </li>
-            <li>List item 3.3</li>
-            <li>List item 3.4</li>
-        </ol>
-    </li>
-    <li>List item 4</li>
-    <li>List item 5</li>
-</ol>
+<blockquote>
+    <p>Why was the XHTML bird an invalid?<br />- Because it wasn’t nested properly.</p>
+    <cite>Somebody on the internets</cite>
+</blockquote>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <p>Someone said:</p>
+            <blockquote>
+                <p>Why was the XHTML bird an invalid?<br />- Because it wasn’t nested properly.</p>
+                <cite>Somebody on the internets</cite>
+            </blockquote>
+        </div>
+    </div>
+</section>
+
+<section class="unwrap deco-separator-line  medium-split-bg">
+    <div class="row middle medium-reverse">
+        <div class="col medium-6">
+            <h2>Lists</h2>
+            <p>Anything that can be considered a list can be marked-up as a list. Menus, table of contents, steps, enumerations...</p>
+            <p>If the order is important, the <code>ol</code> tag is the correct one. Otherwise, it's the <code>ul</code> tag.</p>
+            <p>When nesting lists, the nested <code>ul</code> or <code>ol</code> must be inside the <code>li</code> element.</p>
+            {% highlight 'html' %}
+            <ul>
+                <li>...</li>
+                <li>...
+                    <ul>
+                        <li>...</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ol>
+                <li>...</li>
+            </ol>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <ul>
+                <li>List item</li>
+                <li>List item 2</li>
+                <li>List item 3
+                    <ul>
+                        <li>List item 3.1</li>
+                        <li>List item 3.2
+                            <ul>
+                                <li>List item 3.2.1</li>
+                                <li>List item 3.2.2</li>
+                                <li>List item 3.2.3</li>
+                            </ul>
+                        </li>
+                        <li>List item 3.3</li>
+                        <li>List item 3.4</li>
+                    </ul>
+                </li>
+                <li>List item 4</li>
+                <li>List item 5</li>
+            </ul>
+            <ol>
+                <li>List item</li>
+                <li>List item 2</li>
+                <li>List item 3
+                    <ol>
+                        <li>List item 3.1</li>
+                        <li>List item 3.2
+                            <ol>
+                                <li>List item 3.2.1</li>
+                                <li>List item 3.2.2</li>
+                                <li>List item 3.2.3</li>
+                            </ol>
+                        </li>
+                        <li>List item 3.3</li>
+                        <li>List item 3.4</li>
+                    </ol>
+                </li>
+                <li>List item 4</li>
+                <li>List item 5</li>
+            </ol>
+        </div>
+    </div>
+</section>
