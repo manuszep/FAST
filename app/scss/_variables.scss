@@ -76,6 +76,7 @@ $FAST-anchor-color: #0060D6 !default;
 $FAST-anchor-color-rev: #fff !default;
 $FAST-anchor-hover-color: #0060D6 !default;
 $FAST-anchor-hover-color-rev: #5D9CEC !default;
+$FAST-header-menu-item-hover-bg: #656D78 !default;
 
 $FAST-color-contrast-threshold: 55% !default;
 
@@ -120,7 +121,7 @@ $FAST-phi: 1.618 !default;
 $FAST-base-size: 16px !default;
 // Base scale: 16, 20, 24, 30, 36, 46, 58, 72
 
-$FAST-type-size-s: .875em;
+$FAST-font-size-s: .875em;
 $FAST-font-size-l: 1.25em;
 $FAST-font-size-xl: 1.5em;
 $FAST-font-size-xxl: 1.875em;

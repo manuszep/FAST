@@ -92,6 +92,7 @@ $FAST-type-import: true !default;
     a {
         color: fast-color-get('blue');
         text-decoration: none;
+        transition: color .2s, background .2s;
 
         &:hover {
             text-decoration: underline;
@@ -109,7 +110,7 @@ $FAST-type-import: true !default;
     }
 
     .dimmed {
-        font-size: $FAST-base-size-s;
+        font-size: $FAST-font-size-s;
         font-weight: 200;
         opacity: .6;
     }

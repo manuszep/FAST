@@ -42,21 +42,32 @@ $FAST-header-import: true !default;
 
         nav {
             padding: 0 ($FAST-gutter / 2);
-        }
 
-        ul {
-            display: flex;
-            margin: 0;
-            padding: 0;
-        }
-
-        li {
-            &:before {
-                content: none;
+            ul {
+                display: flex;
+                margin: 0;
+                padding: 0;
             }
 
-            margin: 0;
-            padding: 0 .5em;
+            li {
+                &:before {
+                    content: none;
+                }
+
+                margin: 0;
+                padding: 0 .25em;
+            }
+
+            a {
+                border-radius: 3px;
+                padding: .25em ($FAST-gutter / 4);
+
+                &:hover {
+                    background: $FAST-header-menu-item-hover-bg;
+                    color: $FAST-anchor-color-rev;
+                    text-decoration: none;
+                }
+            }
         }
     }
 
