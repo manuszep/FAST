@@ -1,5 +1,3 @@
-{% include "variables.tpl" %}
-
 <style>
     .cell {
         text-align: center;
@@ -13,18 +11,18 @@
 
 <h2>Background</h2>
 <div class="row">
-    {% for entry in fast_color_list %}
+    {% for key, color in data.common.color.list %}
     <div class="cell col c2">
-        <div class="content bg-{{entry.name}}">.{{entry.name}}</div>
+        <div class="content bg-{{key}}">.{{key}}</div>
     </div>
     {% endfor %}
 </div>
 
 <h2>Text</h2>
 <div class="row">
-    {% for entry in fast_color_list %}
+    {% for key, color in data.common.color.list %}
     <div class="cell col c2">
-        <div class="content color-{{entry.name}}">.{{entry.name}}</div>
+        <div class="content color-{{key}}">.{{key}}</div>
     </div>
     {% endfor %}
 </div>
