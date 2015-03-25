@@ -24,8 +24,8 @@ $FAST-header-import: true !default;
    ===================================================== */
 @if $FAST-header-import {
     .main-header {
-        @include fast-background-color($FAST-header-color);
-        @include fast-background-anchor-color($FAST-header-color);
+        @include fast-background-color(fastColorGet($FAST-header-color));
+        @include fast-background-anchor-color(fastColorGet($FAST-header-color));
         margin-bottom: $FAST-line-height * 2;
         padding: ($FAST-line-height / 2) 0;
 
@@ -63,8 +63,8 @@ $FAST-header-import: true !default;
                 padding: .25em ($FAST-gutter / 4);
 
                 &:hover {
-                    background: $FAST-header-menu-item-hover-bg;
-                    color: $FAST-anchor-color-rev;
+                    background: fastColorGet($FAST-header-menu-item-hover-bg-color);
+                    color: fastColorGet($FAST-anchor-color-rev);
                     text-decoration: none;
                 }
             }

@@ -1,0 +1,48 @@
+{
+  "list": {
+    "blue-xxxd"      : "#2c3e50",
+    "blue-xxd"       : "#103184",
+    "blue-xd"        : "#004893",
+    "blue-d"         : "#2253AF",
+    "blue"           : "#0060D6",
+    "blue-l"         : "#4A89DC",
+    "blue-xl"        : "#5D9CEC",
+
+    "cyan"           : "#3BAFDA",
+    "cyan-l"         : "#4FC1E9",
+
+    "red-d"          : "#C70000",
+    "red"            : "#E30000",
+    "red-l"          : "#FF1821",
+
+    "orange-d"       : "#D35400",
+    "orange"         : "#E67E22",
+
+    "yellow-d"       : "#F6BB42",
+    "yellow"         : "#FFCE54",
+
+    "green-d"        : "#66AF44",
+    "green"          : "#8CC152",
+    "green-l"        : "#A0D468",
+
+    "turquoise"      : "#37BC9B",
+    "turquoise-l"    : "#48CFAD",
+
+    "grey-xd"        : "#333333",
+    "grey-d"         : "#616367",
+    "grey"           : "#999999",
+    "grey-l"         : "#B3B3B3",
+    "grey-xl"        : "#EFEBEA",
+    "grey-xxl"       : "#F2F2F2",
+
+    "cold-grey-xd"   : "#434A54",
+    "cold-grey-d"    : "#656D78",
+    "cold-grey"      : "#AAB2BD",
+    "cold-grey-l"    : "#CCD1D9",
+    "cold-grey-xl"   : "#E6E9ED",
+    "cold-grey-xxl"  : "#F5F7FA",
+
+    "white"          : "#fff",
+    "black"          : "#000"
+  }
+}

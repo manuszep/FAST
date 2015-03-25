@@ -7,7 +7,7 @@
 @import "../generated/icons";
 
 $FAST-icon-import: true !default;
-$FAST-icon-font-name: map-deep-get($FAST-data-icons, options, fontName) !default;
+$FAST-icon-font-name: fastMapDeepGet($FAST-data-icons, options, fontName) !default;
 $FAST-icon-codepoints: map-get($FAST-data-icons, codepoints) !default;
 
 
@@ -179,7 +179,7 @@ $FAST-icon-codepoints: map-get($FAST-data-icons, codepoints) !default;
         li:before {
             @extend %ico;
             @extend %ico-chevron-right;
-            color: fast-color-get('blue-xl');
+            color: fastColorGet('blue-xl');
             font-size: .625em;
             left: - $FAST-gutter;
             line-height: $FAST-icon-list-adjust-vertical;
@@ -201,7 +201,7 @@ $FAST-icon-codepoints: map-get($FAST-data-icons, codepoints) !default;
         &:before {
             @extend %ico;
             @extend %ico-quote-left;
-            color: fast-color-get('turquoise');
+            color: fastColorGet('turquoise');
             float: left;
             padding-right: .5em;
         }
@@ -216,7 +216,7 @@ $FAST-icon-codepoints: map-get($FAST-data-icons, codepoints) !default;
             @extend %ico;
             @extend %ico-minus;
             margin-right: .5em;
-            color: fast-color-get('turquoise');
+            color: fastColorGet('turquoise');
         }
     }
 }

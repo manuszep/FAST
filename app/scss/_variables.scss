@@ -2,140 +2,117 @@
     #FAST Variables
 \*------------------------------------*/
 
-@import "generated/button";
-
 $FAST-use-protocol: "http" !default;
 
-$FAST-color-list: (
-        "blue-xxd"        #103184,
-        "blue-xd"         #004893,
-        "blue-d"          #2253AF,
-        "blue"            #0060D6,
-        "blue-l"          #4A89DC,
-        "blue-xl"         #5D9CEC,
-
-        "cyan"            #3BAFDA,
-        "cyan-l"          #4FC1E9,
-
-        "red-d"           #C70000,
-        "red"             #E30000,
-        "red-l"           #FF1821,
-
-        "orange-d"        #D35400,
-        "orange"          #E67E22,
-
-        "yellow-d"        #F6BB42,
-        "yellow"          #FFCE54,
-
-        "green-d"         #66AF44,
-        "green"           #8CC152,
-        "green-l"         #A0D468,
-
-        "turquoise"       #37BC9B,
-        "turquoise-l"     #48CFAD,
-
-        "grey-xd"         #333333,
-        "grey-d"          #616367,
-        "grey"            #999999,
-        "grey-l"          #B3B3B3,
-        "grey-xl"         #EFEBEA,
-        "grey-xxl"        #F2F2F2,
-
-        "cold-grey-xd"    #434A54,
-        "cold-grey-d"     #656D78,
-        "cold-grey"       #AAB2BD,
-        "cold-grey-l"     #CCD1D9,
-        "cold-grey-xl"    #E6E9ED,
-        "cold-grey-xxl"   #F5F7FA,
-
-        "white"           #fff,
-        "black"           #000
-) !default;
-
-$FAST-button-colors: (
-        "primary"         #8CC152,
-        "secondary"       #0060D6,
-        "danger"          #E30000,
-        "warning"         #FFCE54,
-
-        "cyan"            #3BAFDA,
-        "turquoise"       #37BC9B,
-        "black"           #000,
-        "white"           #fff
-) !default;
-
-$FAST-button-default-color: #E6E9ED !default;
-
-$FAST-color-text-light: #fff !default;
-$FAST-color-text-dark: #333 !default;
-
-$FAST-code-color: #C70000 !default;
-$FAST-code-bg-color: transparent !default;
-
-$FAST-anchor-color: #0060D6 !default;
-$FAST-anchor-color-rev: #fff !default;
-$FAST-anchor-hover-color: #0060D6 !default;
-$FAST-anchor-hover-color-rev: #5D9CEC !default;
-$FAST-header-menu-item-hover-bg: #656D78 !default;
-
+/* Colors.
+   ===================================================== */
 $FAST-color-contrast-threshold: 55% !default;
-
 $FAST-color-lightness-cap: 95% !default;
 $FAST-color-darkness-cap: 15% !default;
 
-$FAST-border-color: #E6E9ED;
-$FAST-border-width: 1px;
-$FAST-border-style: solid;
-$FAST-border: $FAST-border-width $FAST-border-style $FAST-border-color;
+$FAST-button-default-color: "cold-grey-xl" !default;
+$FAST-button-colors: (
+        "primary": "green",
+        "secondary": "blue",
+        "danger": "red",
+        "warning": "yellow",
 
-$FAST-header-color: #434A54;
-$FAST-footer-color: #434A54;
-
-$FAST-breakpoints: (
-    //  name        min-width   max-width
-        "tiny"      false       640px,
-        "small"     641px       1024px,
-        "medium"    1025px      1140px,
-        "large"     1141px      false
+        "cyan": "cyan",
+        "turquoise": "turquoise",
+        "black": "black",
+        "white": "white"
 ) !default;
 
-$FAST-gutter: 30px !default;
+$FAST-text-color-light: "white" !default;
+$FAST-text-color-dark: "grey-xd" !default;
+$FAST-text-default-color: $FAST-text-color-dark !default;
+
+$FAST-anchor-color: "blue" !default;
+$FAST-anchor-color-rev: "white" !default;
+$FAST-anchor-hover-color: "blue" !default;
+$FAST-anchor-hover-color-rev: "blue-xl" !default;
+
+$FAST-blockquote-color: "grey-d" !default;
+
+$FAST-code-color: "red-d" !default;
+$FAST-code-bg-color: transparent !default;
+
+$FAST-border-color: "cold-grey-xl" !default;
+
+$FAST-icon-border-color: $FAST-border-color !default;
+
+$FAST-header-color: "cold-grey-xd" !default;
+$FAST-header-menu-item-hover-bg-color: "cold-grey-d" !default;
+
+$FAST-footer-color: $FAST-header-color !default;
+
+$FAST-split-bg-color: "cold-grey-xxl";
+$FAST-split-bg-color-dark: "blue-xxxd";
+
+
+/* Borders.
+   ===================================================== */
+$FAST-border-width: 1px !default;
+$FAST-border-style: solid !default;
+$FAST-border: $FAST-border-width $FAST-border-style $FAST-border-color !default;
+
+
+/* Breakpoints.
+   ===================================================== */
+$FAST-breakpoints: (
+    "tiny": (
+        "min": false,
+        "max": 640px
+    ),
+    "small": (
+        "min": 641px,
+        "max": 1024px
+    ),
+    "medium": (
+        "min": 1025px,
+        "max": 1140px
+    ),
+    "large": (
+        "min": 1141px,
+        "max": false
+    )
+) !default;
 
 $FAST-breakpoints-columns: (
-    //  name        col-count
-        "tiny"      4,
-        "small"     8,
-        "medium"    12
+        "tiny": 4,
+        "small": 8,
+        "medium": 12
 ) !default;
 
+
+/* Grid.
+   ===================================================== */
 $FAST-min-columns: 4 !default;
 $FAST-max-columns: 12 !default;
 $FAST-grid-use-words: false !default;
 
+
+/* Type.
+   ===================================================== */
 $FAST-font-url: '//fonts.googleapis.com/css?family=Roboto:100,300,400,700,900,300italic,400italic,700italic' !default;
 $FAST-font-family:   "Roboto", "Segoe UI", "Helvetica Neue", Frutiger, "Frutiger Linotype", "Dejavu Sans", Arial, sans-serif !default;
 
-$FAST-type-default-color: $FAST-color-text-dark !default;
-
 $FAST-phi: 1.618 !default;
 $FAST-base-size: 16px !default;
-// Base scale: 16, 20, 24, 30, 36, 46, 58, 72
-
-$FAST-font-size-s: .875em;
-$FAST-font-size-l: 1.25em;
-$FAST-font-size-xl: 1.5em;
-$FAST-font-size-xxl: 1.875em;
-
 $FAST-line-height: 22px !default;
 $FAST-font-weight: 400 !default;
+// Base scale: 16, 20, 24, 30, 36, 46, 58, 72
+
+$FAST-font-size-s: .875em !default;
+$FAST-font-size-l: 1.25em !default;
+$FAST-font-size-xl: 1.5em !default;
+$FAST-font-size-xxl: 1.875em !default;
 
 $FAST-paragraph-font-size: $FAST-base-size !default;
 $FAST-paragraph-line-height: $FAST-line-height !default;
 
-$FAST-blockquote-color: #616367 !default;
-$FAST-blockquote-style: italic;
-$FAST-blockquote-spacing: 0 $FAST-gutter $FAST-line-height $FAST-gutter;
-$FAST-blockquote-font-family: Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif;
+$FAST-blockquote-style: italic !default;
+$FAST-blockquote-font-family: Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif !default;
 
 $FAST-h1: (
     font-size: 46px,
@@ -187,9 +164,10 @@ $FAST-h6: (
 
 $FAST-headings: ($FAST-h1, $FAST-h2, $FAST-h3, $FAST-h4, $FAST-h5, $FAST-h6) !default;
 
-$FAST-button-line-height: $FAST-base-size !default;
-$FAST-button-height: $FAST-line-height * 2 !default;
-$FAST-button-padding-h: $FAST-gutter !default;
+
+/* Spacing.
+   ===================================================== */
+$FAST-gutter: 30px !default;
 
 $FAST-spacing-v: $FAST-line-height !default;
 $FAST-spacing-v-xs: $FAST-spacing-v / 2 !default;
@@ -197,9 +175,20 @@ $FAST-spacing-v-s: $FAST-spacing-v / 1.5 !default;
 $FAST-spacing-v-l: $FAST-spacing-v * 2 !default;
 $FAST-spacing-v-xl: $FAST-spacing-v * 3 !default;
 
+$FAST-blockquote-spacing: 0 $FAST-gutter $FAST-line-height $FAST-gutter !default;
+
+$FAST-header-spacing: $FAST-line-height * 2 !default;
+
+
+/* Button.
+   ===================================================== */
+$FAST-button-line-height: $FAST-base-size !default;
+$FAST-button-height: $FAST-line-height * 2 !default;
+$FAST-button-padding-h: $FAST-gutter !default;
+
+
+/* Icon.
+   ===================================================== */
 $FAST-icon-font-path: "../fonts/" !default;
 $FAST-icon-li-width: (30em / 14) !default;
-$FAST-icon-border-color: #eee !default;
 $FAST-icon-list-adjust-vertical: 20px !default;
-
-$FAST-header-spacing: $FAST-line-height * 2;

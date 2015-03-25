@@ -58,7 +58,7 @@ $FAST-type-import: true !default;
     }
 
     body {
-        color: $FAST-type-default-color;
+        color: $FAST-text-default-color;
         font-family: $FAST-font-family;
         font-size: 1em;
         font-weight: $FAST-font-weight;
@@ -90,7 +90,7 @@ $FAST-type-import: true !default;
     }
 
     a {
-        color: fast-color-get('blue');
+        color: fastColorGet('blue');
         text-decoration: none;
         transition: color .2s, background .2s;
 

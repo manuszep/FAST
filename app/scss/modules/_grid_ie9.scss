@@ -54,8 +54,8 @@ $FAST-grid-import: false;
     $one-column-width: (100% / $max-columns);
 
     @for $i from 1 through $max-columns {
-        $num: fast-number-as-word($i);
-        $selector: fast-grid-col-class($prefix, $i);
+        $num: fastSpellNumber($i);
+        $selector: fastGridColClass($prefix, $i);
 
         #{$selector} {
             width: ($one-column-width * $i);
@@ -63,9 +63,9 @@ $FAST-grid-import: false;
 
         @if $i < $max-columns {
             @if $prefix == false {
-                $selector: fast-grid-col-class('offset', $i);
+                $selector: fastGridColClass('offset', $i);
             } @else {
-                $selector: fast-grid-col-class('#{$prefix}-offset', $i);
+                $selector: fastGridColClass('#{$prefix}-offset', $i);
             }
 
             #{$selector} {
@@ -86,8 +86,8 @@ $FAST-grid-import: false;
     $maxed-columns: ();
 
     @for $i from 1 through $col-max { // [1]
-        $num: fast-number-as-word($i);
-        $selector: fast-grid-col-class(false, $i);
+        $num: fastSpellNumber($i);
+        $selector: fastGridColClass(false, $i);
 
         @if ($i < $col-count) {
             $w: ((100% / $col-count) * $i);
@@ -102,7 +102,7 @@ $FAST-grid-import: false;
     }
 
     @if length($maxed-columns) > 0 {
-        #{fast-list-join($maxed-columns, ',')} { // [3]
+        #{fastListJoin($maxed-columns, ',')} { // [3]
             width: 100%;
         }
     }
@@ -130,7 +130,7 @@ $FAST-grid-import: false;
 @include fast-grid-default-columns($FAST-max-columns, $FAST-max-columns);
 
 /* Find last grid breakpoint values */
-$last-grid-breakpoint: fast-get-last-list-value($FAST-breakpoints-columns);
+$last-grid-breakpoint: fastGetLastListValue($FAST-breakpoints-columns);
 $name: nth($last-grid-breakpoint, 1);
 $columns-count: nth($last-grid-breakpoint, 2);
 

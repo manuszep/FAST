@@ -7,6 +7,8 @@
 
 $FAST-deco-import: true !default;
 
+$FAST-deco-split-bg-light-color: fastColorGet($FAST-split-bg-color) !default;
+$FAST-deco-split-bg-dark-color: fastColorGet($FAST-split-bg-color-dark) !default;
 
 /* Functions.
    ===================================================== */
@@ -53,9 +55,53 @@ $FAST-deco-import: true !default;
         }
     }
 
+    .split-bg {
+        background: transparent;
+        background: linear-gradient(to right,  #ffffff 0%,#ffffff 50%,$FAST-deco-split-bg-light-color 50%,$FAST-deco-split-bg-light-color 100%);
+    }
+
+    .split-bg-rev {
+        background: transparent;
+        background: linear-gradient(to left,  #ffffff 0%,#ffffff 50%,$FAST-deco-split-bg-light-color 50%,$FAST-deco-split-bg-light-color 100%);
+    }
+
+    .split-bg-dark {
+        background: transparent;
+        background: linear-gradient(to right,  #ffffff 0%,#ffffff 50%,$FAST-deco-split-bg-dark-color 50%,$FAST-deco-split-bg-dark-color 100%);
+    }
+
+    .split-bg-dark-rev {
+        background: transparent;
+        background: linear-gradient(to left,  #ffffff 0%,#ffffff 50%,$FAST-deco-split-bg-dark-color 50%,$FAST-deco-split-bg-dark-color 100%);
+    }
+
+    @each $name, $bp in $FAST-breakpoints {
+        @include fast-mq($name) {
+            .#{$name}-split-bg {
+                background: transparent;
+                background: linear-gradient(to right,  #ffffff 0%,#ffffff 50%,$FAST-deco-split-bg-light-color 50%,$FAST-deco-split-bg-light-color 100%);
+            }
+
+            .#{$name}-split-bg-rev {
+                background: transparent;
+                background: linear-gradient(to left,  #ffffff 0%,#ffffff 50%,$FAST-deco-split-bg-light-color 50%,$FAST-deco-split-bg-light-color 100%);
+            }
+
+            .#{$name}-split-bg-dark {
+                background: transparent;
+                background: linear-gradient(to right,  #ffffff 0%,#ffffff 50%,$FAST-deco-split-bg-dark-color 50%,$FAST-deco-split-bg-dark-color 100%);
+            }
+
+            .#{$name}-split-bg-dark-rev {
+                background: transparent;
+                background: linear-gradient(to left,  #ffffff 0%,#ffffff 50%,$FAST-deco-split-bg-dark-color 50%,$FAST-deco-split-bg-dark-color 100%);
+            }
+        }
+    }
+
     .page-heading {
         @extend %unwrap;
-        @include fast-background-color($FAST-header-color);
+        @include fast-background-color(fastColorGet($FAST-header-color));
         margin-bottom: $FAST-header-spacing;
         margin-top: -$FAST-header-spacing;
         padding-bottom: $FAST-line-height;

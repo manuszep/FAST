@@ -11,43 +11,45 @@
 
 $FAST-color-import: true !default;
 
+$FAST-color-list: map-get($FAST-data-color, list) !default;
+
 /* Functions.
    ===================================================== */
 
 // Returns a color code by name
-@function fast-color-get($name, $list: $FAST-color-list) {
-   @return nth(fast-get-list-value-by-name($list, $name), 2);
+@function fastColorGet($name, $list: $FAST-color-list) {
+   @return map-get($list, unquote($name));
 }
 
 // Provide light or dark color to get an optimal contrast against a background color
-@function fast-color-contrast($color, $dark: $FAST-color-text-dark, $light: $FAST-color-text-light, $threshold: $FAST-color-contrast-threshold) {
-   @return if(lightness($color) < $threshold, $light, $dark)
+@function fastColorContrast($color, $dark: fastColorGet($FAST-text-color-dark), $light: fastColorGet($FAST-text-color-light), $threshold: $FAST-color-contrast-threshold) {
+   @return if(lightness($color) < $threshold, $light, $dark);
 }
 
 // Lighten a color with a maximum of $FAST-color-lightness-cap (%) lightness
-@function fast-color-safe-lighten($color, $amount) {
+@function fastColorSafeLighten($color, $amount, $cap: $FAST-color-lightness-cap) {
    $new-color: lighten($color, $amount);
 
-   @if (lightness($new-color) > $FAST-color-lightness-cap) {
-      @return hsl(hue($color), saturation($color), $FAST-color-lightness-cap);
+   @if (lightness($new-color) > $cap) {
+      @return hsl(hue($color), saturation($color), $cap);
    }
 
    @return $new-color;
 }
 
 // Darken a color with a minimum of $FAST-color-darkness-cap (%) lightness
-@function fast-color-safe-darken($color, $amount) {
+@function fastColorSafeDarken($color, $amount, $cap: $FAST-color-darkness-cap) {
    $new-color: darken($color, $amount);
 
-   @if (lightness($new-color) < $FAST-color-darkness-cap) {
-      @return hsl(hue($color), saturation($color), $FAST-color-darkness-cap);
+   @if (lightness($new-color) < $cap) {
+      @return hsl(hue($color), saturation($color), $cap);
    }
 
    @return $new-color;
 }
 
 // Sets the lightness of a color without altering other properties
-@function fast-color-lightness($color, $lightness) {
+@function fastColorLightness($color, $lightness) {
    @return hsl(hue($color), saturation($color), $lightness);
 }
 
@@ -55,17 +57,17 @@ $FAST-color-import: true !default;
 /* Mixins.
    ===================================================== */
 
-@mixin fast-background-color ($color) {
+@mixin fast-background-color ($color, $dark: fastColorGet($FAST-text-color-dark), $light: fastColorGet($FAST-text-color-light), $threshold: $FAST-color-contrast-threshold) {
    background-color: $color;
-   color: fast-color-contrast($color);
+   color: fastColorContrast($color, $dark, $light, $threshold);
 }
 
-@mixin fast-background-anchor-color ($color) {
+@mixin fast-background-anchor-color($color) {
    a {
-      color: fast-color-contrast($color, $FAST-anchor-color, $FAST-anchor-color-rev);
+      color: fastColorContrast($color, fastColorGet($FAST-anchor-color), fastColorGet($FAST-anchor-color-rev));
 
       &:hover {
-         color: fast-color-contrast($color, $FAST-anchor-hover-color, $FAST-anchor-hover-color-rev);
+         color: fastColorContrast($color, fastColorGet($FAST-anchor-hover-color), fastColorGet($FAST-anchor-hover-color-rev));
       }
    }
 }
@@ -78,73 +80,13 @@ $FAST-color-import: true !default;
 /* Styles.
    ===================================================== */
 @if $FAST-color-import {
-   @for $i from 1 through length($FAST-color-list) {
-      $item: nth($FAST-color-list, $i);
-      $name: nth($item, 1);
-      $color: nth($item, 2);
-
+   @each $name, $color in $FAST-color-list {
       .bg-#{$name} {
          @include fast-background-color($color);
       }
 
       .color-#{$name} {
          color: $color;
-      }
-   }
-
-   .split-bg {
-      background: transparent;
-      background: linear-gradient(to right,  #ffffff 0%,#ffffff 50%,#f5f7fa 50%,#f5f7fa 100%);
-   }
-
-   .split-bg-rev {
-       background: transparent;
-       background: linear-gradient(to left,  #ffffff 0%,#ffffff 50%,#f5f7fa 50%,#f5f7fa 100%);
-   }
-
-   $FAST-color-split-bg-dark: fast-color-safe-darken(#3BAFDA, 100%);
-   .split-bg-dark {
-      background: transparent;
-      background: linear-gradient(to right,  #ffffff 0%,#ffffff 50%,$FAST-color-split-bg-dark 50%,$FAST-color-split-bg-dark 100%);
-   }
-
-   .split-bg-dark-rev {
-      background: transparent;
-      background: linear-gradient(to left,  #ffffff 0%,#ffffff 50%,$FAST-color-split-bg-dark 50%,$FAST-color-split-bg-dark 100%);
-   }
-
-   @for $i from 1 through length($FAST-breakpoints-columns) {
-      /* Start of Breakpoints loop */
-      $bp-columns: nth($FAST-breakpoints-columns, $i);
-      $name: nth($bp-columns, 1);
-      $columns-count: nth($bp-columns, 2);
-      $limit-query: true;
-
-      // If this is the last media query, we don't want a max-width
-      @if $i == length($FAST-breakpoints-columns) {
-         $limit-query: false;
-      }
-
-      @include fast-mq($name, $limit-query) {
-         .#{$name}-split-bg {
-            background: transparent;
-            background: linear-gradient(to right,  #ffffff 0%,#ffffff 50%,#f5f7fa 50%,#f5f7fa 100%);
-         }
-
-         .#{$name}-split-bg-rev {
-            background: transparent;
-            background: linear-gradient(to left,  #ffffff 0%,#ffffff 50%,#f5f7fa 50%,#f5f7fa 100%);
-         }
-
-         .#{$name}-split-bg-dark {
-            background: transparent;
-            background: linear-gradient(to right,  #ffffff 0%,#ffffff 50%,$FAST-color-split-bg-dark 50%,$FAST-color-split-bg-dark 100%);
-         }
-
-         .#{$name}-split-bg-dark-rev {
-            background: transparent;
-            background: linear-gradient(to left,  #ffffff 0%,#ffffff 50%,$FAST-color-split-bg-dark 50%,$FAST-color-split-bg-dark 100%);
-         }
       }
    }
 }

@@ -16,7 +16,7 @@
  *  @param {Arglist} $keys - Keys to fetch
  *  @return {*}
  */
-@function map-deep-get($map, $keys...) {
+@function fastMapDeepGet($map, $keys...) {
     @each $key in $keys {
         $map: map-get($map, $key);
     }
@@ -24,30 +24,37 @@
     @return $map;
 }
 
-/*  fast-em
- *  This function converts a size in pixels to em's
+/**
+ *  Convert a size in pixels to em's
+ *
+ *  @param {px} $target - Desired size in px
+ *  @param {px} $context - Size of the context in px
+ *  @return {em}
  */
-@function fast-em($target, $font-size: $FAST-base-size) {
-    @if $target == false {
-        @return ($font-size * 1em);
-    }
-
-    @return (($target / $font-size) * 1em);
+@function fastEm($target, $context: $FAST-base-size) {
+    @return (($target / $context) * 1em);
 }
 
-/*  fast-number-as-word
+/**
  *  Convert an integer to the corresponding word
+ *
+ *  @param {int} $number - The number to convert in word
+ *  @return {string}
  */
-@function fast-number-as-word($number) {
+@function fastSpellNumber($number) {
     $w: "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty", "twenty-one", "twenty-two", "twenty-three", "twenty-four", "twenty-five", "twenty-six", "twenty-seven", "twenty-eight", "twenty-nine", "thirty", "thirty-one", "thirty-two", "thirty-three", "thirty-four", "thirty-five", "thirty-six";
 
     @return nth($w, $number);
 }
 
-/*  fast-build-mq
+/**
  *  Build a media query based on a minimum and maximum size
+ *
+ *  @param {px || false} $min - The minimum size of the media query
+ *  @param {px || false} $max - The maximum size of the media query
+ *  @return {string} - Media query string
  */
-@function fast-build-mq($min: false, $max: false) {
+@function fastBuildMq($min: false, $max: false) {
     @if $min == false and $max == false {
         @return '@media only screen';
     }
@@ -75,15 +82,21 @@
 
 /**
  *  Returns the first item of a list
+ *
+ *  @param {list} $list
+ *  @return {*}
  */
-@function fast-get-first-list-value($list) {
+@function fastGetFirstListValue($list) {
     @return nth($list, 1);
 }
 
 /**
  *  Returns the last item of a list
+ *
+ *  @param {list} $list
+ *  @return {*}
  */
-@function fast-get-last-list-value($list) {
+@function fastGetLastListValue($list) {
     @return nth($list, length($list));
 }
 
@@ -92,8 +105,12 @@
  *  Sass @for loops can’t decrement.
  *  Thus, we have to use a ugly workaround to make the loop increment on negative value,
  *  then use the absolute value of $i. Not cool but it works.
+ *
+ *  @param {list} $list
+ *  @param {*} $value - Value to search in list
+ *  @return {int || null}
  */
-@function fast-get-last-list-index($list, $value) {
+@function fastGetLastListIndex($list, $value) {
     @for $i from length($list)*-1 through -1 {
         @if nth($list, abs($i)) == $value {
             @return abs($i);
@@ -105,23 +122,36 @@
 
 /**
  *  Finds the first occurence of a value in a list and returns it's index
- *  Sass has a built-in function for it but we provide a wrapper to match the fast-get-last-list-index
+ *  Sass has a built-in function for it but we provide a wrapper to match the fastGetLastListIndex
+ *
+ *  @param {list} $list
+ *  @param {*} $value - Value to search in list
+ *  @return {* || null}
  */
-@function fast-get-first-list-index($list, $value) {
+@function fastGetFirstListIndex($list, $value) {
     @return index($list, $value)
 }
 
 /**
  *  Add a value at the beginning of a list
+ *
+ *  @param {list} $list
+ *  @param {*} $value - Value to add in list
+ *  @return {list}
  */
-@function fast-list-prepend($list, $value) {
+@function fastListPrepend($list, $value) {
     @return join($value, $list);
 }
 
 /**
  *  Converts a list into a string with the given separator
+ *
+ *  @param {list} $list
+ *  @param {string} $glue - Separator for list elements
+ *  @param {bool} $is-nested - Don't use. It's for the recursive function
+ *  @return {string}
  */
-@function fast-list-join($list, $glue: '', $is-nested: false) {
+@function fastListJoin($list, $glue: '', $is-nested: false) {
     $result: null;
 
     @if length($list) == 0 {
@@ -142,23 +172,6 @@
     @return $result;
 }
 
-/**
- *  Loops through a list, reads the first element of each value and compares to the $name attribute.
- *  If the name matches, it returns the current list item.
- */
-@function fast-get-list-value-by-name($list, $name) {
-    @for $i from 1 through length($list) {
-        $item: nth($list, $i);
-        $item-name: nth($item, 1);
-
-        @if $item-name == $name {
-            @return $item;
-        }
-    }
-
-    @return false;
-}
-
 
 /* Mixins.
    ===================================================== */
@@ -166,21 +179,46 @@
 /*  fast-rem
  *  Sets a rule in pixels (as a fallback) and in rem (for modern browsers)
  */
-@mixin fast-rem($rule: font-size, $value: $FAST-base-size) {
-    $list: ();
+@mixin fast-rem($property: font-size, $values: $FAST-base-size) {
+    $px : ();
+    $rem: ();
 
-    @each $val in $value {
-        $list: append($list, (($val / $FAST-base-size) * 1rem));
+    @each $value in $values {
+
+        @if $value == 0 or $value == auto {
+            $px : append($px , $value);
+            $rem: append($rem, $value);
+        }
+
+        @else {
+            $unit: unit($value);
+
+            @if $unit == "px" {
+                $px : append($px,  $value);
+                $rem: append($rem, ($value / $FAST-base-size) * 1rem);
+            }
+
+            @if $unit == "rem" {
+                $px : append($px,  ($value * $FAST-base-size));
+                $rem: append($rem, $value);
+            }
+        }
     }
-    #{$rule}: $value;
-    #{$rule}: $list;
+
+    // If the two lists are the same, we output only one (ex: margin-top: 0)
+    @if $px == $rem {
+        #{$property}: $px;
+    } @else {
+        #{$property}: $px;
+        #{$property}: $rem;
+    }
 }
 
 /*  fast-build-mq
  *  Declares a media query with a min and max width and includes the content
  */
 @mixin fast-build-mq($min: false, $max: false) {
-    $mq: fast-build-mq($min, $max);
+    $mq: fastBuildMq($min, $max);
 
     @media #{$mq} {
         @content;
@@ -192,16 +230,11 @@
  *  The second argument allows to scope a min-width and above.
  */
 @mixin fast-mq($name, $use_max: false) {
-    @each $bp in $FAST-breakpoints {
-        $bp-name: nth($bp, 1);
-        $min: nth($bp, 2);
-        $max: nth($bp, 3);
-
-        @if $use_max == false {
-            $max: false;
-        }
-
+    @each $bp-name, $sizes in $FAST-breakpoints {
         @if $bp-name == $name {
+            $min: map-get($sizes, "min");
+            $max: if($use_max == false, false, map-get($sizes, "max"));
+
             @include fast-build-mq($min, $max) {
                 @content;
             }

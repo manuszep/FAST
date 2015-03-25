@@ -28,8 +28,8 @@ $FAST-footer-import: true !default;
    ===================================================== */
 @if $FAST-footer-import {
     .main-footer {
-        @include fast-background-color($FAST-footer-color);
-        @include fast-background-anchor-color($FAST-footer-color);
+        @include fast-background-color(fastColorGet($FAST-footer-color));
+        @include fast-background-anchor-color(fastColorGet($FAST-footer-color));
         margin-top: $FAST-line-height * 2;
         padding: ($FAST-line-height / 2) 0;
 

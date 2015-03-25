@@ -52,9 +52,8 @@ $FAST-page-import: true !default;
      *  Loop through each breakpoint and set the wrapper size to the min-width of that breakpoint
      *  [1] : If a min-width is specified, wrap the rule in a media query.
      */
-    @each $bp in $FAST-breakpoints {
-        $name: nth($bp, 1);
-        $min: nth($bp, 2);
+    @each $name, $bp in $FAST-breakpoints {
+        $min: map-get($bp, "min");
 
         @if $min != false { // [1]
             @include fast-mq($name) {

@@ -14,8 +14,8 @@ $FAST-grid-import: true !default;
 
 /* Functions.
    ===================================================== */
-@function fast-grid-col-class($prefix, $number) {
-    $num: fast-number-as-word($number);
+@function fastGridColClass($prefix, $number) {
+    $num: fastSpellNumber($number);
 
     @if $FAST-grid-use-words {
         @if $prefix == false {
@@ -39,11 +39,7 @@ $FAST-grid-import: true !default;
 
 @mixin fast-grid-columns-styles($prefix: false) {
     /* Start of fast-grid-columns-styles */
-    @if $prefix == false {
-        $prefix: '';
-    } @else {
-        $prefix: '#{$prefix}-';
-    }
+    $prefix: if($prefix == false, '', '#{$prefix}-');
 
     @for $i from 1 through $FAST-max-columns {
         .#{$prefix}order#{$i} {
@@ -100,23 +96,29 @@ $FAST-grid-import: true !default;
     /* End of fast-grid-columns-styles */
 }
 
+/**
+ *  This mixin applies styles for a specific breakpoint only (prefixed).
+ *  It applies width and offsets.
+ */
 @mixin fast-grid-columns($prefix, $max-columns) {
     /* Start of fast-grid-columns */
     $one-column-width: (100% / $max-columns);
 
     @for $i from 1 through $max-columns {
-        $selector: fast-grid-col-class($prefix, $i);
+        $selector: fastGridColClass($prefix, $i);
 
+        // Setting width of columns
         #{$selector} {
             flex-basis: ($one-column-width * $i);
             max-width: ($one-column-width * $i);
         }
 
+        // Setting Offsets of columns except for max-columns (we don't want to push a column outside the grid)
         @if $i < $max-columns {
             @if $prefix == false {
-                $selector: fast-grid-col-class('offset', $i);
+                $selector: fastGridColClass('offset', $i);
             } @else {
-                $selector: fast-grid-col-class('#{$prefix}-offset', $i);
+                $selector: fastGridColClass('#{$prefix}-offset', $i);
             }
 
             #{$selector} {
@@ -136,29 +138,27 @@ $FAST-grid-import: true !default;
  */
 @mixin fast-grid-default-columns($col-count, $col-max) {
     /* Start of fast-grid-default-columns */
-    $maxed-columns: ();
+    $maxed-columns: (); // Store the selectors that will get a 100% width
 
     @for $i from 1 through $col-max { // [1]
-        $selector: fast-grid-col-class(false, $i);
+        $selector: fastGridColClass(false, $i);
 
-        @if ($i < $col-count) {
+        @if ($i < $col-count) { // As long as we are not a the media query max column count, it is smaller than 100%
             $w: ((100% / $col-count) * $i);
 
             #{$selector} {
                 flex-basis: $w;
                 max-width: $w;
             }
-        } @else {
+        } @else { // Now the width is @ 100%. We collect the selectors for later use
             $tmp: $maxed-columns;
             $maxed-columns: append($maxed-columns, '#{$selector}'); // [2]
         }
     }
 
-    @if length($maxed-columns) > 0 {
-        #{fast-list-join($maxed-columns, ',')} { // [3]
-            flex-basis: 100%;
-            max-width: 100%;
-        }
+    #{fastListJoin($maxed-columns, ',')} { // [3]
+        flex-basis: 100%;
+        max-width: 100%;
     }
     /* End of fast-grid-default-columns */
 }
@@ -219,27 +219,17 @@ $FAST-grid-import: true !default;
     /**
      *  Generate columns styles for each breakpoint declared in $FAST-breakpoints-columns
      *  [1] - Get the media query data that matches the current breakpoint name and check that it exists ([1b])
-     *  [2] - If the current breakpoints covers less columns than the maximum, the excedent columns will all be 100%.
-     *        Prepare a list to hold the classes names for these columns and group them later.
+     *  [2] - If this is the last media query and $to-infinity is true, we don't want a max-width
      */
     @for $i from 1 through length($FAST-breakpoints-columns) {
         /* Start of Breakpoints loop */
-        $bp-columns: nth($FAST-breakpoints-columns, $i);
-        $name: nth($bp-columns, 1);
-        $columns-count: nth($bp-columns, 2);
+        $item: nth($FAST-breakpoints-columns, $i);
+        $name: nth($item, 1);
+        $columns-count: nth($item, 2);
+        $bp: map-get($FAST-breakpoints, $name); // [1]
 
-        $bp: fast-get-list-value-by-name($FAST-breakpoints, $name); // [1]
-
-        @if $bp != false { // [1b]
-            $min: nth($bp, 2);
-            $max: nth($bp, 3);
-            $maxed-columns: (); // [2]
-            $limit-query: true;
-
-            // If this is the last media query, we don't want a max-width
-            @if $i == length($FAST-breakpoints-columns) {
-                $limit-query: false;
-            }
+        @if $bp != null { // [1b]
+            $limit-query: if($i == length($FAST-breakpoints-columns), false, true);
 
             // Start the media query
             @include fast-mq($name, $limit-query) {
