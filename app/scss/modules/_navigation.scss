@@ -27,6 +27,9 @@ $FAST-navigation-import: true !default;
 /* Styles.
    ===================================================== */
 @if $FAST-navigation-import {
+    .main-header .alpha {
+        width: 100%;
+    }
     .main-nav-toggle {
         text-align: right;
         position: relative;
@@ -183,14 +186,59 @@ $FAST-navigation-import: true !default;
      *  Loop through each breakpoint and set the wrapper size to the min-width of that breakpoint
      *  [1] : If a min-width is specified, wrap the rule in a media query.
      */
+    $set-nav-width: true;
     @each $name, $bp in $FAST-breakpoints {
         $min: map-get($bp, "min");
 
         @if $min != false { // [1]
             @include fast-mq($name) {
-                .main-nav.main-nav nav {
-                    width: $min;
+                @if $name == $FAST-navigation-expand-breakpoint {
+                    $set-nav-width: false;
+                    .main-header .alpha {
+                        width: auto;
+                    }
+
+                    .main-nav-toggle {
+                        display: none;
+                    }
+
+                    .main-nav.main-nav {
+                        box-shadow: none;
+                        flex-grow: 1;
+                        min-height: unset;
+                        position: static;
+                        margin: 0;
+                        opacity: 1;
+                        transform: none;
+                        width: auto;
+                        z-index: 0;
+                        justify-content: flex-end;
+                        transition: none;
+
+                        nav, ul, li {
+                            margin: 0;
+                            width: auto;
+                        }
+
+                        ul li, a {
+                            border: none;
+                            display: inline-block;
+                        }
+
+                        nav ul li a {
+                            border-radius: 3px;
+                            padding: .25em ($FAST-gutter / 4);
+                        }
+                    }
                 }
+
+                @if $set-nav-width == true {
+                    .main-nav.main-nav nav {
+                        width: $min;
+                    }
+                }
+
+
             }
         }
     }
