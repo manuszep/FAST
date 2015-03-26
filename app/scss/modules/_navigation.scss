@@ -32,6 +32,15 @@ $FAST-navigation-import: true !default;
         position: relative;
         flex-grow: 0;
 
+        &:hover {
+            .menu-open {
+                color: rgba(fastColorGet($FAST-anchor-color-rev), .5) !important;
+            }
+            .menu-open span {
+                transform: scale(-1, 1);
+            }
+        }
+
         .menu-close {
             display: block;
             left: 0;
@@ -116,9 +125,10 @@ $FAST-navigation-import: true !default;
     .main-nav.main-nav {
         @include fast-background-color(fastColorGet($FAST-header-color));
 
-        box-shadow: 0 2px 7px 0 rgba(0,0,0,.3);
+        box-shadow: 0 5px 7px 0 rgba(0,0,0,.2);
         min-height: 30vh;
         left: 0;
+        margin: 0 auto;
         opacity: 0;
         position: absolute;
         top: 0;
@@ -135,6 +145,7 @@ $FAST-navigation-import: true !default;
         }
 
         nav {
+            margin: 0 auto;
             padding: 0 ($FAST-gutter / 2);
             width: 100%;
         }
@@ -164,6 +175,22 @@ $FAST-navigation-import: true !default;
             &:hover {
                 background: fastColorGet($FAST-header-menu-item-hover-bg-color);
                 color: fastColorGet($FAST-anchor-color-rev);
+            }
+        }
+    }
+
+    /**
+     *  Loop through each breakpoint and set the wrapper size to the min-width of that breakpoint
+     *  [1] : If a min-width is specified, wrap the rule in a media query.
+     */
+    @each $name, $bp in $FAST-breakpoints {
+        $min: map-get($bp, "min");
+
+        @if $min != false { // [1]
+            @include fast-mq($name) {
+                .main-nav.main-nav nav {
+                    width: $min;
+                }
             }
         }
     }

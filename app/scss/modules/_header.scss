@@ -24,11 +24,12 @@ $FAST-header-import: true !default;
    ===================================================== */
 @if $FAST-header-import {
     .main-header {
+        @include fast-background-color(fastColorGet($FAST-header-color));
         @include fast-background-anchor-color(fastColorGet($FAST-header-color));
         margin-bottom: $FAST-line-height * 2;
 
         .alpha, .beta {
-            @include fast-background-color(fastColorGet($FAST-header-color));
+            background: fastColorGet($FAST-header-color);
 
             align-items: center;
             display: flex;
@@ -57,5 +58,9 @@ $FAST-header-import: true !default;
         line-height: 2.2;
         padding: 0 ($FAST-gutter / 2);
         text-transform: uppercase;
+
+        a:hover {
+            color: #fff;
+        }
     }
 }
