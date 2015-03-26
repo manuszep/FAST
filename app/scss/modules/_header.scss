@@ -59,6 +59,16 @@ $FAST-header-import: true !default;
         padding: 0 ($FAST-gutter / 2);
         text-transform: uppercase;
 
+        a {
+            $logo-font-size-unitless: $FAST-font-size-l / ($FAST-font-size-l * 0 + 1);
+            $logo-font-size-px: $FAST-base-size * $logo-font-size-unitless;
+
+            background: transparent url($FAST-logo-url) no-repeat left center;
+            background-size: contain;
+            display: inline-block;
+            padding-left: $logo-font-size-px * 2.2;
+        }
+
         a:hover {
             color: #fff;
         }

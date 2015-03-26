@@ -175,6 +175,15 @@ gulp.task('scripts', function() {
         .pipe(reload({stream: true}));
 });
 
+gulp.task('assets', function() {
+    var sources = 'app/static/**/*';
+
+    return gulp.src(sources)
+        .pipe(plumber())
+        .pipe(gulp.dest('tmp/assets'))
+        .pipe(reload({stream: true}));
+});
+
 var html = function(path, dest) {
     var sources = path;
 
@@ -205,6 +214,7 @@ gulp.task('prepareServer', ['clean'], function() {
     gulp.start('icons');
     gulp.start('styles');
     gulp.start('scripts');
+    gulp.start('assets');
     gulp.start('html');
     gulp.start('htmlTests');
 });
