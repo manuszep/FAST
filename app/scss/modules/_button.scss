@@ -68,6 +68,10 @@ $FAST-button-import: true !default;
         box-shadow: inset 0 0 0 2px currentColor;
         transition: color .2s, background-color .2s;
 
+        &.btn-tiny {
+            box-shadow: inset 0 0 0 1px currentColor;
+        }
+
         &.btn-small {
             box-shadow: inset 0 0 0 1px currentColor;
         }
@@ -82,7 +86,18 @@ $FAST-button-import: true !default;
     }
 
     .btn-small {
-        @include fast-rem(padding, (($FAST-button-height - $FAST-button-line-height) / 8) ($FAST-button-padding-h / 2));
+        @include fast-rem(padding, (($FAST-button-height - $FAST-button-line-height) / 4) ($FAST-button-padding-h / 2));
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0);
+        letter-spacing: 0;
+        text-transform: none;
+
+        &:hover {
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2);
+        }
+    }
+
+    .btn-tiny {
+        @include fast-rem(padding, (($FAST-button-height - $FAST-button-line-height) / 14) ($FAST-button-padding-h / 2));
         box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0);
         letter-spacing: 0;
         text-transform: none;

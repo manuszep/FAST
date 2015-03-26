@@ -3,7 +3,7 @@
 <section class="deco-separator-line deco-separator-line-pre">
 <p>All buttons support the following colors:
    {% for key, color in data.common.button.colors %}
-<a class="btn btn-{{key}} btn-small">.btn-{{key}}</a>
+<a class="btn btn-{{key}} btn-tiny">.btn-{{key}}</a>
 {% endfor %}
 </p>
 </section>
@@ -128,6 +128,46 @@
                 {% for key, color in data.common.button.colors %}
                 <div class="col">
                     <p><a class="btn btn-border-{{key}} btn-small">Button</a></p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<section class="unwrap deco-separator-line medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Tiny buttons</h2>
+            {% highlight 'html' %}<a class="btn btn-tiny">Button</a>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <div class="row center">
+                <div class="col">
+                    <p><a class="btn btn-tiny">Button</a></p>
+                </div>
+                {% for key, color in data.common.button.colors %}
+                <div class="col">
+                    <p><a class="btn btn-{{key}} btn-tiny">Button</a></p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<section class="unwrap deco-separator-line medium-split-bg-rev">
+    <div class="row middle medium-reverse">
+        <div class="col medium-6">
+            <h2>Hollow & tiny</h2>
+            {% highlight 'html' %}<a class="btn btn-tiny btn-border-secondary">Button</a>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <div class="row center">
+                <div class="col">
+                    <p><a class="btn btn-border-neutral btn-tiny">Button</a></p>
+                </div>
+                {% for key, color in data.common.button.colors %}
+                <div class="col">
+                    <p><a class="btn btn-border-{{key}} btn-tiny">Button</a></p>
                 </div>
                 {% endfor %}
             </div>
