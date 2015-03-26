@@ -2,6 +2,8 @@
 
 FAST stands for Fast Application Styling tools. It’s a modular CSS framework.
 
+![screenshot](http://i358.photobucket.com/albums/oo27/manuszep/FAST_zpsycahp9w3.png)
+
 ## Modules
 
 - **Buttons**
