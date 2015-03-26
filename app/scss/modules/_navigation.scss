@@ -1,0 +1,306 @@
+/*-------------------------------------------------------*\
+    #FAST Navigation
+
+    @depends on
+        - FAST-toolkit
+\*-------------------------------------------------------*/
+
+/*
+ *  Module description and remarks
+ */
+
+$FAST-navigation-import: true !default;
+
+
+/* Functions.
+   ===================================================== */
+
+
+/* Mixins.
+   ===================================================== */
+
+
+/* Placeholders.
+   ===================================================== */
+
+
+/* Styles.
+   ===================================================== */
+@if $FAST-navigation-import {
+    .main-nav-toggle {
+        text-align: right;
+        position: relative;
+        flex-grow: 0;
+
+        .menu-close {
+            display: block;
+            left: 0;
+            position: absolute;
+            height: 100%;
+            top: 0;
+            width: 100%;
+            z-index: -1;
+        }
+
+        .menu-open {
+            align-content: center;
+            align-items: center;
+            display: inline-flex;
+            line-height: 1em;
+            height: 1em;
+            text-transform: uppercase;
+            transition: all .2s ease-in-out;
+
+            &:hover {
+                color: fastColorGet($FAST-anchor-color-rev);
+            }
+
+            span {
+                color: transparent;
+                display: inline-block;
+                position: relative;
+                transition: all .2s ease-in-out;
+
+                &:before, &:after {
+                    content: "";
+                    background-color: fastColorGet($FAST-anchor-color-rev);
+                    display: block;
+                    height: .115em;
+                    position: absolute;
+                    transition: transform .3s ease-in-out, box-shadow .2s ease-in;
+                    width: 100%;
+                }
+
+                &:before {
+                    box-shadow: 0 .3em 0 0 fastColorGet($FAST-anchor-color-rev);
+                    top: .11em;
+                }
+
+                &:after {
+                    bottom: .17em;
+                }
+            }
+        }
+
+        :target & {
+            .menu-close {
+                z-index: 1;
+            }
+
+            .menu-open {
+                color: transparent;
+                font-size: 0;
+                @include fast-rem(height, $FAST-base-size);
+
+                span {
+                    @include fast-rem(font-size, $FAST-base-size);
+                    @include fast-rem(line-height, $FAST-base-size);
+
+                    &:before, &:after {
+                        transition: transform .3s ease-out, box-shadow .2s linear;
+                    }
+
+                    &:before {
+                        box-shadow: 0 0 0 0 transparent;
+                        transform: scale(2) translate3d(0, .02em, 0) rotate(-135deg);
+                    }
+
+                    &:after {
+                        transform: scale(2) translate3d(0, -.30em, 0) rotate(135deg);
+                    }
+                }
+            }
+        }
+    }
+
+    .main-nav.main-nav {
+        @include fast-background-color(fastColorGet($FAST-header-color));
+
+        box-shadow: 0 2px 7px 0 rgba(0,0,0,.3);
+        min-height: 30vh;
+        left: 0;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        transition: all .3s ease-in;
+        transform: translate3d(0, -100%, 0);
+        width: 100%;
+        z-index: -1;
+
+        :target & {
+            opacity: 1;
+            top: 100%;
+            transform: translate3d(0, 0, 0);
+            transition: all .3s ease-out;
+        }
+
+        nav {
+            padding: 0 ($FAST-gutter / 2);
+            width: 100%;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            width: 100%;
+
+            li {
+                &:before {
+                    content: none;
+                }
+
+                border-top: 1px solid fastColorGet("cold-grey-d");
+                margin: 0;
+
+                a {
+                    @include fast-rem(padding, ($FAST-line-height / 2) 0);
+                    display: block;
+                }
+            }
+        }
+
+        a {
+            &:hover {
+                background: fastColorGet($FAST-header-menu-item-hover-bg-color);
+                color: fastColorGet($FAST-anchor-color-rev);
+            }
+        }
+    }
+    /*.menu-close {
+        display: none;
+
+        &:hover {
+            background: none;
+        }
+    }
+
+    .menu-icon {
+        align-items: center;
+        cursor: pointer;
+        display: flex;
+        position: relative;
+        text-transform: uppercase;
+        transition: all .2s;
+        z-index: 1;
+
+        span {
+            border-top: 2px solid #fff;
+            display: inline-block;
+            font-size: 0;
+            height: 0;
+            margin: -2px 1px 0 1px;
+            position: relative;
+            transition: all .2s;
+            @include fast-rem(width, $FAST-base-size * .75);
+
+
+            &:before, &:after {
+                content: " ";
+                border-bottom: 2px solid #fff;
+                position: absolute;
+                @include fast-rem(top, (-$FAST-base-size * .5) + 1px);
+                width: 100%;
+                transition: all .2s;
+            }
+
+            &:after {
+                border-bottom: 0;
+                border-top: 2px solid #fff;
+                @include fast-rem(top, ($FAST-base-size * .5) - 5px);
+            }
+        }
+    }
+
+    nav {
+        padding: 0 ($FAST-gutter / 2);
+
+        ul {
+            background: fastColorSafeDarken(fastColorGet($FAST-header-color), 100%);
+            box-shadow: inset 0 0 10px rgba(0,0,0,.4);
+            height: 100vh;
+            left: 100%;
+            margin: 0;
+            padding: 4em 0 2em;
+            position: absolute;
+            top: 0;
+            transition: all .3s;
+            width: 75vw;
+        }
+
+        li {
+            &:before {
+                content: none;
+            }
+
+            margin: 0;
+            padding: 0 .25em;
+        }
+
+        a {
+            border-radius: 3px;
+            padding: .25em ($FAST-gutter / 4);
+
+            &:hover {
+                background: fastColorGet($FAST-header-menu-item-hover-bg-color);
+                color: fastColorGet($FAST-anchor-color-rev);
+                text-decoration: none;
+            }
+        }
+    }
+
+    &:target .main-header .menu-close {
+        display: block;
+        @include fast-rem(height, $FAST-line-height);
+        @include fast-rem(width, $FAST-line-height);
+        @include fast-rem(margin-top, -$FAST-line-height);
+        position: relative;
+        z-index: 1;
+    }
+
+    &:target .main-header .menu-icon {
+        color: transparent;
+        font-size: 0;
+        span {
+            border-color: transparent;
+            color: #fff;
+            transform: scale(1.5);
+        }
+
+        span:before {
+            transform: rotate(-45deg);
+            top: -1px;
+        }
+
+        span:after {
+            transform: rotate(45deg);
+            top: -1px;
+        }
+    }
+
+    &:target .main-header nav ul {
+        transition: all .2s;
+        transform: translate3d(-75.1vw, 0, 0);
+    }
+
+    .main-content {
+        transition: all .2s;
+    }
+
+    &:target .main-content {
+        transform: translate3d(-75vw, 0, 0);
+        transition: all .3s;
+    }
+
+    @include fast-mq("small") {
+        .main-header {
+            .menu-icon {
+                display: none;
+            }
+
+            nav ul {
+                display: flex;
+            }
+        }
+    }*/
+}

@@ -24,50 +24,29 @@ $FAST-header-import: true !default;
    ===================================================== */
 @if $FAST-header-import {
     .main-header {
-        @include fast-background-color(fastColorGet($FAST-header-color));
         @include fast-background-anchor-color(fastColorGet($FAST-header-color));
         margin-bottom: $FAST-line-height * 2;
-        padding: ($FAST-line-height / 2) 0;
+
+        .alpha, .beta {
+            @include fast-background-color(fastColorGet($FAST-header-color));
+
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            padding: ($FAST-line-height / 2) 0;
+            position: relative;
+            width: 100%;
+            z-index: 1;
+        }
+
+        a {
+            text-decoration: none;
+        }
 
         &.fixed {
             position: fixed;
             width: 100%;
             z-index: 1;
-        }
-
-        .row {
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        nav {
-            padding: 0 ($FAST-gutter / 2);
-
-            ul {
-                display: flex;
-                margin: 0;
-                padding: 0;
-            }
-
-            li {
-                &:before {
-                    content: none;
-                }
-
-                margin: 0;
-                padding: 0 .25em;
-            }
-
-            a {
-                border-radius: 3px;
-                padding: .25em ($FAST-gutter / 4);
-
-                &:hover {
-                    background: fastColorGet($FAST-header-menu-item-hover-bg-color);
-                    color: fastColorGet($FAST-anchor-color-rev);
-                    text-decoration: none;
-                }
-            }
         }
     }
 

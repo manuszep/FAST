@@ -56,7 +56,7 @@
  */
 @function fastBuildMq($min: false, $max: false) {
     @if $min == false and $max == false {
-        @return '@media only screen';
+        @return 'only screen';
     }
 
     $part1: "";
