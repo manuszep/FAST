@@ -1,19 +1,21 @@
 var gulp = require('gulp');
-var clean = require('gulp-clean');
+var jsonSass = require('./node_modules/json-sass/lib/jsToSassString');
+var gutil = require('gulp-util');
+var del = require('del');
+var iconfont = require('gulp-iconfont');
+var through = require('through2');
+var path = require('path');
 var plumber = require('gulp-plumber');
 var sourcemaps = require('gulp-sourcemaps');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
-var frontMatter = require('gulp-front-matter');
-var gulp_swig = require('gulp-swig');
-var through = require('through2');
-var casperJs = require('gulp-casperjs');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
-var iconfont = require('gulp-iconfont');
-var gutil = require('gulp-util');
-var jsonSass = require('./node_modules/json-sass/lib/jsToSassString');
-var path = require('path');
+var frontMatter = require('gulp-front-matter');
+var gulp_swig = require('gulp-swig');
+var jshint = require('gulp-jshint');
+var stylish = require('jshint-stylish');
+var casperJs = require('gulp-casperjs');
 var glob = require( 'glob' );
 
 var json_data = {};
@@ -27,39 +29,35 @@ glob.sync( 'app/data/**/*.json' ).forEach( function( file ) {
     json_data[ns][v] = require(path.resolve(file));
 });
 
-function gulpJsonSass(config) {
-    var stream = through.obj(function(file, enc, cb) {
-        var parsedJSON = JSON.parse(file.contents);
+/* Helpers.
+ ===================================================== */
+
+var gulpJsonSass = function (config) {
+
+    return through.obj(function(file, enc, cb) {
+        var parsedJSON = jsonSass(JSON.parse(file.contents));
         var name = path.basename(file.path, '.json');
         var dirname = path.dirname(file.path);
-        var sass = '$FAST-data-' + name + ': ' + jsonSass(parsedJSON) + ";";
+        var sass = '$FAST-data-' + name + ': ' + parsedJSON + ";";
+
         file.contents = Buffer(sass);
         file.path = dirname + "/_" + name + ".scss";
+
         // make sure the file goes through the next gulp plugin
         this.push(file);
+
         cb();
     });
+};
 
-    // returning the file stream
-    return stream;
-}
+var stringToFile = function (filename, string) {
+    var src = require('stream').Readable({ objectMode: true });
 
-function handleError(err) {
-    console.log(err.toString());
-    this.emit('end');
-}
-
-var json_to_data = function() {
-    return through.obj(function (file, enc, cb) {
-        var parts_count = file.path.replace(root, '').replace(/^\/|\/$/g, '').split( '/' ).length;
-        var relative_parts = new Array( parts_count ).join( "../" );
-
-        file.data = file.data || {};
-
-        file.data.data = json_data;
-        this.push(file);
-        cb();
-    });
+    src._read = function () {
+        this.push(new gutil.File({ cwd: "", base: "", path: filename, contents: new Buffer(string) }));
+        this.push(null);
+    };
+    return src;
 };
 
 var relative_path = function() {
@@ -77,14 +75,17 @@ var relative_path = function() {
     });
 };
 
-var stringToFile = function (filename, string) {
-    var src = require('stream').Readable({ objectMode: true });
+var json_to_data = function() {
+    return through.obj(function (file, enc, cb) {
+        var parts_count = file.path.replace(root, '').replace(/^\/|\/$/g, '').split( '/' ).length;
+        var relative_parts = new Array( parts_count ).join( "../" );
 
-    src._read = function () {
-        this.push(new gutil.File({ cwd: "", base: "", path: filename, contents: new Buffer(string) }));
-        this.push(null);
-    };
-    return src;
+        file.data = file.data || {};
+        file.data.data = json_data;
+
+        this.push(file);
+        cb();
+    });
 };
 
 var swig_opts = {
@@ -120,10 +121,21 @@ var swig_opts = {
     }
 };
 
-gulp.task('icons', function() {
-    var sources = 'app/icons/**/*.svg';
 
-    gulp.src(sources)
+/* Tasks.
+ ===================================================== */
+
+gulp.task('clean:tmp', function(cb) {
+
+    del(['./tmp'], cb);
+});
+
+gulp.task('icons', function() {
+    var sources = './app/icons/**/*.svg';
+    var dest_data = './app/data/generated';
+    var dest_font = './tmp/fonts';
+
+    return gulp.src(sources)
         .pipe(iconfont({
             fontName: 'fast-icons',
             appendCodepoints: false,
@@ -135,22 +147,29 @@ gulp.task('icons', function() {
                 codepoints[i].codepoint = codepoints[i].codepoint.toString(16);
             }
 
+            // Convert variables to JSON strings
             var data = JSON.stringify({codepoints: codepoints, options: options});
 
             return stringToFile('icons.json', data)
-                .pipe(gulp.dest('app/data/generated'))
+                .pipe(gulp.dest(dest_data))
         })
-        .pipe(gulp.dest('tmp/fonts'));
+        .pipe(gulp.dest(dest_font));
 });
 
-gulp.task('styles', function() {
-    var sources = 'app/scss/**/*.scss';
+gulp.task('data', function(cb) {
+    var sources = ['./app/data/generated/**/*.json', 'app/data/common/**/*.json'];
+    var dest = './app/scss/generated';
 
-    gulp.src(['app/data/generated/**/*.json', 'app/data/common/**/*.json'])
+    return gulp.src(sources)
         .pipe(gulpJsonSass({
             prefix: '$FAST-data: '
         }))
-        .pipe(gulp.dest('app/scss/generated'));
+        .pipe(gulp.dest(dest));
+});
+
+gulp.task('styles', function() {
+    var sources = './app/scss/**/*.scss';
+    var dest = './tmp/css';
 
     return gulp.src(sources)
         .pipe(plumber())
@@ -162,30 +181,33 @@ gulp.task('styles', function() {
         })
         .pipe(autoprefixer())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('tmp/css'))
+        .pipe(gulp.dest(dest))
         .pipe(reload({stream: true}));
 });
 
 gulp.task('scripts', function() {
-    var sources = 'app/js/**/*.js';
+    var sources = './app/js/**/*.js';
+    var dest = './tmp/js';
 
     return gulp.src(sources)
         .pipe(plumber())
-        .pipe(gulp.dest('tmp/js'))
+        .pipe(gulp.dest(dest))
         .pipe(reload({stream: true}));
 });
 
 gulp.task('assets', function() {
-    var sources = 'app/static/**/*';
+    var sources = './app/static/**/*';
+    var dest = './tmp/assets';
 
     return gulp.src(sources)
         .pipe(plumber())
-        .pipe(gulp.dest('tmp/assets'))
+        .pipe(gulp.dest(dest))
         .pipe(reload({stream: true}));
 });
 
-var html = function(path, dest) {
-    var sources = path;
+gulp.task('pages', function() {
+    var sources = './app/pages/**/*.html';
+    var dest = './tmp';
 
     return gulp.src(sources)
         .pipe(plumber())
@@ -195,61 +217,84 @@ var html = function(path, dest) {
         .pipe(gulp_swig(swig_opts))
         .pipe(gulp.dest(dest))
         .pipe(reload({stream: true}));
-};
-
-gulp.task('html', function() {
-    html('app/pages/**/*.html', 'tmp');
 });
 
-gulp.task('htmlTests', function() {
-    html('app/tests/**/*.html', 'tmp/tests');
+gulp.task('watch', ['icons', 'data', 'styles', 'scripts', 'pages'], function() {
+    gulp.watch('./app/icons/**/*.svg', ['icons']);
+    gulp.watch(['./app/data/generated/**/*.json', 'app/data/common/**/*.json'], ['data', 'pages'])
+    gulp.watch('./app/scss/**/*.scss', ['styles']);
+    gulp.watch('./app/js/**/*.js', ['scripts']);
+    gulp.watch(['./app/**/*.html', './app/**/*.tpl', '!./app/tests/**/*.html'], ['pages']);
 });
 
-gulp.task('clean', function() {
-    return gulp.src('tmp', {read: false})
-        .pipe(clean());
+gulp.task('buildTests', function() {
+    var sources = './app/tests/**/*.html';
+    var dest = './tmp/tests';
+
+    return gulp.src(sources)
+        .pipe(plumber())
+        .pipe(frontMatter({ property: 'data' }))
+        .pipe(relative_path())
+        .pipe(json_to_data())
+        .pipe(gulp_swig(swig_opts))
+        .pipe(gulp.dest(dest))
+        .pipe(reload({stream: true}));
 });
 
-gulp.task('prepareServer', ['clean'], function() {
-    gulp.start('icons');
-    gulp.start('styles');
-    gulp.start('scripts');
-    gulp.start('assets');
-    gulp.start('html');
-    gulp.start('htmlTests');
+gulp.task('test:hint', function() {
+    var sources = ['./app/js/**/*.js', '!./app/js/libs/**/*.js'];
+
+    return gulp.src(sources)
+        .pipe(jshint())
+        .pipe(jshint.reporter(stylish));
 });
 
-var server_options = {
-    notify: false,
-    port: 8000,
-    server: {
-        baseDir: ['tmp']
-    },
-    open: true
-};
-
-gulp.task('webserver', ['prepareServer'], function() {
-    browserSync(server_options);
-});
-
-var test = function() {
-    var sources = 'app/tests/**/*.js';
+gulp.task('test:casper', function() {
+    var sources = './app/tests/**/*.js';
 
     return gulp.src(sources)
         .pipe(casperJs());
-};
-
-gulp.task('test', ['prepareServer'], function() {
-    test();
 });
 
-gulp.task('serve', ['webserver'], function() {
-    test();
+gulp.task('test', ['buildTests'], function() {
+    gulp.start('test:hint');
+    gulp.start('test:casper');
+});
 
-    gulp.watch('app/scss/**/*.scss', ['styles']);
-    gulp.watch('app/js/**/*.js', ['scripts']);
-    gulp.watch(['app/**/*.html', 'app/**/*.tpl', '!app/tests/**/*.html'], ['html']);
-    gulp.watch('app/tests/**/*', test);
+gulp.task('server:prepare', ['clean:tmp'], function() {
+    gulp.start('icons');
+    gulp.start('data');
+    gulp.start('styles');
+    gulp.start('scripts');
+    gulp.start('assets');
+    gulp.start('pages');
+    gulp.start('watch');
+});
+
+gulp.task('server', ['server:prepare'], function() {
+    var server_options = {
+        notify: false,
+        port: 8000,
+        server: {
+            baseDir: ['./tmp']
+        },
+        open: true
+    };
+
+    browserSync(server_options);
+});
+
+gulp.task('mergeScripts', function() {
+
+});
+
+gulp.task('compress', function() {
+
+});
+
+gulp.task('build', ['test'], function() {
+    gulp.start('mergeScripts');
+    gulp.start('compress');
 });
 
 gulp.task('default', ['serve']);
