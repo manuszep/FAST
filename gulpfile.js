@@ -20,6 +20,8 @@ var glob = require( 'glob' );
 
 var json_data = {};
 
+var current_context = "./tmp";
+
 glob.sync( 'app/data/**/*.json' ).forEach( function( file ) {
     var ns = path.dirname(file).replace('app/data/', '').replace('/', '-');
     var v = path.basename(file, '.json');
@@ -31,6 +33,20 @@ glob.sync( 'app/data/**/*.json' ).forEach( function( file ) {
 
 /* Helpers.
  ===================================================== */
+
+var switchEnv = function(env) {
+    switch (env) {
+        case 'server':
+            current_context = "./tmp";
+            break;
+        case 'test':
+            current_context = './tests';
+            break;
+        case 'build':
+            current_context = './dist';
+            break;
+    }
+}
 
 var gulpJsonSass = function (config) {
 
@@ -61,7 +77,7 @@ var stringToFile = function (filename, string) {
 };
 
 var relative_path = function() {
-    var root = __dirname + '/app/pages/';
+    var root = (current_context == './tests') ? __dirname + '/app/tests' : __dirname + '/app/pages/';
     return through.obj(function (file, enc, cb) {
         var parts_count = file.path.replace(root, '').replace(/^\/|\/$/g, '').split( '/' ).length;
         var relative_parts = new Array( parts_count ).join( "../" );
@@ -125,15 +141,25 @@ var swig_opts = {
 /* Tasks.
  ===================================================== */
 
-gulp.task('clean:tmp', function(cb) {
+gulp.task('clean:server', function(cb) {
+    switchEnv('server');
+    del([current_context], cb);
+});
 
-    del(['./tmp'], cb);
+gulp.task('clean:test', function(cb) {
+    switchEnv('test');
+    del([current_context], cb);
+});
+
+gulp.task('clean:build', function(cb) {
+    switchEnv('build');
+    del([current_context], cb);
 });
 
 gulp.task('icons', function() {
     var sources = './app/icons/**/*.svg';
     var dest_data = './app/data/generated';
-    var dest_font = './tmp/fonts';
+    var dest_font = current_context + '/fonts';
 
     return gulp.src(sources)
         .pipe(iconfont({
@@ -169,7 +195,7 @@ gulp.task('data', function(cb) {
 
 gulp.task('styles', function() {
     var sources = './app/scss/**/*.scss';
-    var dest = './tmp/css';
+    var dest = current_context + '/css';
 
     return gulp.src(sources)
         .pipe(plumber())
@@ -187,7 +213,7 @@ gulp.task('styles', function() {
 
 gulp.task('scripts', function() {
     var sources = './app/js/**/*.js';
-    var dest = './tmp/js';
+    var dest = current_context + '/js';
 
     return gulp.src(sources)
         .pipe(plumber())
@@ -197,7 +223,7 @@ gulp.task('scripts', function() {
 
 gulp.task('assets', function() {
     var sources = './app/static/**/*';
-    var dest = './tmp/assets';
+    var dest = current_context + '/assets';
 
     return gulp.src(sources)
         .pipe(plumber())
@@ -206,8 +232,8 @@ gulp.task('assets', function() {
 });
 
 gulp.task('pages', function() {
-    var sources = './app/pages/**/*.html';
-    var dest = './tmp';
+    var sources = (current_context == './tests') ? './app/tests/**/*.html' : './app/pages/**/*.html';
+    var dest = current_context;
 
     return gulp.src(sources)
         .pipe(plumber())
@@ -227,18 +253,19 @@ gulp.task('watch', ['icons', 'data', 'styles', 'scripts', 'pages'], function() {
     gulp.watch(['./app/**/*.html', './app/**/*.tpl', '!./app/tests/**/*.html'], ['pages']);
 });
 
-gulp.task('buildTests', function() {
-    var sources = './app/tests/**/*.html';
-    var dest = './tmp/tests';
+gulp.task('buildTests', ['clean:test'], function() {
+    gulp.start('icons');
+    gulp.start('data');
+    gulp.start('styles');
+    gulp.start('scripts');
+    gulp.start('assets');
+    gulp.start('pages');
 
-    return gulp.src(sources)
-        .pipe(plumber())
-        .pipe(frontMatter({ property: 'data' }))
-        .pipe(relative_path())
-        .pipe(json_to_data())
-        .pipe(gulp_swig(swig_opts))
-        .pipe(gulp.dest(dest))
-        .pipe(reload({stream: true}));
+    var sources = './app/tests/**/*.js';
+    var dest = './tests/casper';
+
+    gulp.src(sources)
+        .pipe(gulp.dest(dest));
 });
 
 gulp.task('test:hint', function() {
@@ -249,8 +276,8 @@ gulp.task('test:hint', function() {
         .pipe(jshint.reporter(stylish));
 });
 
-gulp.task('test:casper', function() {
-    var sources = './app/tests/**/*.js';
+gulp.task('test:casper', ['icons', 'data', 'styles', 'scripts', 'assets', 'pages'], function() {
+    var sources = './tests/casper/**/*.js';
 
     return gulp.src(sources)
         .pipe(casperJs());
@@ -261,7 +288,7 @@ gulp.task('test', ['buildTests'], function() {
     gulp.start('test:casper');
 });
 
-gulp.task('server:prepare', ['clean:tmp'], function() {
+gulp.task('server:prepare', ['clean:server'], function() {
     gulp.start('icons');
     gulp.start('data');
     gulp.start('styles');
@@ -297,4 +324,16 @@ gulp.task('build', ['test'], function() {
     gulp.start('compress');
 });
 
-gulp.task('default', ['serve']);
+gulp.task('cleanTestCaptures', function(cb) {
+    del('./app/test/captures', cb);
+});
+
+gulp.task('acceptTestCaptures', ['cleanTestCaptures'], function() {
+    var sources = './tests/captures/**/*.*';
+    var dest = './app/tests/captures';
+
+    gulp.src(sources)
+        .pipe(gulp.dest(dest));
+});
+
+gulp.task('default', ['server']);

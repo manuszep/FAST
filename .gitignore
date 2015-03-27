@@ -1,5 +1,6 @@
 node_modules
 tmp
+tests
 .npm-debug.log
 app/data/generated
 app/scss/generated
