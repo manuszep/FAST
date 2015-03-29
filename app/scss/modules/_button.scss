@@ -115,6 +115,27 @@ $FAST-button-import: true !default;
         @include fast-rem(padding, (($FAST-button-height - $FAST-button-line-height) / 2) ($FAST-button-padding-h / 2));
     }
 
+    .btn-split {
+        @include fast-rem(margin-left, (($FAST-button-height - $FAST-button-line-height) / 2));
+        //padding-left: 0;
+
+        &:before, &:after {
+            background-color: rgba(0,0,0,.2);
+            border-right: 1px solid rgba(#fff, .6);
+            @include fast-rem(margin, -(($FAST-button-height - $FAST-button-line-height) / 2) ($FAST-button-padding-h) (-(($FAST-button-height - $FAST-button-line-height) / 2)) (-$FAST-button-padding-h));
+            @include fast-rem(padding, (($FAST-button-height - $FAST-button-line-height) / 2) 0);
+            min-width: $FAST-button-height;
+            width: 2em;
+        }
+
+        &:after {
+            @include fast-rem(margin-left, $FAST-button-padding-h);
+            @include fast-rem(margin-right, (-$FAST-button-padding-h));
+            border-right: none;
+            border-left: 1px solid rgba(#fff, .6);
+        }
+    }
+
     @each $btn-color in map-get($FAST-data-button, "colors") {
         $name: nth($btn-color, 1);
         $color: nth($btn-color, 2);

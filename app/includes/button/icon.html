@@ -31,7 +31,7 @@
             <h2>Button icons</h2>
             <p>Icons can be added to buttons just like for any other element.</p>
             {% highlight 'html' %}
-<a class="btn"><span class="ico-save"></span> Button</a>{% endhighlight %}
+<a class="btn ico-save">Button</a>{% endhighlight %}
         </div>
         <div class="col medium-6">
             <div class="row center">
@@ -84,6 +84,37 @@
                 </div>
                 <div class="col">
                     <p><a class="btn ico-only ico-{{data.generated.icons.codepoints[10].name}} ico-5x">{{data.generated.icons.codepoints[10].name}}</a><br /><small>x 5</small></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Split buttons</h2>
+            <p>The icon can be isolated from the button's text.</p>
+            {% highlight 'html' %}
+<a class="btn btn-split ico-a-angle-down">Dropdown</a>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <div class="row center">
+                <div class="col">
+                    <p><a class="btn btn-primary btn-split ico-{{data.generated.icons.codepoints[11].name}}">Button</a></p>
+                </div>
+                <div class="col">
+                    <p><a class="btn btn-secondary btn-split ico-a-{{data.generated.icons.codepoints[12].name}}">Button</a></p>
+                </div>
+                <div class="col">
+                    <p><a class="btn btn-danger btn-split ico-{{data.generated.icons.codepoints[13].name}} ico-lg">Button</a></p>
+                </div>
+                <div class="col">
+                    <p><a class="btn btn-warning btn-split ico-{{data.generated.icons.codepoints[14].name}} ico-2x">Button</a></p>
+                </div>
+                <div class="col">
+                    <p><a class="btn btn-cyan btn-split ico-{{data.generated.icons.codepoints[15].name}} ico-3x">Button</a></p>
                 </div>
 
             </div>
