@@ -21,23 +21,35 @@ $FAST-icon-codepoints: map-get($FAST-data-icons, codepoints) !default;
 @mixin fast-icon {
     display: inline-block;
     font: normal normal normal #{$FAST-base-size}/1 $FAST-icon-font-name;
-    font-size: inherit;
+    @include fast-rem(font-size, $FAST-base-size);
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-align: center;
     transform: translate(0, 0);
-    vertical-align: middle;
+    vertical-align: baseline;
+    width: 1em;
 }
 
 
 /* Placeholders.
    ===================================================== */
 %ico {
-    @include fast-icon;
+    &:before {
+        @include fast-icon;
+        margin-right: .2em;
+    }
+}
+
+%ico-a {
+    &:after {
+        @include fast-icon;
+        margin-left: .2em;
+    }
 }
 
 @each $codepoint, $code in $FAST-icon-codepoints {
-    %ico-#{map-get($codepoint, name)} {
+    %ico-#{map-get($codepoint, name)}:before, %ico-a-#{map-get($codepoint, name)}:after {
         content: '\#{map-get($codepoint, codepoint)}';
     }
 }
@@ -57,35 +69,38 @@ $FAST-icon-codepoints: map-get($FAST-data-icons, codepoints) !default;
         font-style: normal;
     }
 
-    .ico {
+    [class^="ico-"]:before, [class*=" ico-"]:before {
         @extend %ico;
     }
 
+    [class^="ico-a-"]:after, [class*=" ico-a-"]:after {
+        @extend %ico-a;
+    }
+
     // Larger icons
-    .ico-lg {
-        font-size: (4em / 3);
-        vertical-align: -15%;
+    .ico-lg:before, .ico-2x:before, .ico-3x:before, .ico-4x:before, .ico-5x:before,
+    .ico-a-lg:after, .ico-a-2x:after, .ico-a-3x:after, .ico-a-4x:after, .ico-a-5x:after {
+        vertical-align: middle;
     }
 
-    .ico-2x {
-        font-size: 2em;
+    .ico-lg:before, .ico-a-lg:after {
+        @include fast-rem(font-size, ((4 * $FAST-base-size) / 3));
     }
 
-    .ico-3x {
-        font-size: 3em;
+    .ico-2x:before, .ico-a-2x:after {
+        @include fast-rem(font-size, (2 * $FAST-base-size));
     }
 
-    .ico-4x {
-        font-size: 4em;
+    .ico-3x:before, .ico-a-3x:after {
+        @include fast-rem(font-size, (3 * $FAST-base-size));
     }
 
-    .ico-5x {
-        font-size: 5em;
+    .ico-4x:before, .ico-a-4x:after {
+        @include fast-rem(font-size, (4 * $FAST-base-size));
     }
 
-    .ico-fw {
-        width: (18em / 14);
-        text-align: center;
+    .ico-5x:before, .ico-a-5x:after {
+        @include fast-rem(font-size, (5 * $FAST-base-size));
     }
 
     .ico-ul {
@@ -96,111 +111,105 @@ $FAST-icon-codepoints: map-get($FAST-data-icons, codepoints) !default;
     }
 
     .ico-li {
-        position: absolute;
-        left: -$FAST-icon-li-width;
-        width: $FAST-icon-li-width;
-        top: (2em / 14);
-        text-align: center;
-        &.ico-lg {
+        &:before {
+            position: absolute;
+            left: -$FAST-icon-li-width;
+            width: $FAST-icon-li-width;
+            top: (2em / 14);
+            text-align: center;
+        }
+
+        &.ico-lg:before {
             left: -$FAST-icon-li-width + (4em / 14);
         }
     }
 
-    .ico-border {
+    .ico-border:before, .ico-a-border:after {
         padding: .2em .25em .15em;
         border: .08em solid $FAST-icon-border-color;
         border-radius: .1em;
     }
 
-    .ico-spin {
+    .ico-spin:before, .ico-a-spin:after {
         animation: fast-spin 2s infinite linear;
     }
 
-    .ico-pulse {
+    .ico-pulse:before, .ico-a-pulse:after {
         animation: fast-spin 1s infinite steps(8);
     }
 
-    .ico-rotate-90  {
+    .ico-rotate-90:before, .ico-a-rotate-90:after  {
         @include fast-rotate(90deg, 1);
     }
 
-    .ico-rotate-180 {
+    .ico-rotate-180:before, .ico-a-rotate-180:after {
         @include fast-rotate(180deg, 2);
     }
 
-    .ico-rotate-270 {
+    .ico-rotate-270:before, .ico-a-rotate-270:after {
         @include fast-rotate(270deg, 3);
     }
 
-    .ico-flip-horizontal {
+    .ico-flip-horizontal:before, .ico-a-flip-horizontal:after {
         @include fast-flip(-1, 1, 0);
     }
 
-    .ico-flip-vertical   {
+    .ico-flip-vertical:before, .ico-a-flip-vertical:after {
         @include fast-flip(1, -1, 2);
     }
 
-    .ico-stack {
-        position: relative;
-        display: inline-block;
-        width: 2em;
-        height: 2em;
-        line-height: 2em;
-        vertical-align: middle;
-    }
+    .ico-only.ico-only {
+        font-size: 0;
 
-    .ico-stack-1x, .ico-stack-2x {
-        position: absolute;
-        left: 0;
-        width: 100%;
-        text-align: center;
-    }
-
-    .ico-stack-1x {
-        line-height: inherit;
-    }
-
-    .ico-stack-2x {
-        font-size: 2em;
+        &:before, &:after {
+            margin: 0;
+            vertical-align: middle;
+            width: 1em;
+        }
     }
 
     @each $codepoint, $code in $FAST-icon-codepoints {
-        .ico-#{map-get($codepoint, name)}:before {
+        .ico-#{map-get($codepoint, name)} {
             @extend %ico-#{map-get($codepoint, name)};
+        }
+
+        .ico-a-#{map-get($codepoint, name)} {
+            @extend %ico-a-#{map-get($codepoint, name)};
         }
     }
 
     ul {
         list-style: none;
         li {
-            position: relative;
-        }
-
-        li:before {
             @extend %ico;
             @extend %ico-chevron-right;
-            color: fastColorGet('blue-xl');
-            font-size: .625em;
-            left: - $FAST-gutter;
-            line-height: $FAST-icon-list-adjust-vertical;
-            position: absolute;
-            text-align: center;
-            width: .75em;
+            position: relative;
+
+            &:before {
+                color: fastColorGet('blue-xl');
+                font-size: .625em;
+                left: - $FAST-gutter;
+                line-height: $FAST-icon-list-adjust-vertical;
+                position: absolute;
+                text-align: center;
+                width: .75em;
+            }
         }
 
-        li li:before {
+        li li {
             @extend %ico-circle-blank;
         }
 
-        li li li:before {
+        li li li {
             @extend %ico-minus;
         }
     }
 
     blockquote {
+        @extend %ico;
+        @extend %ico-quote-left;
+
         &:before {
-            @extend %ico;
-            @extend %ico-quote-left;
             color: fastColorGet('turquoise');
             float: left;
             padding-right: .5em;
@@ -212,9 +221,10 @@ $FAST-icon-codepoints: map-get($FAST-data-icons, codepoints) !default;
     }
 
     cite {
+        @extend %ico;
+        @extend %ico-minus;
+
         &:before {
-            @extend %ico;
-            @extend %ico-minus;
             margin-right: .5em;
             color: fastColorGet('turquoise');
         }

@@ -77,7 +77,7 @@ var stringToFile = function (filename, string) {
 };
 
 var relative_path = function() {
-    var root = (current_context == './tests') ? __dirname + '/app/tests' : __dirname + '/app/pages/';
+    var root = (current_context == './tests') ? __dirname + '/app/tests' : __dirname + '/app/pages';
     return through.obj(function (file, enc, cb) {
         var parts_count = file.path.replace(root, '').replace(/^\/|\/$/g, '').split( '/' ).length;
         var relative_parts = new Array( parts_count ).join( "../" );
@@ -165,7 +165,7 @@ gulp.task('icons', function() {
         .pipe(iconfont({
             fontName: 'fast-icons',
             appendCodepoints: false,
-            descent: 70
+            descent: 105
         }))
         .on('codepoints', function(codepoints, options) {
             // Convert all codepoints to hexadecimal

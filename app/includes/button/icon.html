@@ -1,0 +1,104 @@
+{%set i = 0%}
+
+{% macro icoButton(className, prefixClass) %}
+{%set i = 0%}
+<section class="unwrap deco-separator-line">
+    <div class="row">
+        <div class="col">
+            <div class="row center">
+                <div class="col">
+                    <p><a class="btn {{prefixClass}} {{className}}">
+                        <span class="ico-{{data.generated.icons.codepoints[0].name}}"></span>
+                        Button
+                    </a></p>
+                    {%set i = i + 1%}
+                </div>
+                {% for key, color in data.common.button.colors %}
+                <div class="col">
+                    <p><a class="btn {% if !prefixClass %}btn{% endif %}{{prefixClass}}-{{key}} {{className}} ico-{{data.generated.icons.codepoints[i].name}}">Button</a></p>
+                </div>
+                {%set i = i + 1%}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endmacro %}
+
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Button icons</h2>
+            <p>Icons can be added to buttons just like for any other element.</p>
+            {% highlight 'html' %}
+<a class="btn"><span class="ico-save"></span> Button</a>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <div class="row center">
+                <div class="col">
+                    <p><a class="btn ico-{{data.generated.icons.codepoints[0].name}}">Button</a></p>
+                </div>
+                <div class="col">
+                    <p><a class="btn ico-a-{{data.generated.icons.codepoints[1].name}}">Button</a></p>
+                </div>
+                <div class="col">
+                    <p><a class="btn ico-{{data.generated.icons.codepoints[2].name}} ico-lg">Button</a></p>
+                </div>
+                <div class="col">
+                    <p><a class="btn ico-{{data.generated.icons.codepoints[3].name}} ico-2x">Button</a></p>
+                </div>
+                <div class="col">
+                    <p><a class="btn ico-{{data.generated.icons.codepoints[4].name}} ico-3x">Button</a></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Icon only buttons</h2>
+            <p>By adding the <code>ico-only</code> class, the button will always be square and show only the icon.</p>
+            <p>Although not visible, the real button text should always be included for semantics and accessibility.</p>
+            {% highlight 'html' %}
+            <a class="btn ico-only ico-save">Save</a>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <div class="row center">
+                <div class="col">
+                    <p><a class="btn ico-only ico-{{data.generated.icons.codepoints[5].name}}">{{data.generated.icons.codepoints[5].name}}</a><br /><small>Normal</small></p>
+                </div>
+                <div class="col">
+                    <p><a class="btn ico-only ico-{{data.generated.icons.codepoints[6].name}} ico-lg">{{data.generated.icons.codepoints[6].name}}</a><br /><small>large</small></p>
+                </div>
+                <div class="col">
+                    <p><a class="btn ico-only ico-{{data.generated.icons.codepoints[7].name}} ico-2x">{{data.generated.icons.codepoints[7].name}}</a><br /><small>x 2</small></p>
+                </div>
+                <div class="col">
+                    <p><a class="btn ico-only ico-{{data.generated.icons.codepoints[8].name}} ico-3x">{{data.generated.icons.codepoints[8].name}}</a><br /><small>x 3</small></p>
+                </div>
+                <div class="col">
+                    <p><a class="btn ico-only ico-{{data.generated.icons.codepoints[9].name}} ico-4x">{{data.generated.icons.codepoints[9].name}}</a><br /><small>x 4</small></p>
+                </div>
+                <div class="col">
+                    <p><a class="btn ico-only ico-{{data.generated.icons.codepoints[10].name}} ico-5x">{{data.generated.icons.codepoints[10].name}}</a><br /><small>x 5</small></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{{ icoButton("btn-large", "") }}
+{{ icoButton("btn-large", "btn-border") }}
+{{ icoButton("", "") }}
+{{ icoButton("", "btn-border") }}
+{{ icoButton("btn-small", "") }}
+{{ icoButton("btn-small", "btn-border") }}
+{{ icoButton("btn-tiny", "") }}
+{{ icoButton("btn-tiny", "btn-border") }}
+
+
+

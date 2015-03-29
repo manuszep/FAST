@@ -111,6 +111,10 @@ $FAST-button-import: true !default;
         @include fast-rem(padding, ($FAST-button-height - $FAST-button-line-height) $FAST-button-padding-h * 2);
     }
 
+    .btn.ico-only {
+        @include fast-rem(padding, (($FAST-button-height - $FAST-button-line-height) / 2) ($FAST-button-padding-h / 2));
+    }
+
     @each $btn-color in map-get($FAST-data-button, "colors") {
         $name: nth($btn-color, 1);
         $color: nth($btn-color, 2);
