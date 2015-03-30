@@ -42,12 +42,6 @@ $FAST-header-import: true !default;
         a {
             text-decoration: none;
         }
-
-        &.fixed {
-            position: fixed;
-            width: 100%;
-            z-index: 1;
-        }
     }
 
     .logo {
@@ -70,6 +64,14 @@ $FAST-header-import: true !default;
 
         a:hover {
             color: #fff;
+        }
+    }
+
+    @include fast-mq($FAST-navigation-expand-breakpoint) {
+        .main-header.fixed {
+            position: fixed;
+            width: 100%;
+            z-index: 1;
         }
     }
 }

@@ -75,6 +75,23 @@ $FAST-deco-split-bg-dark-color: fastColorGet($FAST-split-bg-color-dark) !default
         background: linear-gradient(to left,  #ffffff 0%,#ffffff 50%,$FAST-deco-split-bg-dark-color 50%,$FAST-deco-split-bg-dark-color 100%);
     }
 
+    .page-heading {
+        @extend %unwrap;
+        @include fast-background-color(fastColorGet($FAST-header-color));
+        margin-bottom: $FAST-header-spacing;
+        margin-top: -$FAST-header-spacing;
+        padding-top: $FAST-line-height / 2;
+    }
+
+    @include fast-mq($FAST-navigation-expand-breakpoint) {
+        .page-heading {
+            margin-bottom: $FAST-header-spacing;
+            margin-top: -$FAST-header-spacing;
+            padding-bottom: $FAST-line-height / 2;
+            padding-top: $FAST-line-height * 7;
+        }
+    }
+
     @each $name, $bp in $FAST-breakpoints {
         @include fast-mq($name) {
             .#{$name}-split-bg {
@@ -97,14 +114,5 @@ $FAST-deco-split-bg-dark-color: fastColorGet($FAST-split-bg-color-dark) !default
                 background: linear-gradient(to left,  #ffffff 0%,#ffffff 50%,$FAST-deco-split-bg-dark-color 50%,$FAST-deco-split-bg-dark-color 100%);
             }
         }
-    }
-
-    .page-heading {
-        @extend %unwrap;
-        @include fast-background-color(fastColorGet($FAST-header-color));
-        margin-bottom: $FAST-header-spacing;
-        margin-top: -$FAST-header-spacing;
-        padding-bottom: $FAST-line-height;
-        padding-top: $FAST-line-height * 8;
     }
 }
