@@ -195,67 +195,57 @@ $FAST-navigation-import: true !default;
         }
     }
 
-    /**
-     *  Loop through each breakpoint and set the wrapper size to the min-width of that breakpoint
-     *  [1] : If a min-width is specified, wrap the rule in a media query.
-     */
-    $set-nav-width: true;
-    @each $name, $bp in $FAST-breakpoints {
-        $min: map-get($bp, "min");
+    @include fast-mq($FAST-navigation-expand-breakpoint) {
+        .main-header.fixed {
+            position: fixed;
+            width: 100%;
+            z-index: 1;
+        }
+        .main-header .alpha {
+            width: auto;
+        }
 
-        @if $min != false { // [1]
-            @include fast-mq($name) {
-                @if $name == $FAST-navigation-expand-breakpoint {
-                    $set-nav-width: false;
-                    .main-header .alpha {
-                        width: auto;
-                    }
+        .main-nav-toggle {
+            display: none;
+        }
 
-                    .main-nav-toggle {
-                        display: none;
-                    }
+        .main-nav.main-nav {
+            justify-content: flex-end;
+            flex-grow: 1;
+            width: auto;
+        }
 
-                    .main-nav.main-nav {
-                        justify-content: flex-end;
-                        flex-grow: 1;
-                        width: auto;
-                    }
+        .main-nav {
+            nav, ul, li {
+                max-height: none;
+                margin: 0;
+                opacity: 1;
+                width: auto;
+            }
 
-                    .main-nav {
-                        nav, ul, li {
-                            max-height: none;
-                            margin: 0;
-                            opacity: 1;
-                            width: auto;
-                        }
+            ul li, a {
+                border: none;
+                display: inline-block;
+            }
 
-                        ul li, a {
-                            border: none;
-                            display: inline-block;
-                        }
+            nav ul li {
+                border-radius: 3px;
+            }
 
-                        nav ul li {
-                            border-radius: 3px;
-                        }
+            nav ul li a {
+                padding: .25em ($FAST-gutter / 4);
+            }
 
-                        nav ul li a {
-                            padding: .25em ($FAST-gutter / 4);
-                        }
+            &.main-nav ul ul li {
+                display: none;
+                opacity: 1;
+                position: absolute;
+            }
 
-                        &.main-nav ul ul li {
-                            display: none;
-                            opacity: 1;
-                        }
-                    }
-                }
-
-                @if $set-nav-width == true {
-                    .main-nav.main-nav nav {
-                        width: $min;
-                    }
-                }
-
-
+            &.main-nav li:hover li {
+                border: none;
+                display: block;
+                opacity: 1;
             }
         }
     }
