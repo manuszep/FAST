@@ -8,8 +8,6 @@ var FAST = FAST || {};
  */
 
 (function(F, $, undefined) {
-    var M = F.Color = {};
-
     /**
      *  Private area
      */
