@@ -92,7 +92,7 @@ $FAST-type-import: true !default;
     a {
         color: fastColorGet('blue');
         text-decoration: none;
-        transition: color .2s, background .2s;
+        transition: all .2s;
 
         &:hover {
             text-decoration: underline;

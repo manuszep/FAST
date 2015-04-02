@@ -24,19 +24,25 @@ $FAST-header-import: true !default;
    ===================================================== */
 @if $FAST-header-import {
     .main-header {
-        @include fast-background-color(fastColorGet($FAST-header-color));
-        @include fast-background-anchor-color(fastColorGet($FAST-header-color));
         margin-bottom: $FAST-line-height * 2;
 
         .alpha, .beta {
-            background: fastColorGet($FAST-header-color);
-
+            @include fast-background-color(fastColorGet($FAST-header-color));
+            @include fast-background-anchor-color(fastColorGet($FAST-header-color));
+            @include fast-rem(padding-top, ($FAST-line-height / 2));
+            @include fast-rem(padding-bottom, ($FAST-line-height / 2));
             align-items: center;
             display: flex;
-            justify-content: space-between;
-            padding: ($FAST-line-height / 2) 0;
-            position: relative;
-            z-index: 1;
+
+        }
+
+        &.fixed {
+            min-height: 3.5em;
+            .alpha {
+                position: fixed;
+                width: 100%;
+                z-index: 999;
+            }
         }
 
         a {
@@ -68,10 +74,19 @@ $FAST-header-import: true !default;
     }
 
     @include fast-mq($FAST-navigation-expand-breakpoint) {
-        .main-header.fixed {
-            position: fixed;
-            width: 100%;
-            z-index: 1;
+        .main-header {
+            @include fast-background-color(fastColorGet($FAST-header-color));
+
+            &.fixed {
+                position: fixed;
+                width: 100%;
+                z-index: 1;
+
+                .alpha {
+                    position: static;
+                    width: auto;
+                }
+            }
         }
     }
 }

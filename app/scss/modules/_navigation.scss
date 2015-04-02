@@ -27,226 +27,220 @@ $FAST-navigation-import: true !default;
 /* Styles.
    ===================================================== */
 @if $FAST-navigation-import {
-    .main-header .alpha {
-        width: 100%;
-    }
-    .main-nav-toggle {
-        text-align: right;
-        position: relative;
-        flex-grow: 0;
-
-        &:hover {
-            .menu-open {
-                color: rgba(fastColorGet($FAST-anchor-color-rev), .5) !important;
-            }
-            .menu-open span {
-                transform: scale(-1, 1);
-            }
-        }
-
-        .menu-close {
-            display: block;
-            left: 0;
-            position: absolute;
-            height: 100%;
-            top: 0;
-            width: 100%;
-            z-index: -1;
-        }
-
-        .menu-open {
-            align-content: center;
-            align-items: center;
-            display: inline-flex;
-            line-height: 1em;
-            height: 1em;
-            text-transform: uppercase;
-            transition: all .2s ease-in-out;
-
-            &:hover {
-                color: fastColorGet($FAST-anchor-color-rev);
-            }
-
-            span {
-                color: transparent;
-                display: inline-block;
-                position: relative;
-                transition: all .2s ease-in-out;
-
-                &:before, &:after {
-                    content: "";
-                    background-color: fastColorGet($FAST-anchor-color-rev);
-                    display: block;
-                    height: .115em;
-                    position: absolute;
-                    transition: transform .3s ease-in-out, box-shadow .2s ease-in;
-                    width: 100%;
-                }
-
-                &:before {
-                    box-shadow: 0 .3em 0 0 fastColorGet($FAST-anchor-color-rev);
-                    top: .11em;
-                }
-
-                &:after {
-                    bottom: .17em;
-                }
-            }
-        }
-
-        :target & {
-            .menu-close {
-                z-index: 1;
-            }
-
-            .menu-open {
-                color: transparent;
-                font-size: 0;
-                @include fast-rem(height, $FAST-base-size);
-
-                span {
-                    @include fast-rem(font-size, $FAST-base-size);
-                    @include fast-rem(line-height, $FAST-base-size);
-
-                    &:before, &:after {
-                        transition: transform .3s ease-out, box-shadow .2s linear;
-                    }
-
-                    &:before {
-                        box-shadow: 0 0 0 0 transparent;
-                        transform: scale(2) translate3d(0, .02em, 0) rotate(-135deg);
-                    }
-
-                    &:after {
-                        transform: scale(2) translate3d(0, -.30em, 0) rotate(135deg);
-                    }
-                }
-            }
-        }
-    }
-
-    .main-nav.main-nav {
-        transition: padding .2s;
-        transition-delay: .1s;
-        width: 100%;
-    }
-
     .main-nav {
-        :target & {
-            padding: ($FAST-line-height / 2) 0;
-        }
-
-        nav {
-            padding: 0 ($FAST-gutter / 2);
-            width: 100%;
-        }
-
-        ul {
+        ul, nav, li {
             margin: 0;
-            position: relative;
-            text-align: center;
+            padding: 0;
         }
 
         li {
-            max-height: 0;
-            border-top: 0 solid fastColorGet("cold-grey-d");
-            opacity: 0;
-            transition: max-height .3s, border .3s, opacity .3s;
-            transition-delay: .1s;
-
-            :target & {
-                border-top-width: 1px;
-                max-height: 10em;
-                opacity: 1;
-            }
-
-            &:hover {
-                background: rgba(255,255,255,.1);
-            }
-
+            transition: background-color .2s;
             &:before {
                 content: none;
             }
 
-            a {
-                @include fast-rem(padding, ($FAST-line-height / 2) 0);
-                display: block;
+            &:hover {
+                background: rgba(255, 255, 255, .1);
             }
         }
 
-        &.main-nav li li {
-            max-height: 0;
-            border-top: 0 solid fastColorGet("cold-grey-d");
-            opacity: 0;
-            transition-delay: .3s;
-
-        }
-
-        &.main-nav li:hover li {
-            border-top-width: 1px;
-            max-height: 10em;
-            opacity: 1;
-        }
-
         a {
-            &:hover {
-                color: fastColorGet($FAST-anchor-color-rev);
+            @include fast-rem(padding, ($FAST-line-height / 2) ($FAST-gutter / 4));
+            display: block;
+        }
+    }
+
+    // Build a media query that stops at the minimum of the expand nav breakpoint
+    @each $bp-name, $sizes in $FAST-breakpoints {
+        @if $bp-name == $FAST-navigation-expand-breakpoint {
+            $min: map-get($sizes, "min");
+
+            @include fast-build-mq(false, $min - 1) {
+                .main-content, .main-footer {
+                    transition: transform .3s ease-in-out;
+                }
+
+                .main-header .main-nav {
+                    align-items: flex-start;
+
+                    a {
+                        &:hover {
+                            color: fastColorGet($FAST-anchor-color-rev);
+                        }
+                    }
+                }
+
+                .main-nav {
+                    height: 100%;
+                    position: fixed;
+                    right: -20em;
+                    top: 0;
+                    transition: transform .3s ease-in-out, box-shadow .3s ease-in-out;
+                    width: 20em;
+                    z-index: 1;
+
+                    ul, nav, li {
+                        width: 100%;
+                    }
+
+                    nav {
+                        max-height: 100%;
+                        overflow-x: hidden;
+                        overflow-y: scroll;
+                        padding: 3.5em (fastEm($FAST-gutter / 4)) + 1em 3.5em fastEm($FAST-gutter / 4);
+                    }
+
+                    ul {
+                        position: relative;
+
+                        ul {
+                            background: fastColorGet($FAST-header-color);
+                            min-height: 100%;
+                            position: absolute;
+                            top: 0;
+                            transform: translate3d(20em, 0, 0);
+                            transition: transform .3s ease-in-out;
+                            transition-delay: .3s;
+                        }
+                    }
+
+                    li {
+                        border-top: 1px solid fastColorGet("cold-grey-d");
+                        position: static;
+                        width: 100%;
+
+                        &:last-child {
+                            border-bottom: 1px solid fastColorGet("cold-grey-d");
+                        }
+
+                        &:hover {
+                            > ul {
+                                transform: translate3d(0,0,0);
+                            }
+                        }
+                    }
+                }
+
+                .main-nav-toggle {
+                    text-align: right;
+                    position: relative;
+                    flex-grow: 1;
+
+                    a {
+                        @include fast-rem(padding-top, ($FAST-line-height / 2));
+                        @include fast-rem(padding-bottom, ($FAST-line-height / 2));
+                    }
+
+                    .menu-close {
+                        display: block;
+                        left: 0;
+                        position: absolute;
+                        height: 100%;
+                        top: 0;
+                        width: 100%;
+                        z-index: -1;
+                    }
+
+                    &:hover {
+                        .menu-open {
+                            color: rgba(fastColorGet($FAST-anchor-color-rev), .5) !important;
+
+                            span {
+                                transform: scale(-1, 1);
+                            }
+                        }
+                    }
+
+                    .menu-open {
+                        line-height: 1em;
+                        text-transform: uppercase;
+                        transition: all .2s ease-in-out;
+
+                        span {
+                            color: transparent;
+                            display: inline-block;
+                            position: relative;
+                            transition: all .2s ease-in-out;
+
+                            &:before, &:after {
+                                content: "";
+                                background-color: fastColorGet($FAST-anchor-color-rev);
+                                display: block;
+                                height: .115em;
+                                position: absolute;
+                                transition: transform .3s ease-in-out, box-shadow .2s ease-in;
+                                width: 100%;
+                            }
+
+                            &:before {
+                                box-shadow: 0 .3em 0 0 fastColorGet($FAST-anchor-color-rev);
+                                top: .11em;
+                            }
+
+                            &:after {
+                                bottom: .17em;
+                            }
+                        }
+                    }
+                }
+
+                #bodyWrapper:target {
+                    .main-content, .main-footer, .main-nav {
+                        transform: translate3d(-18em, 0, 0);
+                    }
+
+                    .main-nav-toggle {
+                        .menu-close {
+                            z-index: 1;
+                        }
+                    }
+
+                    .menu-open {
+                        color: transparent !important;
+                        font-size: 0;
+                        @include fast-rem(height, $FAST-base-size);
+
+                        span {
+                            @include fast-rem(font-size, $FAST-base-size);
+                            @include fast-rem(line-height, $FAST-base-size);
+
+                            &:before {
+                                box-shadow: 0 0 0 0 transparent;
+                                transform: scale(2) translate3d(0, .15em, 0) rotate(-135deg);
+                            }
+
+                            &:after {
+                                transform: scale(2) translate3d(0, -.15em, 0) rotate(135deg);
+                            }
+                        }
+                    }
+                }
             }
         }
     }
 
     @include fast-mq($FAST-navigation-expand-breakpoint) {
-        .main-header.fixed {
-            position: fixed;
-            width: 100%;
-            z-index: 1;
-        }
-        .main-header .alpha {
-            width: auto;
+        .main-nav {
+            @include fast-rem(padding-left, ($FAST-gutter/2));
+            @include fast-rem(padding-right, ($FAST-gutter/2));
+            flex-grow: 1;
+            justify-content: flex-end;
+
+            ul {
+                display: flex;
+
+                ul {
+                    display: none;
+                }
+            }
+
+            li {
+                border-radius: 3px;
+            }
         }
 
         .main-nav-toggle {
             display: none;
-        }
-
-        .main-nav.main-nav {
-            justify-content: flex-end;
-            flex-grow: 1;
-            width: auto;
-        }
-
-        .main-nav {
-            nav, ul, li {
-                max-height: none;
-                margin: 0;
-                opacity: 1;
-                width: auto;
-            }
-
-            ul li, a {
-                border: none;
-                display: inline-block;
-            }
-
-            nav ul li {
-                border-radius: 3px;
-            }
-
-            nav ul li a {
-                padding: .25em ($FAST-gutter / 4);
-            }
-
-            &.main-nav ul ul li {
-                display: none;
-                opacity: 1;
-                position: absolute;
-            }
-
-            &.main-nav li:hover li {
-                border: none;
-                display: block;
-                opacity: 1;
-            }
         }
     }
 }
