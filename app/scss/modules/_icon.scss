@@ -160,6 +160,7 @@ $FAST-icon-codepoints: map-get($FAST-data-icons, codepoints) !default;
 
     .ico-only.ico-only {
         font-size: 0;
+        letter-spacing: 0;
 
         &:before, &:after {
             margin: 0;
