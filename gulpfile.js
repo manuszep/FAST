@@ -193,7 +193,7 @@ gulp.task('data', function(cb) {
         .pipe(gulp.dest(dest));
 });
 
-gulp.task('styles', function() {
+gulp.task('styles', ['data'], function() {
     var sources = './app/scss/**/*.scss';
     var dest = current_context + '/css';
 
