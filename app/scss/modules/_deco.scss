@@ -83,6 +83,15 @@ $FAST-deco-split-bg-dark-color: fastColorGet($FAST-split-bg-color-dark) !default
         padding-top: $FAST-line-height / 2;
     }
 
+    .circle.circle {
+        border-radius: 50%;
+    }
+
+    .wide {
+        flex-grow: 1;
+        width: 100%;
+    }
+
     @include fast-mq($FAST-navigation-expand-breakpoint) {
         .page-heading {
             margin-bottom: $FAST-header-spacing;
@@ -115,4 +124,6 @@ $FAST-deco-split-bg-dark-color: fastColorGet($FAST-split-bg-color-dark) !default
             }
         }
     }
+
+
 }

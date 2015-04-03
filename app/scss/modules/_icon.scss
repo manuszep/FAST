@@ -83,6 +83,11 @@ $FAST-icon-codepoints: map-get($FAST-data-icons, codepoints) !default;
         vertical-align: middle;
     }
 
+    .ico-small:before, .ico-a-small:after {
+        @include fast-rem(font-size, ($FAST-base-size / 1.5));
+        line-height: 1.5;
+    }
+
     .ico-lg:before, .ico-a-lg:after {
         @include fast-rem(font-size, ((4 * $FAST-base-size) / 3));
     }

@@ -1,0 +1,160 @@
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Grouping buttons</h2>
+            <p>By wrapping the buttons in an element with class <code>btn-group</code>, the space between each button is normalized and all buttons, even with various content sizes will be the same height.</p>
+{% highlight 'html' %}
+<div class="btn-group">
+    <a class="btn ico-{{data.generated.icons.codepoints[0].name}}">Button</a>
+    <a class="btn ico-a-{{data.generated.icons.codepoints[1].name}}">Button</a>
+    <a class="btn ico-{{data.generated.icons.codepoints[2].name}} ico-only ico-2x">Button</a>
+    <a class="btn ico-{{data.generated.icons.codepoints[3].name}} ico-only">Button</a>
+</div>{% endhighlight %}
+        </div>
+
+        <div class="col medium-6">
+            <div class="btn-group">
+                <a class="btn ico-{{data.generated.icons.codepoints[0].name}}">Button</a>
+                <a class="btn ico-a-{{data.generated.icons.codepoints[1].name}}">Button</a>
+                <a class="btn ico-{{data.generated.icons.codepoints[2].name}} ico-only ico-2x">Button</a>
+                <a class="btn ico-{{data.generated.icons.codepoints[3].name}} ico-only">Button</a>
+            </div>
+            <p>With <code>wide</code> class.</p>
+            <div class="btn-group wide">
+                <a class="btn ico-{{data.generated.icons.codepoints[0].name}}">Button</a>
+                <a class="btn ico-a-{{data.generated.icons.codepoints[1].name}}">Button</a>
+                <a class="btn ico-{{data.generated.icons.codepoints[2].name}} ico-only ico-2x">Button</a>
+                <a class="btn ico-{{data.generated.icons.codepoints[3].name}} ico-only">Button</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Toolbars</h2>
+            <p>To make a toolbar, it's often best to use the small buttons with normal icons.</p>
+{% highlight 'html' %}
+<div class="btn-group">
+    <a class="btn btn-small ico-{{data.generated.icons.codepoints[4].name}}">Button</a>
+    <a class="btn btn-small ico-a-{{data.generated.icons.codepoints[5].name}}">Button</a>
+    <a class="btn btn-small ico-{{data.generated.icons.codepoints[6].name}} ico-only">Button</a>
+</div>{% endhighlight %}
+        </div>
+
+        <div class="col medium-6">
+            <div class="btn-group">
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[4].name}}">Button</a>
+                <a class="btn btn-small ico-a-{{data.generated.icons.codepoints[5].name}}">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[6].name}} ico-only">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[7].name}} ico-only">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[8].name}} ico-only">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[9].name}} ico-only">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[10].name}} ico-only">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[11].name}} ico-only">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[12].name}} ico-only">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[13].name}} ico-only">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[14].name}} ico-only">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[15].name}} ico-only">Button</a>
+            </div>
+            <p>With <code>wide</code> class.</p>
+            <div class="btn-group wide">
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[4].name}}">Button</a>
+                <a class="btn btn-small ico-a-{{data.generated.icons.codepoints[5].name}}">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[6].name}} ico-only">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[7].name}} ico-only">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[8].name}} ico-only">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[9].name}} ico-only">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[10].name}} ico-only">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[11].name}} ico-only">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[12].name}} ico-only">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[13].name}} ico-only">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[14].name}} ico-only">Button</a>
+                <a class="btn btn-small ico-{{data.generated.icons.codepoints[15].name}} ico-only">Button</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Colors</h2>
+            <p>Of course, buttons colors are still available.</p>
+            {% highlight 'html' %}
+<div class="btn-group">
+    <a class="btn btn-small ico-fast-backward ico-only">Button</a>
+    <a class="btn btn-small ico-backward ico-only">Button</a>
+    <a class="btn btn-small btn-primary ico-play ico-only">Button</a>
+    <a class="btn btn-small ico-pause ico-only">Button</a>
+    <a class="btn btn-small ico-stop ico-only">Button</a>
+    <a class="btn btn-small btn-danger ico-circle ico-only">Button</a>
+    <a class="btn btn-small ico-forward ico-only">Button</a>
+    <a class="btn btn-small ico-fast-forward ico-only">Button</a>
+</div>{% endhighlight %}
+        </div>
+
+        <div class="col medium-6">
+            <div class="btn-group">
+                <a class="btn btn-small ico-fast-backward ico-only">Button</a>
+                <a class="btn btn-small ico-backward ico-only">Button</a>
+                <a class="btn btn-small btn-primary ico-play ico-only">Button</a>
+                <a class="btn btn-small ico-pause ico-only">Button</a>
+                <a class="btn btn-small ico-stop ico-only">Button</a>
+                <a class="btn btn-small btn-danger ico-circle ico-only">Button</a>
+                <a class="btn btn-small ico-forward ico-only">Button</a>
+                <a class="btn btn-small ico-fast-forward ico-only">Button</a>
+            </div>
+            <p>With <code>wide</code> class.</p>
+            <div class="btn-group wide">
+                <a class="btn btn-small ico-fast-backward ico-only">Button</a>
+                <a class="btn btn-small ico-backward ico-only">Button</a>
+                <a class="btn btn-small btn-primary ico-play ico-only">Button</a>
+                <a class="btn btn-small ico-pause ico-only">Button</a>
+                <a class="btn btn-small ico-stop ico-only">Button</a>
+                <a class="btn btn-small btn-danger ico-circle ico-only">Button</a>
+                <a class="btn btn-small ico-forward ico-only">Button</a>
+                <a class="btn btn-small ico-fast-forward ico-only">Button</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Conditionals</h2>
+            <p>A compact way to provide two options.</p>
+            {% highlight 'html' %}
+<div class="btn-condition">
+    <a class="btn btn-small ico-remove">Cancel</a>
+    <a class="btn btn-small ico-a-save">save</a>
+</div>{% endhighlight %}
+        </div>
+
+        <div class="col medium-6">
+            <div class="btn-condition">
+                <a class="btn ico-remove">Cancel</a>
+                <span class="or">Or</span>
+                <a class="btn btn-primary ico-a-save">save</a>
+            </div>
+            <div class="btn-condition">
+                <a class="btn btn-small ico-remove">Cancel</a>
+                <span class="or">Or</span>
+                <a class="btn btn-small btn-primary ico-a-save">save</a>
+            </div>
+            <p>With <code>wide</code> class.</p>
+            <div class="btn-condition wide">
+                <a class="btn ico-remove">Cancel</a>
+                <span class="or">Or</span>
+                <a class="btn btn-primary ico-a-save">save</a>
+            </div>
+            <div class="btn-condition wide">
+                <a class="btn btn-small ico-remove">Cancel</a>
+                <span class="or">Or</span>
+                <a class="btn btn-small btn-primary ico-a-save">save</a>
+            </div>
+        </div>
+    </div>
+</section>
