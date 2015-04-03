@@ -37,12 +37,15 @@
                             <li><a href="/button">Buttons</a>
                                 <ul>
                                     <li><a href="/button/icon.html">Icons</a></li>
+                                    <li><a href="/button/group.html">Group</a></li>
+                                    <li><a href="/button/variations.html">Variations</a></li>
                                 </ul>
                             </li>
                             <li><a href="/color">Colors</a></li>
                             <li><a href="/grid">Grid</a></li>
                             <li><a href="/icon">Icons</a></li>
                             <li><a href="/type">Type</a></li>
+                            <li><a href="/tooltip">Tooltip</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -69,6 +72,8 @@
 
 {% block javascripts %}
 <script src="{{ root_prefix }}js/libs/jquery-1.11.2.js"></script>
+<script src="{{ root_prefix }}js/toolkit.js"></script>
+<script src="{{ root_prefix }}js/tooltip.js"></script>
 <script src="{{ root_prefix }}js/main.js"></script>
 {% endblock %}
 {% for script in storeAt.javascripts -%}

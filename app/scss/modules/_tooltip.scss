@@ -1,0 +1,43 @@
+/*-------------------------------------------------------*\
+    #FAST Tooltip
+
+    @depends on
+        - FAST-tooltip
+\*-------------------------------------------------------*/
+
+$FAST-tooltip-import: true !default;
+
+
+/* Functions.
+   ===================================================== */
+
+
+/* Mixins.
+   ===================================================== */
+
+
+/* Placeholders.
+   ===================================================== */
+
+
+/* Styles.
+   ===================================================== */
+@if $FAST-tooltip-import {
+    .tooltip, [title] {
+        border-bottom: 1px dotted #ccc;
+        cursor: help;
+    }
+
+    img.tooltip, img[title] {
+        border: none;
+    }
+
+    .tooltip-content {
+        background-color: #fff;
+        box-shadow: 0 1px 5px rgba(black, .3);
+        display: none;
+        margin: 15px;
+        @include fast-rem(padding, ($FAST-line-height / 2) ($FAST-gutter / 2));
+        position: fixed;
+    }
+}

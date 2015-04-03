@@ -1,0 +1,30 @@
+<section>
+    <div class="btn tooltip wide" title="Test tooltip">Tooltip test zone</div>
+</section>
+<section class="unwrap deco-separator-line medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2></h2>
+            <p></p>
+            {% highlight 'html' %}
+{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <div class="row center">
+                <div class="col">
+                    <p>This text contains a <span class="tooltip" title="This is a basic tooltip">tooltip</span>.</p>
+                    <p>This one has a bigger tooltip behind an image : <img class="tooltip" title="The title attribute takes the tooltip fallback in case of a javascript issue." data-tooltip="<h3>HTML tooltip</h3><ul><li>This is an HTML tooltip</li><li>The markup is stored inline</li><li>It's easy but not practical for big chunks of HTML</li></ul>" src="http://placehold.it/350x150" /></span></p>
+                    <p>This one has a bigger tooltip behind an image : <img class="tooltip" title="The title attribute takes the tooltip fallback in case of a javascript issue." data-tooltip-src="#htmlTooltipContent" src="http://placehold.it/350x150" /></p>
+                    <div class="tooltip-content" id="htmlTooltipContent">
+                        <h3>HTML tooltip</h3>
+                        <ul>
+                            <li>This is an HTML tooltip</li>
+                            <li>The markup is stored inline</li>
+                            <li>It's easy but not practical for big chunks of HTML</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
