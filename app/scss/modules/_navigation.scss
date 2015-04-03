@@ -159,6 +159,8 @@ $FAST-navigation-import: true !default;
                         span {
                             color: transparent;
                             display: inline-block;
+                            height: 1em;
+                            line-height: 1em;
                             position: relative;
                             transition: all .2s ease-in-out;
 
@@ -230,12 +232,20 @@ $FAST-navigation-import: true !default;
                 display: flex;
 
                 ul {
+                    background-color: fastColorGet($FAST-header-color);
                     display: none;
+                    position: absolute;
                 }
             }
 
             li {
                 border-radius: 3px;
+
+                &:hover {
+                    ul {
+                        display: block;
+                    }
+                }
             }
         }
 
