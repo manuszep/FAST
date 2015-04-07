@@ -11,14 +11,23 @@ var FAST = FAST || {};
     /**
      *  Private area
      */
-    var _handleWindowResize = function() {
-        $(window).trigger('fast.toolkit.windowResize');
+    var _handleWindowResize = function(e) {
+        $(document).trigger('fast.toolkit.windowResize', e);
+    };
+
+    var _handleMouseMove = function(e) {
+        mouse.x = e.clientX || e.pageX;
+        mouse.y = e.clientY || e.pageY
+
+        $(document).trigger('fast.toolkit.mouseMove', e);
     };
 
 
     /**
      *  Public area
      */
+
+    var mouse = {x: 0, y: 0};
 
     /**
      * is() Checks if an object matches given type
@@ -163,6 +172,71 @@ var FAST = FAST || {};
         };
     };
 
+    /**
+     *  bindIntended()
+     *
+     *  Bind two events that will cancel each other if one of them is called right after the other (depends on the delay)
+     *  The second event is considered as the "normal state". For example the mouseIn event should be declared first as
+     *  the mouseOut is generally the initial state. The second event will only be executed if the first one is active.
+     *  This is handy to cancel a hover event if the mouse has allready left the target.
+     *
+     *  @param event1 {Object} - {
+     *      target: The element the event will be bound to,
+     *      event: The jquery event to bind,
+     *      data: Some data to pass to the callback,
+     *      func: The event callback,
+     *      delay: The timeframe in ms where the event can be cancelled
+     *  }
+     *  @param delay {Object} - {
+     *      target: The element the event will be bound to,
+     *      event: The jquery event to bind,
+     *      data: Some data to pass to the callback,
+     *      func: The event callback,
+     *      delay: The timeframe in ms where the event can be cancelled
+     *  }
+     */
+    var bindIntended = function(event1, event2) {
+        var context;
+        var args;
+        var event1_timeout;
+        var event2_timeout;
+        var event1_active = false;
+        var event2_active = true;
+        event1.data = event1.data || {};
+        event2.data = event2.data || {};
+
+        var execEvent1 = function(e) {
+            args = arguments;
+            context = this;
+            clearTimeout(event2_timeout);
+            if (event2_active) {
+                event1_timeout = setTimeout(function () {
+                    event1.func.apply(context, args);
+
+                    event1_active = true;
+                    event2_active = false;
+                }, event1.delay);
+            }
+        };
+
+        var execEvent2 = function(e) {
+            args = arguments;
+            context = this;
+            clearTimeout(event1_timeout);
+            if (event1_active) {
+                event2_timeout = setTimeout(function(){
+                    event2.func.apply(context, args);
+
+                    event1_active = false;
+                    event2_active = true;
+                }, event2.delay);
+            }
+        };
+
+        event1.target.on(event1.event, event1.data, execEvent1);
+        event2.target.on(event2.event, event2.data, execEvent2);
+    };
+
     var UUID = function() {
         var lut = [];
 
@@ -186,17 +260,20 @@ var FAST = FAST || {};
      *  Initialisation
      */
     $(window).on('resize', debounce(_handleWindowResize, 500));
+    $(window).on('mousemove', throttle(_handleMouseMove, 10));
 
 
     /**
      *  Module declarations
      */
     F.Toolkit = {
+        mouse: mouse,
         is: is,
         isset: isset,
         now: thenow,
         throttle: throttle,
         debounce: debounce,
+        bindIntended: bindIntended,
         UUID: UUID
     };
 })(FAST, jQuery);
