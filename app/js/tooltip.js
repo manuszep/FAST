@@ -31,7 +31,7 @@ var FAST = FAST || {};
         var index = e.data.index;
 
         $container.fadeIn();
-        $(document).on('mousemove.tooltip_' + index, {target: $container}, _.throttle(_followMouse, 10));
+        $(document).on('mousemove.tooltip', {target: $container}, _.throttle(_followMouse, 10));
     };
 
     var _hideTooltip = function(e) {
@@ -39,7 +39,7 @@ var FAST = FAST || {};
         var index = e.data.index;
 
         $container.fadeOut();
-        $(document).off('mousemove.tooltip_' + index);
+        $(document).off('mousemove.tooltip');
     };
 
     var _followMouse = function(e) {
@@ -59,17 +59,22 @@ var FAST = FAST || {};
         $target.css(css);
     };
 
-    var _initTooltip = function(index) {
-        var content = _extractTooltipContent($(this));
+    var _attachTooltip = function($target, content) {
         var $container = $('<div class="tooltip-content"></div>');
+        var uuid = F.Toolkit.UUID();
 
-        $container.html(content);
+        $container.attr('id', uuid).html(content);
         $body.append($container);
 
-        $(this)
-            .removeAttr('title')
-            .on('mouseover', { container: $container, index: index }, _showTooltip)
-            .on('mouseout', { container: $container, index: index }, _hideTooltip);
+        $target.data('container-uuid', uuid).removeAttr('title')
+            .on('mouseover.tooltip', { container: $container }, _showTooltip)
+            .on('mouseout.tooltip', { container: $container }, _hideTooltip);
+    };
+
+    var _initTooltip = function() {
+        var content = _extractTooltipContent($(this));
+
+        _attachTooltip($(this), content);
     };
 
     /**
@@ -81,11 +86,25 @@ var FAST = FAST || {};
         $tooltips.each(_initTooltip);
     };
 
+    var setTooltip = function($target, content) {
+        _attachTooltip($target, content);
+    };
+
+    var destroyTooltip = function($target) {
+        var container_id = $target.data('container-uuid');
+        var $container = $('#' + container_id);
+
+        $container.remove();
+        $target.off('mouseover.tooltip').off('mouseout.tooltip');
+    };
+
 
     /**
      *  Module declarations
      */
     F.Tooltip = {
-        init: init
+        init: init,
+        setTooltip: setTooltip,
+        destroyTooltip: destroyTooltip
     };
 })(FAST, jQuery);
