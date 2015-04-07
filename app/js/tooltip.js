@@ -28,35 +28,35 @@ var FAST = FAST || {};
 
     var _showTooltip = function(e) {
         var $container = e.data.container;
-        var index = e.data.index;
 
         $container.fadeIn();
-        $(document).on('mousemove.tooltip', {target: $container}, _.throttle(_followMouse, 10));
+        $(document).on('fast.toolkit.mouseMove.tooltip', {target: $container}, _followMouse);
+        _setPosition($container);
     };
 
     var _hideTooltip = function(e) {
         var $container = e.data.container;
-        var index = e.data.index;
 
         $container.fadeOut();
-        $(document).off('mousemove.tooltip');
+        $(document).off('fast.toolkit.mouseMove.tooltip');
     };
 
-    var _followMouse = function(e) {
-        var $target = e.data.target;
+    var _setPosition = function($target) {
         var target_width = $target.outerWidth(true);
         var target_height = $target.outerHeight(true);
         var window_width = window.innerWidth;
         var window_height = window.innerHeight;
-        var pos_x = e.clientX;
-        var pos_y = e.clientY;
-        var pc_x = pos_x / window_width;
+        var pc_x = _.mouse.x / window_width;
         var css = {
-            left: pos_x - (target_width * pc_x),
-            top: (pos_y < (window_height / 2)) ? pos_y : pos_y - target_height
+            left: _.mouse.x - (target_width * pc_x),
+            top: (_.mouse.y < (window_height / 2)) ? _.mouse.y : _.mouse.y - target_height
         };
 
         $target.css(css);
+    };
+
+    var _followMouse = function(e) {
+        _setPosition(e.data.target);
     };
 
     var _attachTooltip = function($target, content) {
@@ -66,9 +66,12 @@ var FAST = FAST || {};
         $container.attr('id', uuid).html(content);
         $body.append($container);
 
-        $target.data('container-uuid', uuid).removeAttr('title')
-            .on('mouseover.tooltip', { container: $container }, _showTooltip)
-            .on('mouseout.tooltip', { container: $container }, _hideTooltip);
+        $target.data('container-uuid', uuid).removeAttr('title');
+
+        _.bindIntended(
+            {target: $target, event: 'mouseover.tooltip', data: {container: $container}, func: _showTooltip, delay: 300},
+            {target: $target, event: 'mouseout.tooltip', data: {container: $container}, func: _hideTooltip, delay: 300}
+        );
     };
 
     var _initTooltip = function() {

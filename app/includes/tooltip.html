@@ -1,20 +1,77 @@
 <section>
+    <p>Tooltip may contain simple text or HTML markup. The size of the tooltip depends on it's content (so for wide content, it can be useful to use the sizing classes from the grid module.</p>
+    <p>The tooltip is placed in relation to the mouse cursor and the position on the screen.</p>
     <div class="btn tooltip wide" title="Test tooltip">Tooltip test zone</div>
 </section>
-<section class="unwrap deco-separator-line medium-split-bg-rev">
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
     <div class="row middle">
         <div class="col medium-6">
-            <h2></h2>
-            <p></p>
+            <h2>Basic tooltip</h2>
+            <p>The simplest way to add a tooltip is to use the title attribute and add the <code>tooltip</code> class.</p>
             {% highlight 'html' %}
-{% endhighlight %}
+<p>This text contains a <span class="tooltip" title="This is a basic tooltip">tooltip</span>.</p>{% endhighlight %}
         </div>
         <div class="col medium-6">
             <div class="row center">
                 <div class="col">
                     <p>This text contains a <span class="tooltip" title="This is a basic tooltip">tooltip</span>.</p>
-                    <p>This one has a bigger tooltip behind an image : <img class="tooltip" title="The title attribute takes the tooltip fallback in case of a javascript issue." data-tooltip="<h3>HTML tooltip</h3><ul><li>This is an HTML tooltip</li><li>The markup is stored inline</li><li>It's easy but not practical for big chunks of HTML</li></ul>" src="http://placehold.it/350x150" /></span></p>
-                    <p>This one has a bigger tooltip behind an image : <img class="tooltip" title="The title attribute takes the tooltip fallback in case of a javascript issue." data-tooltip-src="#htmlTooltipContent" src="http://placehold.it/350x150" /></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="unwrap deco-separator-line medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Inline HTML tooltip</h2>
+            <p>For a more complex tooltip, HTML can be added in a <code>data-tooltip</code> attribute. The <code>title</code> attribute can be used as a fallback.</p>
+            {% highlight 'html' %}
+<p>
+    <img
+        class="tooltip"
+        title="The title attribute takes the tooltip fallback in case of a javascript issue."
+        data-tooltip="<h3>HTML tooltip</h3><ul><li>This is an HTML tooltip</li><li>The markup is stored inline</li><li>It's easy but not practical for big chunks of HTML</li></ul>"
+        src="http://placehold.it/350x150"
+    />
+</p>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <div class="row center">
+                <div class="col">
+                    <p><img class="tooltip" title="The title attribute takes the tooltip fallback in case of a javascript issue." data-tooltip="<h3>HTML tooltip</h3><ul><li>This is an HTML tooltip</li><li>The markup is stored inline</li><li>It's easy but not practical for big chunks of HTML</li></ul>" src="http://placehold.it/350x150" /></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="unwrap deco-separator-line medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>External HTML tooltip</h2>
+            <p>The tooltip HTML can be taken from another element. For this, a <code>data-tooltip-src</code> attribute can be used with a css selector as content.</p>
+            {% highlight 'html' %}
+<p>
+    <img
+        class="tooltip"
+        title="The title attribute takes the tooltip fallback in case of a javascript issue."
+        data-tooltip-src="#htmlTooltipContent"
+        src="http://placehold.it/350x150"
+    />
+
+    <div class="tooltip-content" id="htmlTooltipContent">
+        <h3>HTML tooltip</h3>
+        <ul>
+            <li>This is an HTML tooltip</li>
+            <li>The markup is stored inline</li>
+            <li>It's easy but not practical for big chunks of HTML</li>
+        </ul>
+    </div>
+</p>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <div class="row center">
+                <div class="col">
+                    <p><img class="tooltip" title="The title attribute takes the tooltip fallback in case of a javascript issue." data-tooltip-src="#htmlTooltipContent" src="http://placehold.it/350x150" /></p>
                     <div class="tooltip-content" id="htmlTooltipContent">
                         <h3>HTML tooltip</h3>
                         <ul>
