@@ -59,7 +59,7 @@ $FAST-header-import: true !default;
         text-transform: uppercase;
 
         a {
-            $logo-font-size-unitless: $FAST-font-size-l / ($FAST-font-size-l * 0 + 1);
+            $logo-font-size-unitless: fastStripUnit($FAST-font-size-l);
             $logo-font-size-px: $FAST-base-size * $logo-font-size-unitless;
 
             background: transparent url($FAST-logo-url) no-repeat left center;
@@ -80,7 +80,7 @@ $FAST-header-import: true !default;
             &.fixed {
                 position: fixed;
                 width: 100%;
-                z-index: 1;
+                z-index: 900;
 
                 .alpha {
                     position: static;

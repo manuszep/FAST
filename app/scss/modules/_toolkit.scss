@@ -10,6 +10,13 @@
    ===================================================== */
 
 /**
+ *  Strip units from value
+ */
+@function fastStripUnit($number) {
+    @return $number / ($number * 0 + 1);
+}
+
+/**
  *  Fetch nested keys
  *
  *  @param {Map} $map - Map
