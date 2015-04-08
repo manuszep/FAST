@@ -1,17 +1,6 @@
 {% include "variables.tpl" %}
 
 {% macro table(classes, responsive, responsive_small, data) %}
-{% set resp_class = "" %}
-
-{% if responsive %}
-{% if responsive_small %}
-{% set resp_class = "small-table-resp" %}
-{% endif %}
-
-{% set resp_class += " tiny-table-resp " + responsive %}
-
-<div class="{{ resp_class }}">
-    {% endif %}
 
     <table{% if classes %} class="{{classes}}"{% endif %}>
     {% if data.thead %}
@@ -44,22 +33,21 @@
     </tbody>
     {% endif %}
     </table>
+{% endmacro %}
 
-    {% if responsive %}
-</div>
+{% macro classInput(name, target, checked) %}
+{%if !target%}
+    {% set target = "class" %}
 {% endif %}
+<label for="fld-class-{{name}}"><input type="checkbox" name="fld-class-{{name}}" id="fld-class-{{name}}" data-attr="{{target}}" value="{{name}}"{% if checked %} checked{% endif %} /> .{{name}}</label>
 {% endmacro %}
 
-{% macro classInput(name) %}
-<label for="fld-class-{{name}}"><input type="checkbox" name="fld-class-{{name}}" id="fld-class-{{name}}" data-attr="class" value="{{name}}" /> .{{name}}</label>
+{% macro colorInput(name, checked) %}
+<label for="fld-color-{{name}}"><input type="radio" name="fld-color" id="fld-color-{{name}}" data-attr="class" value="{{name}}"{% if checked %} checked{% endif %} /> .{{name}}</label>
 {% endmacro %}
 
-{% macro colorInput(name) %}
-<label for="fld-color-{{name}}"><input type="radio" name="fld-color" id="fld-color-{{name}}" data-attr="class" value="{{name}}" /> .{{name}}</label>
-{% endmacro %}
-
-{% macro divInput(name, txt) %}
-<label for="fld-div-{{name}}"><input type="checkbox" name="fld-div-{{name}}" id="fld-div-{{name}}" data-attr="div" value="{{name}}" /> {{txt}}</label>
+{% macro divInput(name, txt, checked) %}
+<label for="fld-div-{{name}}"><input type="checkbox" name="fld-div-{{name}}" id="fld-div-{{name}}" data-attr="div" value="{{name}}"{% if checked %} checked{% endif %} /> {{txt}}</label>
 {% endmacro %}
 
 <style name="Demo styles">
@@ -68,45 +56,188 @@
     }
 </style>
 
-<h2>Setup table</h2>
-<div id="styler">
-    <p><strong>Classes : </strong>
-        {{classInput("contrast")}}
-        {{classInput("breathe")}}
-        {{classInput("compact")}}
-        {{classInput("zebra")}}
-        {{classInput("bordered")}}
-        {{classInput("spaced")}}
-    </p>
-    <p><strong>Colors : </strong>
-        {{colorInput("highlight")}}
-        {% for color in colors %}
-        {{colorInput(color)}}
-        {% endfor %}
-    </p>
-    <p><strong>Responsive : </strong>
-        {{divInput("tiny-table-resp", "For tiny screens")}}
-        {{divInput("small-table-resp", "For small screens")}}
-    </p>
-    <p><strong>Responsive mode (requires responsive) : </strong>
-        {{divInput("scroll", "Optimize horizontal scroll")}}
-    </p>
-</div>
-<h2>Table playground</h2>
-<div id="playground">
-    <div>
-        {{ table(false, false, false, data_table) }}
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row">
+        <div class="col medium-6">
+            <h2>Setup table</h2>
+            <p class="btn-group wide">
+                <a class="btn ico-plus" id="addRow">Add row</a>
+                <a class="btn ico-plus" id="addColumn">Add column</a>
+            </p>
+            <p class="btn-group wide">
+                <a class="btn btn-small ico-exchange" id="toggleTag">Toggle header</a>
+                <a class="btn btn-small ico-align-left ico-only" id="alignLeft">Align left</a>
+                <a class="btn btn-small ico-align-center ico-only" id="alignCenter">Align center</a>
+                <a class="btn btn-small ico-align-right ico-only" id="alignRight">Align right</a>
+            </p>
+            <p class="btn-group wide">
+                <a class="btn btn-small ico-circle-blank ico-only btn-color-toggle">no color</a>
+                {% for key, color in data.common.color.list %}
+                <a class="btn btn-small ico-circle color-{{key}} ico-only btn-color-toggle" data-cls="{{key}}">Color {{key}}</a>
+                {% endfor %}
+            </p>
+            <div id="styler">
+                <p><strong>Classes : </strong>
+                    {{classInput("card", "div")}}
+                    {{classInput("contrast", "div")}}
+                    {{classInput("breathe")}}
+                    {{classInput("compact")}}
+                    {{classInput("zebra")}}
+                    {{classInput("bordered", "class", true)}}
+                    {{classInput("spaced")}}
+                    {{classInput("fixed")}}
+                </p>
+                <p><strong>Colors : </strong>
+                    {{colorInput('none')}}
+                    {% for key, color in data.common.table.colors %}
+                    {{colorInput(key)}}
+                    {% endfor %}
+                </p>
+                <p><strong>Responsive expand : </strong>
+                    {{divInput("tiny-table-expand", "For tiny screens")}}
+                    {{divInput("small-table-expand", "For small screens")}}
+                    {{divInput("medium-table-expand", "For medium screens")}}
+                </p>
+            </div>
+        </div>
+        <div id="playground" class="col medium-6">
+            <div class="table-wrapper">
+                <table class="bordered">
+                    <thead>
+                        <tr></tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+                        <tr></tr>
+                    </tfoot>
+                </table>
+            </div>
+            <textarea></textarea>
+        </div>
     </div>
-</div>
+</section>
+
+<section class="unwrap deco-separator-line medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+
+        <div class="col medium-6">
+            <h2>Playground</h2>
+            <div>
+                <div class="table-wrapper">
+                    {{ table(false, false, false, data_table) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% storeAt "javascripts" %}
 <script>
-    var wrapper = $('#playground > div');
-    var table = $('#playground table');
     var inputs = $('#styler input');
+    var btn_add_row = $('#addRow');
+    var btn_add_col = $('#addColumn');
+    var btn_toggle_tag = $('#toggleTag');
+    var btn_aling_left = $('#alignLeft');
+    var btn_aling_center = $('#alignCenter');
+    var btn_aling_right = $('#alignRight');
+    var btn_color = $('.btn-color-toggle');
+    var col_count = 0;
+    var playground = $('#playground');
+    var thead_tr = $('thead tr', playground);
+    var tfoot_tr = $('tfoot tr', playground);
+    var tbody = $('tbody', playground);
+    var textarea = $('textarea', playground);
+    var current_focus = null;
+
+    btn_add_row.on('click', function(e) {
+        var row = $('<tr></tr>');
+
+        for (var i = 0; i < col_count; i++) {
+            row.append('\n<td contenteditable="true"></td>');
+        }
+
+        tbody.append(row);
+    });
+
+    btn_add_col.on('click', function(e) {
+        col_count++;
+        var new_td = '<td contenteditable="true"></td>';
+        var new_th = '<th contenteditable="true"></th>';
+        thead_tr.append(new_th);
+        tfoot_tr.append(new_td);
+        $('tr', tbody).each(function() {
+            $(this).append(new_td);
+        });
+    });
+
+    playground.on('focus', 'td, th', function(e) {
+        current_focus = $(e.currentTarget);
+    });
+
+    btn_toggle_tag.on('click', function(e) {
+        if (current_focus != null) {
+            var tag_name = current_focus.prop("tagName").toLowerCase();
+            var new_tag_name = (tag_name == "td") ? "th" : "td";
+            var new_tag = $('<' + new_tag_name + ' contenteditable="true">' + current_focus.html() + '</' + new_tag_name + '>');
+            current_focus.replaceWith(new_tag);
+            new_tag.focus();
+        }
+    });
+
+    btn_aling_left.on('click', function(e) {
+        if (current_focus != null) {
+            current_focus.removeClass('right');
+            current_focus.removeClass('center');
+
+            textarea.val(replaceAll($('.table-wrapper', playground)[0].outerHTML, ' contenteditable="true"', ''));
+        }
+    });
+
+    btn_aling_center.on('click', function(e) {
+        if (current_focus != null) {
+            current_focus.removeClass('right');
+            current_focus.addClass('center');
+
+            textarea.val(replaceAll($('.table-wrapper', playground)[0].outerHTML, ' contenteditable="true"', ''));
+        }
+    });
+
+    btn_aling_right.on('click', function(e) {
+        if (current_focus != null) {
+            current_focus.addClass('right');
+            current_focus.removeClass('center');
+
+            textarea.val(replaceAll($('.table-wrapper', playground)[0].outerHTML, ' contenteditable="true"', ''));
+        }
+    });
+
+    btn_color.on('click', function(e) {
+        if (current_focus != null) {
+            var col = $(this).data('cls');
+            btn_color.each(function() {
+                var c = $(this).data('cls');
+                current_focus.removeClass('bg-' + c);
+            });
+            if (col != undefined) {
+                current_focus.addClass('bg-' + col);
+            }
+
+            textarea.val(replaceAll($('.table-wrapper', playground)[0].outerHTML, ' contenteditable="true"', ''));
+        }
+    });
+    function escapeRegExp(string) {
+        return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+    }
+    function replaceAll(string, find, replace) {
+        return string.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+    }
+    playground.bind("DOMSubtreeModified", function() {
+        textarea.val(replaceAll($('.table-wrapper', playground)[0].outerHTML, ' contenteditable="true"', ''));
+    });
 
     inputs.on("change", function(e) {
-        var div_class = "";
+        var div_class = "table-wrapper";
         var table_class = "";
 
         inputs.each(function() {
@@ -114,7 +245,7 @@
             var target = ($(this).data('attr') == 'div') ? div_class : table_class;
             var cls = $(this).val();
 
-            if (chk) {
+            if (chk && cls != "none") {
                 if ($(this).data('attr') == 'div') {
                     div_class += " " + cls;
                 } else {
@@ -123,8 +254,9 @@
             }
         });
 
-        wrapper.attr("class", div_class);
-        table.attr("class", table_class);
+        $('#playground .table-wrapper').attr("class", div_class);
+        $('#playground table').attr("class", table_class);
+        textarea.val(replaceAll($('.table-wrapper', playground)[0].outerHTML, ' contenteditable="true"', ''));
     });
 </script>
 {% endstoreAt %}

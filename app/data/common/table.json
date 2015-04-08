@@ -1,0 +1,12 @@
+{
+  "default-color": "#000",
+  "colors": {
+    "highlight": "#37BC9B",
+    "dark": "#2c3e50",
+    "primary": "#66AF44",
+    "secondary": "#0060D6",
+    "danger": "#C70000",
+    "warning": "#FFCE54",
+    "cyan": "#3BAFDA"
+  }
+}

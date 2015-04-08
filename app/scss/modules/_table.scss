@@ -16,6 +16,77 @@ $FAST-table-import: true !default;
 
 /* Mixins.
    ===================================================== */
+@mixin fast-table-color($color) {
+   $color-full: fastColorLightness($color, 35%);
+   $color-dark: fastColorLightness($color, 70%);
+   //$color: desaturate($color, 10%);
+   $color-light: fastColorLightness($color, 90%);
+   $color-super-light: fastColorLightness($color, 95%);
+
+   td, th {
+      border-color: $color-dark;
+      color: $color-full;
+   }
+
+   tbody {
+      td, th {
+         border-color: $color-light;
+      }
+
+      td {
+         color: fastColorGet($FAST-text-color-dark);
+      }
+   }
+
+   &.zebra {
+      tr:nth-child(even) {
+         td, th {
+            background-color: $color-super-light;
+            color: fastColorContrast($color-light);
+         }
+      }
+
+      tbody {
+         th {
+            //border-color: $color;
+         }
+      }
+   }
+
+   &.contrast, .table-wrapper.contrast & {
+      th, thead td, tfoot td {
+         background-color: $color;
+         color: fastColorContrast($color);
+      }
+
+      tbody {
+         th {
+            background-color: $color-super-light;
+            color: fastColorContrast($color-super-light);
+         }
+      }
+
+      &.zebra {
+         tr:nth-child(even) th {
+            background-color: $color-light;
+            color: fastColorContrast($color-light);
+         }
+      }
+   }
+
+   &.bordered {
+      td, th {
+         border: 1px solid darken($color,5%) !important;
+      }
+
+      &.spaced {
+         td, th {
+            border-left: none !important;
+            border-right: none !important;
+         }
+      }
+   }
+}
 
 
 /* Placeholders.
@@ -25,5 +96,136 @@ $FAST-table-import: true !default;
 /* Styles.
    ===================================================== */
 @if $FAST-table-import {
+   .table-wrapper {
+      @include fast-rem(margin-bottom, $FAST-line-height);
+      overflow-x: auto;
+      position: relative;
+      width: 100%;
 
+      table {
+         margin-bottom: 0;
+      }
+   }
+
+   table {
+      border-collapse: collapse;
+      margin: 0;
+      @include fast-rem(margin-bottom, $FAST-line-height);
+      max-width: 100%;
+      text-align: left;
+      width: 100%;
+
+      @include fast-table-color(map_get($FAST-data-table, default-color));
+   }
+
+   th, td {
+      @include fast-rem(padding, $FAST-table-cell-padding);
+      border-bottom: 1px solid transparent;
+      vertical-align: top;
+   }
+
+   th {
+      font-weight: bold;
+   }
+
+   thead {
+      background: #fff;
+
+      th, td {
+         border-bottom: 1px solid transparent;
+         vertical-align: bottom;
+      }
+   }
+
+   tfoot {
+      td, th {
+         border-bottom: none;
+         border-top: 1px solid transparent;
+      }
+   }
+
+   table.spaced {
+      @include fast-rem(border-spacing, 0 ($FAST-line-height / 4));
+      border-collapse: separate;
+      box-shadow: none;
+
+      td, th {
+         border: 1px solid rgba(0,0,0,.10) !important;
+         border-width: 1px 1px 1px 0 !important;
+         box-shadow: 0 1px 2px rgba(0,0,0,.1);
+      }
+   }
+
+   table.card, .table-wrapper.card {
+      box-shadow: 0 1px 5px 0 rgba(black, .3);
+   }
+
+   table.breathe {
+      td, th {
+         @include fast-rem(padding, ($FAST-table-cell-padding-v * 2) ($FAST-table-cell-padding-h * 2));
+      }
+   }
+
+   table.compact {
+      td, th {
+         @include fast-rem(padding, ($FAST-table-cell-padding-v / 2) ($FAST-table-cell-padding-h / 2));
+      }
+   }
+
+   table.fixed {
+      table-layout: fixed;
+   }
+
+   @each $color in map-get($FAST-data-table, colors) {
+      $name: nth($color, 1);
+      $val: nth($color, 2);
+
+      table.#{$name} {
+         @include fast-table-color($val);
+      }
+   }
+
+   @for $i from 1 through length($FAST-breakpoints-columns) {
+      $item: nth($FAST-breakpoints-columns, $i);
+      $name: nth($item, 1);
+      $columns-count: nth($item, 2) / 2;
+      $bp: map-get($FAST-breakpoints, $name);
+
+      @if $bp != null {
+         $limit-query: if($i == length($FAST-breakpoints-columns), false, true);
+
+         @include fast-mq($name, $limit-query) {
+            .#{$name}-table-expand {
+               overflow-x: auto;
+               width: 100%;
+
+               table, tr {
+                  display: flex;
+               }
+
+               table {
+                  box-shadow: none;
+                  flex-direction: column;
+               }
+
+               tbody, thead, tfoot {
+                  display: block;
+               }
+
+               tfoot {
+                  order: 1;
+               }
+
+               td, th {
+                  display: block;
+                  flex-basis: ((100% / $columns-count) - 2%);
+                  flex-shrink: 0;
+                  margin: 0 1%;
+                  flex-grow: 1;
+                  max-width: 80%;
+               }
+            }
+         }
+      }
+   }
 }

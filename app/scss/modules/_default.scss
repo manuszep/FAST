@@ -43,4 +43,16 @@ $FAST-default-import: true !default;
    section {
       @include fast-rem(padding, $FAST-spacing-v-xl 0 $FAST-spacing-v-l 0);
    }
+
+   [contenteditable]:focus {
+      outline: none;
+   }
+
+   .right {
+      text-align: right;
+   }
+
+   .center {
+      text-align: center;
+   }
 }

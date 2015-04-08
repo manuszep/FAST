@@ -198,3 +198,10 @@ $FAST-icon-list-adjust-vertical: 20px !default;
 /* Navigation.
    ===================================================== */
 $FAST-navigation-expand-breakpoint: "small";
+
+
+/* Table.
+   ===================================================== */
+$FAST-table-cell-padding-v: $FAST-line-height / 2;
+$FAST-table-cell-padding-h: $FAST-gutter / 2;
+$FAST-table-cell-padding: $FAST-table-cell-padding-v $FAST-table-cell-padding-h;

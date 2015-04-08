@@ -7,5 +7,6 @@ var FAST = FAST || {};
 (function(F, $, undefined) {
 
     F.Tooltip.init();
+    F.Table.init();
 
 })(FAST, jQuery);
