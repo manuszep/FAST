@@ -81,6 +81,7 @@ $FAST-deco-split-bg-dark-color: fastColorGet($FAST-split-bg-color-dark) !default
         margin-bottom: $FAST-header-spacing;
         margin-top: -$FAST-header-spacing;
         padding-top: $FAST-line-height / 2;
+        border-bottom: 1px solid #fff;
     }
 
     .circle.circle {
