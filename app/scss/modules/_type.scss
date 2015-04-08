@@ -178,4 +178,42 @@ $FAST-type-import: true !default;
             margin-bottom: 0;
         }
     }
+
+    @for $i from 1 through length($FAST-breakpoints-columns) {
+        /* Start of Breakpoints loop */
+        $item: nth($FAST-breakpoints-columns, $i);
+        $name: nth($item, 1);
+        $bp: map-get($FAST-breakpoints, $name); // [1]
+
+        @if $bp != null {
+            // [1b]
+            $limit-query: if($i == length($FAST-breakpoints-columns), false, true);
+
+            // Start the media query
+            @include fast-mq($name, $limit-query) {
+                @for $j from 1 through length($FAST-headings) {
+                    $heading: nth($FAST-headings, $j);
+                    $font-size: map-get($heading, font-size);
+                    $font-size: ($font-size * (.5 + ($i / 5)));
+                    $font-weight: map-get($heading, font-weight);
+                    $letter-spacing: map-get($heading, letter-spacing);
+                    $line-height: map-get($heading, line-height);
+                    $line-height: ($line-height * (.3 + ($i / 3)));
+                    $margin-bottom: map-get($heading, margin);
+
+                    @if ($font-size <= $FAST-base-size) {
+                        $font-size: $FAST-base-size;
+                    }
+
+                    @if ($line-height <= $FAST-line-height) {
+                        $line-height: $FAST-line-height;
+                    }
+
+                    h#{$j} {
+                        @include fast-type-set($font-size, $margin-bottom, $line-height, $font-weight, $letter-spacing);
+                    }
+                }
+            }
+        }
+    }
 }
