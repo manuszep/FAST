@@ -57,9 +57,14 @@ $FAST-color-list: map-get($FAST-data-color, list) !default;
 /* Mixins.
    ===================================================== */
 
-@mixin fast-background-color ($color, $dark: fastColorGet($FAST-text-color-dark), $light: fastColorGet($FAST-text-color-light), $threshold: $FAST-color-contrast-threshold) {
-   background-color: $color;
-   color: fastColorContrast($color, $dark, $light, $threshold);
+@mixin fast-background-color ($color, $dark: fastColorGet($FAST-text-color-dark), $light: fastColorGet($FAST-text-color-light), $threshold: $FAST-color-contrast-threshold, $important: false) {
+   @if $important {
+      background-color: $color !important;
+      color: fastColorContrast($color, $dark, $light, $threshold) !important;
+   } @else {
+      background-color: $color;
+      color: fastColorContrast($color, $dark, $light, $threshold);
+   }
 }
 
 @mixin fast-background-anchor-color($color) {
@@ -82,11 +87,11 @@ $FAST-color-list: map-get($FAST-data-color, list) !default;
 @if $FAST-color-import {
    @each $name, $color in $FAST-color-list {
       .bg-#{$name} {
-         @include fast-background-color($color);
+         @include fast-background-color($color, $important: true);
       }
 
       .color-#{$name} {
-         color: $color;
+         color: $color !important;
       }
    }
 }
