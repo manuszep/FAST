@@ -1,0 +1,154 @@
+/*-------------------------------------------------------*\
+    #FAST Dropdown
+
+    @depends on
+        - FAST-toolkit
+        - FAST-button
+\*-------------------------------------------------------*/
+
+$FAST-dropdown-import: true !default;
+
+
+/* Functions.
+   ===================================================== */
+
+
+/* Mixins.
+   ===================================================== */
+
+
+/* Placeholders.
+   ===================================================== */
+
+
+/* Styles.
+   ===================================================== */
+@if $FAST-dropdown-import {
+    .dropdown {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+
+        .default {
+            @extend %btn;
+            @extend %btn-split;
+            @extend %ico-a;
+            @extend %ico-a-ellipsis-vertical;
+            border: 1px solid fastColorGet('grey-xl');
+        }
+
+        > ul, .dropdown-content {
+            background: #fff;
+            box-shadow: inset 0 0 0 1px rgba(black, 0);
+            left: 0;
+            letter-spacing: 0;
+            margin-top: -1px;
+            max-height: 0;
+            min-width: 10em;
+            //opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            text-align: left;
+            text-transform: none;
+            top: 100%;
+            transition: all .2s ease-out;
+            transition-delay: .3s;
+            width: 100%;
+            z-index: 1;
+        }
+
+        ul, li {
+            margin-left: 0;
+            margin-right: 0;
+            padding: 0;
+        }
+
+        li {
+            @include fast-rem(padding, ($FAST-line-height / 2) ($FAST-gutter / 2));
+            transition: all .2s;
+
+            &:before {
+                content: none;
+            }
+
+            &:hover {
+                @include fast-background-color(fastColorGet('turquoise'));
+            }
+
+            a {
+                @include fast-rem(padding, ($FAST-line-height / 2) ($FAST-gutter / 2));
+                @include fast-rem(margin, (-($FAST-line-height / 2)) (-($FAST-gutter / 2)));
+                color: fastColorGet($FAST-text-color-dark);
+                display: block;
+                text-decoration: none;
+
+                &:hover {
+                    @include fast-background-color(mix(fastColorGet('turquoise'), black, 80%));
+                }
+            }
+        }
+
+        &:hover {
+            > ul, .dropdown-content {
+                box-shadow: inset 0 0 0 1px rgba(black, .2);
+                max-height: 60vh;
+                opacity: 1;
+            }
+        }
+
+        &[class^="dropdown-border"], &[class*=" dropdown-border"] {
+            .default {
+                background: none;
+
+                &:after {
+                    background: none;
+                    border-left: 2px solid currentcolor;
+                }
+            }
+        }
+    }
+
+    [class^="dropdown-border"], [class*=" dropdown-border"] {
+        .default {
+            background-color: transparent;
+            border-radius: 3px;
+            box-shadow: inset 0 0 0 2px currentColor;
+            transition: color .2s, background-color .2s;
+        }
+    }
+
+    .dropdown-border {
+        .default {
+            @include fast-button-bordered(fastColorGet($FAST-button-default-color));
+        }
+    }
+
+    @each $btn-color in map-get($FAST-data-button, "colors") {
+        $name: nth($btn-color, 1);
+        $color: nth($btn-color, 2);
+
+        .dropdown.dropdown-#{$name}, .dropdown.dropdown-border-#{$name} {
+            li {
+                &:hover {
+                    @include fast-button-fill-color($color);
+                }
+
+                a:hover {
+                    @include fast-background-color(mix($color, black, 80%));
+                }
+            }
+        }
+
+        .dropdown.dropdown-#{$name} {
+            .default {
+                @include fast-button-fill-color($color);
+            }
+        }
+
+        .dropdown.dropdown-border-#{$name} {
+            .default {
+                @include fast-button-bordered($color);
+            }
+        }
+    }
+}

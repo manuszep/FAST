@@ -10,16 +10,78 @@
             <div class="row center">
                 <div class="col">
                     <div class="dropdown">
-                        Default text
+                        <span class="default">Default text</span>
                         <ul>
-                            <li>Option 1</li>
-                            <li>Dropdown option 2</li>
-                            <li>This is a third option</li>
-                            <li>A tiny one</li>
-                            <li>Here comes the last option</li>
-                            <li>I lied...</li>
+                            <li><a href="#">Option 1</a></li>
+                            <li><a href="#">Dropdown option 2</a></li>
+                            <li><a href="#">This is a third option</a></li>
+                            <li><a href="#">A tiny one</a></li>
+                            <li><a href="#">Here comes the last option</a></li>
+                            <li><a href="#">Nope...</a></li>
                         </ul>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Colored dropdown</h2>
+            <p></p>
+            {% highlight 'html' %}
+            {% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <div class="row center">
+                <div class="col">
+                    {% for key, color in data.common.button.colors %}
+                    <div class="dropdown dropdown-{{key}}">
+                        <span class="default">Default text</span>
+                        <ul>
+                            <li><a href="#">Option 1</a></li>
+                            <li><a href="#">Dropdown option 2</a></li>
+                            <li><a href="#">This is a third option</a></li>
+                            <li><a href="#">A tiny one</a></li>
+                            <li><a href="#">Here comes the last option</a></li>
+                            <li><a href="#">Nope...</a></li>
+                        </ul>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Outlined dropdown</h2>
+            <p></p>
+            {% highlight 'html' %}
+            {% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <div class="row center">
+                <div class="col">
+                    {% for key, color in data.common.button.colors %}
+                    <div class="dropdown dropdown-border-{{key}}">
+                        <span class="default">Default text</span>
+                        <ul>
+                            <li><a href="#">Option 1</a></li>
+                            <li><a href="#">Dropdown option 2</a></li>
+                            <li><a href="#">This is a third option</a></li>
+                            <li><a href="#">A tiny one</a></li>
+                            <li><a href="#">Here comes the last option</a></li>
+                            <li><a href="#">Nope...</a></li>
+                        </ul>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
