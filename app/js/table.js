@@ -14,10 +14,10 @@ var FAST = FAST || {};
     var _ = F.Toolkit;
     var header_bottom_pos;
 
-    var _updateTableSize = function() {
-        var scroller = $(this).data('scroller');
+    var _updateTableSize = function(e, data) {
+        var scroller = data.table.data('scroller');
 
-        scroller.width($(this).width());
+        scroller.width(data.table.width());
     };
 
     var _handleScroll = function(e, data) {
@@ -54,7 +54,11 @@ var FAST = FAST || {};
         $(this).data('scroller', $scroll_scroller);
 
         // If the markup changes, some things need to be recalculated
-        $(this).on('DOMSubtreeModified', _updateTableSize);
+        $(this).on('DOMSubtreeModified', function(e) {
+            _updateTableSize(null, {
+                table: $(this)
+            });
+        });
 
         // Bind the scroller to the table scroll
         $scroll_wrapper.on('scroll', function(e) {
@@ -67,7 +71,13 @@ var FAST = FAST || {};
             scroll_wrapper: $scroll_wrapper
         });
 
-        _updateTableSize.apply($(this));
+        _.registerResizeCallback(_updateTableSize, {
+            table: $(this)
+        });
+
+        _updateTableSize(null, {
+            table: $(this)
+        });
     };
 
     /**
