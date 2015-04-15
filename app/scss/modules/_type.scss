@@ -65,7 +65,7 @@ $FAST-type-import: true !default;
         @include fast-rem(line-height, $FAST-paragraph-line-height);
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1, h2, h3, h4, h5, h6, %h1, %h2, %h3, %h4, %h5, %h6, .h1, .h2, .h3, .h4, .h5, .h6 {
         font-weight: $FAST-font-weight;
     }
 
@@ -84,7 +84,7 @@ $FAST-type-import: true !default;
             $letter-spacing: false;
         }
 
-        h#{$i} {
+        h#{$i}, %h#{$i}, .h#{$i} {
             @include fast-type-set($font-size, $margin-bottom, $line-height, $font-weight, $letter-spacing);
         }
     }
