@@ -31,7 +31,7 @@ $FAST-button-large-padding-v: fast-padding-for-height($FAST-button-large-height,
 
     &:hover {
         background-color: $color;
-        box-shadow: inset 0 0 0 1px $color;
+        box-shadow: inset 0 0 0 1px $color, fast-bottom-shadow(2), fast-top-shadow(2);
         color: fastColorContrast($color);
     }
 }
@@ -55,7 +55,7 @@ $FAST-button-large-padding-v: fast-padding-for-height($FAST-button-large-height,
     transition: opacity .2s, box-shadow .3s;
 
     &:hover {
-        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2);
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2), fast-bottom-shadow(2), fast-top-shadow(2);
         opacity: 1;
         text-decoration: none;
     }
@@ -88,7 +88,7 @@ $FAST-button-large-padding-v: fast-padding-for-height($FAST-button-large-height,
     text-transform: none;
 
     &:hover {
-        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2);
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2), fast-bottom-shadow(2), fast-top-shadow(2);
     }
 }
 
@@ -113,7 +113,7 @@ $FAST-button-large-padding-v: fast-padding-for-height($FAST-button-large-height,
     text-transform: none;
 
     &:hover {
-        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2);
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2), fast-bottom-shadow(2), fast-top-shadow(2);
     }
 }
 
