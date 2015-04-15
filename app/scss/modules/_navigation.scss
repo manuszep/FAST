@@ -235,6 +235,15 @@ $FAST-navigation-import: true !default;
                     background-color: fastColorGet($FAST-header-color);
                     display: none;
                     position: absolute;
+
+                    li {
+                        position: relative;
+                    }
+
+                    ul {
+                        left: 100%;
+                        top: 0;
+                    }
                 }
             }
 
@@ -242,7 +251,7 @@ $FAST-navigation-import: true !default;
                 border-radius: 3px;
 
                 &:hover {
-                    ul {
+                    > ul {
                         display: block;
                     }
                 }
