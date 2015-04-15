@@ -1,4 +1,5 @@
 {% include "variables.tpl" %}
+{% include "private_variables.tpl" %}
 
 {% macro table(classes, responsive, responsive_small, data) %}
 
@@ -63,6 +64,7 @@
             <p class="btn-group wide">
                 <a class="btn ico-plus" id="addRow">Add row</a>
                 <a class="btn ico-plus" id="addColumn">Add column</a>
+                <a class="btn ico-magic" id="getData">Generate data</a>
             </p>
             <p class="btn-group wide">
                 <a class="btn btn-small ico-exchange" id="toggleTag">Toggle header</a>
@@ -117,26 +119,17 @@
     </div>
 </section>
 
-<section class="unwrap deco-separator-line medium-split-bg-rev">
-    <div class="row middle">
-        <div class="col medium-6">
 
-        <div class="col medium-6">
-            <h2>Playground</h2>
-            <div>
-                <div class="table-wrapper">
-                    {{ table(false, false, false, data_table) }}
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<script>
+    var data_gen_api_key = "{{ data_gen_api_key }}";
+</script>
 
 {% storeAt "javascripts" %}
 <script>
     var inputs = $('#styler input');
     var btn_add_row = $('#addRow');
     var btn_add_col = $('#addColumn');
+    var btn_get_data = $('#getData');
     var btn_toggle_tag = $('#toggleTag');
     var btn_aling_left = $('#alignLeft');
     var btn_aling_center = $('#alignCenter');
@@ -169,6 +162,12 @@
         $('tr', tbody).each(function() {
             $(this).append(new_td);
         });
+    });
+
+    btn_get_data.on('click', function(e) {
+        e.preventDefault();
+
+        generateData(5, 7);
     });
 
     playground.on('focus', 'td, th', function(e) {
@@ -258,5 +257,85 @@
         $('#playground table').attr("class", table_class);
         textarea.val(replaceAll($('.table-wrapper', playground)[0].outerHTML, ' contenteditable="true"', ''));
     });
+
+    var generateData = function(cols, rows) {
+        var data_types = [
+            {type: 'City', name: 'City'},
+            {type: 'Color', name: 'Color'},
+            {type: 'Company Name', name: 'Company Name'},
+            {type: 'Country', name: 'Country'},
+            {type: 'Country Code', name: 'Country Code'},
+            {type: 'Currency', name: 'Currency'},
+            {type: 'Currency Code', name: 'Currency Code'},
+            {type: 'Date', name: 'Date', min: '1/1/2000', max: '12/31/2015', format: '%m/%d/%Y'},
+            {type: 'Domain Name', name: 'Domain Name'},
+            {type: 'Email Address', name: 'Email Address'},
+            {type: 'First Name (European)', name: 'First Name'},
+            {type: 'Full Name', name: 'Name'},
+            {type: 'Language', name: 'Language'},
+            {type: 'Last Name', name: 'Last Name'},
+            {type: 'Number', name: 'Number'},
+            {type: 'Phone', name: 'Phone'},
+            {type: 'Postal Code', name: 'Postal Code'},
+            {type: 'Street Address', name: 'Street Address'},
+            {type: 'Username', name: 'Username'}
+        ];
+
+        var fields = [];
+
+        for (var i = 0; i < cols; i++) {
+            var random_key = Math.floor(Math.random() * data_types.length);
+            fields.push(data_types[random_key]);
+            data_types.splice(random_key, 1);
+
+            console.log(data_types);
+        }
+
+        var url = 'http://www.mockaroo.com/api/generate.json?count=' + rows + '&key=' + data_gen_api_key +
+                '&fields=' + encodeURIComponent(JSON.stringify(fields));
+
+        $.ajax(url, {
+            dataType: 'jsonp',
+            contentType: 'application/json',
+            success: function(data) {
+                populateTable(data, fields);
+            }
+        });
+    };
+
+    var populateTable = function(data, fields) {
+        var markup = '<table><thead><tr>';
+
+        for (var i = 0; i < fields.length; i++) {
+            markup += '<th contenteditable="true">' + fields[i].name + '</th>';
+        }
+
+        markup += '</tr></thead><tbody>';
+
+        for (var i = 0; i < data.length - 1; i++) {
+            markup += '<tr>';
+
+            for (var j = 0; j < fields.length; j++) {
+                markup += '<td contenteditable="true">' + data[i][fields[j].name] + '</td>';
+            }
+
+            markup += '</tr>';
+        }
+
+        markup += '</tbody><tfoot><tr>';
+
+        for (var i = 0; i < fields.length; i++) {
+            markup += '<td contenteditable="true">' + data[data.length - 1][fields[i].name] + '</td>';
+        }
+
+        markup += '</tr></tfoot></tbody>';
+
+        $('.table-wrapper', playground).html(markup);
+
+        thead_tr = $('thead tr', playground);
+        tfoot_tr = $('tfoot tr', playground);
+        tbody = $('tbody', playground);
+        col_count = fields.length;
+    };
 </script>
 {% endstoreAt %}

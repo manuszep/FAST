@@ -11,15 +11,34 @@ var FAST = FAST || {};
     /**
      *  Private area
      */
+    var _resize_callbacks = [];
+    var _mouse_move_callbacks = [];
+    var _scroll_callbacks = [];
+
     var _handleWindowResize = function(e) {
+        _executeEventCallbacks(this, e, _resize_callbacks);
         $(document).trigger('fast.toolkit.windowResize', e);
     };
 
     var _handleMouseMove = function(e) {
+        _executeEventCallbacks(this, e, _mouse_move_callbacks);
         mouse.x = e.clientX || e.pageX;
         mouse.y = e.clientY || e.pageY
 
         $(document).trigger('fast.toolkit.mouseMove', e);
+    };
+
+    var _handleWindowScroll = function(e) {
+        _executeEventCallbacks(this, e, _scroll_callbacks);
+        $(document).trigger('fast.toolkit.windowScroll', e);
+    };
+
+    var _executeEventCallbacks = function(context, e, callbacks) {
+        for (var i = 0; i < callbacks.length; i++) {
+            var args = [e, callbacks[i].data];
+
+            callbacks[i].func.apply(context, args);
+        }
     };
 
 
@@ -28,6 +47,27 @@ var FAST = FAST || {};
      */
 
     var mouse = {x: 0, y: 0};
+
+    var registerResizeCallback = function(func, data) {
+        _resize_callbacks.push({
+            func: func,
+            data: data
+        });
+    };
+
+    var registerMouseMoveCallback = function(func, data) {
+        _mouse_move_callbacks.push({
+            func: func,
+            data: data
+        });
+    };
+
+    var registerScrollCallback = function(func, data) {
+        _scroll_callbacks.push({
+            func: func,
+            data: data
+        });
+    };
 
     /**
      * is() Checks if an object matches given type
@@ -261,6 +301,7 @@ var FAST = FAST || {};
      */
     $(window).on('resize', debounce(_handleWindowResize, 500));
     $(window).on('mousemove', throttle(_handleMouseMove, 10));
+    $(window).on('scroll', debounce(_handleWindowScroll, 50));
 
 
     /**
@@ -274,6 +315,9 @@ var FAST = FAST || {};
         throttle: throttle,
         debounce: debounce,
         bindIntended: bindIntended,
-        UUID: UUID
+        UUID: UUID,
+        registerResizeCallback: registerResizeCallback,
+        registerMouseMoveCallback: registerMouseMoveCallback,
+        registerScrollCallback: registerScrollCallback
     };
 })(FAST, jQuery);

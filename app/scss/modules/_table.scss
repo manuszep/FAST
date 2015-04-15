@@ -107,6 +107,28 @@ $FAST-table-import: true !default;
       }
    }
 
+   .table-wrapper-wrapper {
+      position: relative;
+
+      .table-wrapper {
+         padding-bottom: 1em;
+      }
+   }
+
+   .table-h-scroll-wrapper {
+      bottom: 0;
+      left: 0;
+      overflow-x: auto;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 1;
+
+      .table-h-scroll {
+         height: 1px;
+      }
+   }
+
    table {
       border-collapse: collapse;
       margin: 0;
@@ -223,6 +245,7 @@ $FAST-table-import: true !default;
                   margin: 0 1%;
                   flex-grow: 1;
                   max-width: 80%;
+                  overflow: hidden;
                }
             }
          }
