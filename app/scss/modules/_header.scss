@@ -24,13 +24,13 @@ $FAST-header-import: true !default;
    ===================================================== */
 @if $FAST-header-import {
     .main-header {
-        margin-bottom: $FAST-line-height * 2;
+        margin-bottom: $FAST-spacing-h-l;
 
         .alpha, .beta {
             @include fast-background-color(fastColorGet($FAST-header-color));
             @include fast-background-anchor-color(fastColorGet($FAST-header-color));
-            @include fast-rem(padding-top, ($FAST-line-height / 2));
-            @include fast-rem(padding-bottom, ($FAST-line-height / 2));
+            @include fast-rem(padding-top, $FAST-inner-spacing-v);
+            @include fast-rem(padding-bottom, $FAST-inner-spacing-v);
             align-items: center;
             display: flex;
 

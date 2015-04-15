@@ -97,7 +97,7 @@ $FAST-table-import: true !default;
    ===================================================== */
 @if $FAST-table-import {
    .table-wrapper {
-      @include fast-rem(margin-bottom, $FAST-line-height);
+      @include fast-rem(margin-bottom, $FAST-spacing-v);
       overflow-x: auto;
       position: relative;
       width: 100%;
@@ -132,7 +132,7 @@ $FAST-table-import: true !default;
    table {
       border-collapse: collapse;
       margin: 0;
-      @include fast-rem(margin-bottom, $FAST-line-height);
+      @include fast-rem(margin-bottom, $FAST-spacing-v);
       max-width: 100%;
       text-align: left;
       width: 100%;

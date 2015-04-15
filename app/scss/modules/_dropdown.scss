@@ -69,7 +69,7 @@ $FAST-dropdown-import: true !default;
         }
 
         li {
-            @include fast-rem(padding, ($FAST-line-height / 2) ($FAST-gutter / 2));
+            @include fast-rem(padding, $FAST-inner-spacing-v $FAST-spacing-h);
             transition: all .2s;
 
             &:before {
@@ -81,8 +81,8 @@ $FAST-dropdown-import: true !default;
             }
 
             a {
-                @include fast-rem(padding, ($FAST-line-height / 2) ($FAST-gutter / 2));
-                @include fast-rem(margin, (-($FAST-line-height / 2)) (-($FAST-gutter / 2)));
+                @include fast-rem(padding, $FAST-inner-spacing-v $FAST-spacing-h);
+                @include fast-rem(margin, (-$FAST-inner-spacing-v) (-$FAST-spacing-h));
                 color: fastColorGet($FAST-text-color-dark);
                 display: block;
                 text-decoration: none;

@@ -30,8 +30,8 @@ $FAST-footer-import: true !default;
     .main-footer {
         @include fast-background-color(fastColorGet($FAST-footer-color));
         @include fast-background-anchor-color(fastColorGet($FAST-footer-color));
-        margin-top: $FAST-line-height * 2;
-        padding: ($FAST-line-height / 2) 0;
+        margin-top: $FAST-spacing-v-l;
+        padding: $FAST-inner-spacing-v 0;
 
         .col :last-child {
             margin-bottom: 0;
