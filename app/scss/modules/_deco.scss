@@ -55,6 +55,24 @@ $FAST-deco-split-bg-dark-color: fastColorGet($FAST-split-bg-color-dark) !default
         }
     }
 
+    .deco-separator-line-thick {
+        border-bottom: 3px solid fastColorGet('grey-xl');
+    }
+
+    .deco-separator-line-thick-pre {
+        border-top: 3px solid fastColorGet('grey-xl');
+    }
+
+    @each $name, $color in $FAST-color-list {
+        .deco-separator-line-thick-#{$name} {
+            border-bottom: 3px solid $color;
+        }
+
+        .deco-separator-line-thick-pre-#{$name} {
+            border-top: 3px solid $color;
+        }
+    }
+
     .split-bg {
         background: transparent;
         background: linear-gradient(to right,  #ffffff 0%,#ffffff 50%,$FAST-deco-split-bg-light-color 50%,$FAST-deco-split-bg-light-color 100%);
@@ -82,6 +100,10 @@ $FAST-deco-split-bg-dark-color: fastColorGet($FAST-split-bg-color-dark) !default
         margin-top: -$FAST-header-spacing;
         padding-top: $FAST-line-height / 2;
         border-bottom: 1px solid #fff;
+    }
+
+    .rounded.rounded {
+        border-radius: $FAST-border-radius;
     }
 
     .circle.circle {

@@ -55,4 +55,10 @@ $FAST-default-import: true !default;
    .center {
       text-align: center;
    }
+
+   @for $i from 1 through 6 {
+      .depth#{$i}.depth#{$i} {
+         @include fast-shadow($i);
+      }
+   }
 }

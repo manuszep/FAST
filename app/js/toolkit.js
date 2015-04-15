@@ -303,6 +303,20 @@ var FAST = FAST || {};
     $(window).on('mousemove', throttle(_handleMouseMove, 10));
     $(window).on('scroll', debounce(_handleWindowScroll, 50));
 
+    /**
+     * Add a fade and slide method to jQuery to avoid the content jumping after the end of fade-out.
+     * @param speed
+     * @param callback
+     * @returns {*}
+     */
+    jQuery.fn.fadeThenSlideToggle = function(speed, callback) {
+        if (this.is(":hidden")) {
+            return this.slideDown(speed).fadeTo(speed, 1, callback);
+        } else {
+            return this.fadeTo(speed, 0).slideUp(speed, callback);
+        }
+    };
+
 
     /**
      *  Module declarations

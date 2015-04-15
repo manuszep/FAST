@@ -56,6 +56,7 @@ $FAST-split-bg-color-dark: "blue-xxxd";
 $FAST-border-width: 1px !default;
 $FAST-border-style: solid !default;
 $FAST-border: $FAST-border-width $FAST-border-style $FAST-border-color !default;
+$FAST-border-radius: .25em;
 
 
 /* Breakpoints.
@@ -127,7 +128,7 @@ $FAST-h2: (
         font-size: 36px,
         font-weight: 300,
         letter-spacing: -1px,
-        line-height: 54px,
+        line-height: 36px,
         margin: $FAST-line-height / 1.5
 ) !default;
 
@@ -171,10 +172,19 @@ $FAST-headings: ($FAST-h1, $FAST-h2, $FAST-h3, $FAST-h4, $FAST-h5, $FAST-h6) !de
 $FAST-gutter: 30px !default;
 
 $FAST-spacing-v: $FAST-line-height !default;
+
+$FAST-inner-spacing-v: $FAST-spacing-v / 2 !default;
 $FAST-spacing-v-xs: $FAST-spacing-v / 2 !default;
 $FAST-spacing-v-s: $FAST-spacing-v / 1.5 !default;
 $FAST-spacing-v-l: $FAST-spacing-v * 2 !default;
 $FAST-spacing-v-xl: $FAST-spacing-v * 3 !default;
+
+$FAST-spacing-h: $FAST-gutter / 2 !default;
+$FAST-inner-spacing-h: $FAST-spacing-h !default;
+$FAST-spacing-h-xs: $FAST-spacing-h / 2 !default;
+$FAST-spacing-h-s: $FAST-spacing-h / 1.5 !default;
+$FAST-spacing-h-l: $FAST-spacing-h * 2 !default;
+$FAST-spacing-h-xl: $FAST-spacing-h * 3 !default;
 
 $FAST-blockquote-spacing: 0 $FAST-gutter $FAST-line-height $FAST-gutter !default;
 

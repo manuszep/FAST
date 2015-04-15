@@ -1,0 +1,243 @@
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Basic panel</h2>
+            <p>A panel is just a container with a default shadow. The content must be wrapped inside <code>panel-zone</code> elements to add the correct padding.</p>
+            {% highlight 'html' %}
+<div class="panel">
+    <div class="panel-zone">
+        ...
+    </div>
+</div>{% endhighlight %}
+        </div>
+        <div class="col medium-6 small-8 tiny4">
+            <div class="row">
+                <div class="col">
+                    <div class="panel">
+                        <div class="panel-zone">
+                            <h2>This is a panel</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At commodi delectus doloremque, eaque earum, eos fugiat incidunt magnam magni minima modi natus porro provident quo, reiciendis rem unde vel veniam?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="unwrap deco-separator-line medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Panel zones</h2>
+            <p></p>
+            {% highlight 'html' %}
+<div class="panel depth2">
+    <div class="panel-zone bg-turquoise">
+        ...
+    </div>
+</div>
+
+<div class="panel depth2">
+    <div class="panel-zone bg-cyan bordered">
+        ...
+    </div>
+</div>
+
+<div class="panel depth2">
+    <div class="panel-zone deco-separator-line-thick-pre-blue-l">
+        ...
+    </div>
+</div>
+
+<div class="panel depth2 rounded">
+    <div class="panel-zone bg-yellow">
+        ...
+    </div>
+</div>
+
+<div class="panel depth2 rounded">
+    <div class="panel-zone bg-orange bordered">
+        ...
+    </div>
+    <div class="panel-zone">
+        ...
+    </div>
+</div>{% endhighlight %}
+        </div>
+        <div class="col medium-6 small-8 tiny4">
+            <div class="row">
+                <div class="col">
+                    <div class="panel depth2">
+                        <div class="panel-zone bg-turquoise">
+                            <h2>Colored zone</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At commodi delectus doloremque, eaque earum, eos fugiat incidunt magnam magni minima modi natus porro provident quo, reiciendis rem unde vel veniam?</p>
+                        </div>
+                    </div>
+
+                    <div class="panel depth2">
+                        <div class="panel-zone bg-cyan bordered">
+                            <h2>Bordered zone</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At commodi delectus doloremque, eaque earum, eos fugiat incidunt magnam magni minima modi natus porro provident quo, reiciendis rem unde vel veniam?</p>
+                        </div>
+                    </div>
+
+                    <div class="panel depth2">
+                        <div class="panel-zone deco-separator-line-thick-pre-blue-l">
+                            <h2>Rounded panel with colored zone</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At commodi delectus doloremque, eaque earum, eos fugiat incidunt magnam magni minima modi natus porro provident quo, reiciendis rem unde vel veniam?</p>
+                        </div>
+                    </div>
+
+                    <div class="panel depth2 rounded">
+                        <div class="panel-zone bg-yellow">
+                            <h2>Rounded panel with colored zone</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At commodi delectus doloremque, eaque earum, eos fugiat incidunt magnam magni minima modi natus porro provident quo, reiciendis rem unde vel veniam?</p>
+                        </div>
+                    </div>
+
+                    <div class="panel depth2 rounded">
+                        <div class="panel-zone bg-orange bordered">
+                            <h2>Combined zones</h2>
+                        </div>
+                        <div class="panel-zone">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At commodi delectus doloremque, eaque earum, eos fugiat incidunt magnam magni minima modi natus porro provident quo, reiciendis rem unde vel veniam?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Control zones</h2>
+            <p></p>
+            {% highlight 'html' %}
+            {% endhighlight %}
+        </div>
+        <div class="col medium-6 small-8 tiny4">
+            <div class="row">
+                <div class="col">
+                    <div class="panel may-minimise may-close">
+                        <div class="panel-zone">
+                            <h2>This is a panel</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At commodi delectus doloremque, eaque earum, eos fugiat incidunt magnam magni minima modi natus porro provident quo, reiciendis rem unde vel veniam?</p>
+                        </div>
+                        <div class="actions">
+                            <a class="btn ico-remove panel-close" href="#">Cancel</a>
+                            <a class="btn btn-primary ico-a-angle-right" href="#">Continue</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="unwrap deco-separator-line medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Advanced example panel</h2>
+            <p>The <code>panel-zone</code> elements can be combined to build more advanced styles.</p>
+            <p>Note the deeper shadow is caused by the <code>depth2</code> class.</p>
+            {% highlight 'html' %}
+<div class="panel depth2 center">
+    <div class="panel-zone bg-turquoise">
+        ...
+    </div>
+    <div class="panel-zone bg-turquoise-l color-white">
+        ...
+    </div>
+    <div class="panel-zone">
+        ...
+    </div>
+</div>{% endhighlight %}
+        </div>
+        <div class="col medium-6 small-8 tiny-4">
+            <div class="row">
+                <div class="col">
+                    <div class="panel depth2 center may-minimise">
+                        <div class="panel-zone bg-turquoise">
+                            <h6>Wednesday Apr. 15 2015</h6>
+                        </div>
+                        <div class="panel-zone bg-turquoise-l color-white">
+                            <div class="lead">APR</div>
+                            <div class="lead"><strong>15</strong></div>
+                            <div class="lead">2015</div>
+                        </div>
+                        <div class="panel-zone">
+                            <div class="row">
+                                <div class="col c1"><span class="ico-angle-left"></span></div>
+                                <div class="col center">April 2015</div>
+                                <div class="col c1"><span class="ico-angle-right"></span></div>
+                            </div>
+
+                            <table>
+                                <thead>
+                                    <tr class="dimmed">
+                                        <td>M</td>
+                                        <td>T</td>
+                                        <td>W</td>
+                                        <td>T</td>
+                                        <td>F</td>
+                                        <td>S</td>
+                                        <td>S</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>4</td>
+                                        <td>5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>7</td>
+                                        <td>8</td>
+                                        <td>9</td>
+                                        <td>10</td>
+                                        <td>11</td>
+                                        <td>12</td>
+                                    </tr>
+                                    <tr>
+                                        <td>13</td>
+                                        <td>14</td>
+                                        <td>15</td>
+                                        <td>16</td>
+                                        <td>17</td>
+                                        <td>18</td>
+                                        <td>19</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td>21</td>
+                                        <td>22</td>
+                                        <td>23</td>
+                                        <td>24</td>
+                                        <td>25</td>
+                                        <td>26</td>
+                                    </tr>
+                                    <tr>
+                                        <td>27</td>
+                                        <td>28</td>
+                                        <td>29</td>
+                                        <td>30</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -8,5 +8,6 @@ var FAST = FAST || {};
 
     F.Tooltip.init();
     F.Table.init();
+    F.Panel.init();
 
 })(FAST, jQuery);
