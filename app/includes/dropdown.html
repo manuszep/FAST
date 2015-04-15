@@ -1,10 +1,25 @@
+<section>
+    <p>Dropdowns provide a nice way to add menus anywhere without overloading the UI.</p>
+    <p>With a mouse, a (long enough) hover or a click will expand the menu and a mouse-out or click outside will close it. If the default element is a link, it can be clicked a second time to be activated.</p>
+    <p>On touch devices, a tap will expand the menu and a second tap on the default link will activate it. Tapping anywhere else or scrolling will close the dropdown.</p>
+</section>
 <section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
     <div class="row middle">
         <div class="col medium-6">
             <h2>Basic dropdown</h2>
-            <p></p>
+            <p>The default dropdown looks like a split button. The icon is automatically set and the <code>span</code> with the <code>default</code> class could as well be an anchor tag.</p>
             {% highlight 'html' %}
-{% endhighlight %}
+<div class="dropdown">
+    <span class="default">Default text</span>
+    <ul>
+        <li><a href="#">Option 1</a></li>
+        <li><a href="#">Dropdown option 2</a></li>
+        <li><a href="#">This is a third option</a></li>
+        <li><a href="#">A tiny one</a></li>
+        <li><a href="#">Here comes the last option</a></li>
+        <li><a href="#">Nope...</a></li>
+    </ul>
+</div>{% endhighlight %}
         </div>
         <div class="col medium-6">
             <div class="row center">
@@ -30,9 +45,19 @@
     <div class="row middle">
         <div class="col medium-6">
             <h2>Colored dropdown</h2>
-            <p></p>
+            <p>All colors available for buttons are available for dropdowns.</p>
             {% highlight 'html' %}
-            {% endhighlight %}
+<div class="dropdown dropdown-primary">
+    <span class="default">Default text</span>
+    <ul>
+        <li><a href="#">Option 1</a></li>
+        <li><a href="#">Dropdown option 2</a></li>
+        <li><a href="#">This is a third option</a></li>
+        <li><a href="#">A tiny one</a></li>
+        <li><a href="#">Here comes the last option</a></li>
+        <li><a href="#">Nope...</a></li>
+    </ul>
+</div>{% endhighlight %}
         </div>
         <div class="col medium-6">
             <div class="row center">
@@ -62,9 +87,19 @@
     <div class="row middle">
         <div class="col medium-6">
             <h2>Outlined dropdown</h2>
-            <p></p>
+            <p>All bordered styles available for buttons can be used with dropdowns.</p>
             {% highlight 'html' %}
-            {% endhighlight %}
+<div class="dropdown dropdown-border-secondary">
+    <span class="default">Default text</span>
+    <ul>
+        <li><a href="#">Option 1</a></li>
+        <li><a href="#">Dropdown option 2</a></li>
+        <li><a href="#">This is a third option</a></li>
+        <li><a href="#">A tiny one</a></li>
+        <li><a href="#">Here comes the last option</a></li>
+        <li><a href="#">Nope...</a></li>
+    </ul>
+</div>{% endhighlight %}
         </div>
         <div class="col medium-6">
             <div class="row center">
@@ -82,6 +117,119 @@
                         </ul>
                     </div>
                     {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Sizing dropdown</h2>
+            <p></p>
+            {% highlight 'html' %}
+<div class="dropdown dropdown-primary dropdown-tiny">
+    ...
+</div>
+<div class="dropdown dropdown-primary dropdown-small">
+    ...
+</div>
+<div class="dropdown dropdown-primary">
+    ...
+</div>
+<div class="dropdown dropdown-primary dropdown-large">
+    ...
+</div>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <div class="row center">
+                <div class="col">
+                    <div class="dropdown dropdown-primary dropdown-tiny">
+                        <span class="default">Default text</span>
+                        <ul>
+                            <li><a href="#">Option 1</a></li>
+                            <li><a href="#">Dropdown option 2</a></li>
+                            <li><a href="#">This is a third option</a></li>
+                            <li><a href="#">A tiny one</a></li>
+                            <li><a href="#">Here comes the last option</a></li>
+                            <li><a href="#">Nope...</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown dropdown-primary dropdown-small">
+                        <span class="default">Default text</span>
+                        <ul>
+                            <li><a href="#">Option 1</a></li>
+                            <li><a href="#">Dropdown option 2</a></li>
+                            <li><a href="#">This is a third option</a></li>
+                            <li><a href="#">A tiny one</a></li>
+                            <li><a href="#">Here comes the last option</a></li>
+                            <li><a href="#">Nope...</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown dropdown-primary">
+                        <span class="default">Default text</span>
+                        <ul>
+                            <li><a href="#">Option 1</a></li>
+                            <li><a href="#">Dropdown option 2</a></li>
+                            <li><a href="#">This is a third option</a></li>
+                            <li><a href="#">A tiny one</a></li>
+                            <li><a href="#">Here comes the last option</a></li>
+                            <li><a href="#">Nope...</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown dropdown-primary dropdown-large">
+                        <span class="default">Default text</span>
+                        <ul>
+                            <li><a href="#">Option 1</a></li>
+                            <li><a href="#">Dropdown option 2</a></li>
+                            <li><a href="#">This is a third option</a></li>
+                            <li><a href="#">A tiny one</a></li>
+                            <li><a href="#">Here comes the last option</a></li>
+                            <li><a href="#">Nope...</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="unwrap deco-separator-line deco-separator-line-pre medium-split-bg-rev">
+    <div class="row middle">
+        <div class="col medium-6">
+            <h2>Discreet dropdown</h2>
+            <p>Dropdowns can look completely naked by adding a <code>discreet</code> class instead of the default class.</p>
+            {% highlight 'html' %}
+<div class="dropdown">
+    <span class="discreet">Default text</span>
+    <ul>
+        <li><a href="#">Option 1</a></li>
+        <li><a href="#">Dropdown option 2</a></li>
+        <li><a href="#">This is a third option</a></li>
+        <li><a href="#">A tiny one</a></li>
+        <li><a href="#">Here comes the last option</a></li>
+        <li><a href="#">Nope...</a></li>
+    </ul>
+</div>{% endhighlight %}
+        </div>
+        <div class="col medium-6">
+            <div class="row center">
+                <div class="col">
+                    <div class="dropdown">
+                        <span class="discreet">Default text</span>
+                        <ul>
+                            <li><a href="#">Option 1</a></li>
+                            <li><a href="#">Dropdown option 2</a></li>
+                            <li><a href="#">This is a third option</a></li>
+                            <li><a href="#">A tiny one</a></li>
+                            <li><a href="#">Here comes the last option</a></li>
+                            <li><a href="#">Nope...</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
