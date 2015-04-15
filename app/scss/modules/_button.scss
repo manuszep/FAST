@@ -10,6 +10,10 @@
    ===================================================== */
 
 $FAST-button-import: true !default;
+$FAST-button-padding-v: fast-padding-for-height($FAST-button-height, $FAST-button-line-height);
+$FAST-button-small-padding-v: fast-padding-for-height($FAST-button-small-height, $FAST-button-line-height);
+$FAST-button-tiny-padding-v: fast-padding-for-height($FAST-button-tiny-height, $FAST-button-line-height);
+$FAST-button-large-padding-v: fast-padding-for-height($FAST-button-large-height, $FAST-button-line-height);
 
 
 /* Functions.
@@ -37,7 +41,7 @@ $FAST-button-import: true !default;
    ===================================================== */
 %btn {
     @include fast-button-fill-color;
-    @include fast-rem(padding, (($FAST-button-height - $FAST-button-line-height) / 2) $FAST-button-padding-h);
+    @include fast-rem(padding, $FAST-button-padding-v $FAST-button-padding-h);
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0);
     border-radius: 2px;
     cursor: pointer;
@@ -63,8 +67,8 @@ $FAST-button-import: true !default;
     &:before, &:after {
         background-color: rgba(0,0,0,.2);
         border-right: 1px solid rgba(#fff, .6);
-        @include fast-rem(margin, -(($FAST-button-height - $FAST-button-line-height) / 2) ($FAST-button-padding-h) (-(($FAST-button-height - $FAST-button-line-height) / 2)) (-$FAST-button-padding-h));
-        @include fast-rem(padding, (($FAST-button-height - $FAST-button-line-height) / 2) 0);
+        @include fast-rem(margin, (-$FAST-button-padding-v) ($FAST-button-padding-h) (-$FAST-button-padding-v) (-$FAST-button-padding-h));
+        @include fast-rem(padding, $FAST-button-padding-v 0);
         min-width: $FAST-button-height;
         width: 2em;
     }
@@ -74,6 +78,74 @@ $FAST-button-import: true !default;
         @include fast-rem(margin-right, (-$FAST-button-padding-h));
         border-right: none;
         border-left: 1px solid rgba(#fff, .6);
+    }
+}
+
+%btn-small {
+    @include fast-rem(padding, $FAST-button-small-padding-v ($FAST-button-padding-h / 2));
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0);
+    letter-spacing: 0;
+    text-transform: none;
+
+    &:hover {
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2);
+    }
+}
+
+%btn-split-small {
+    &:before, &:after {
+        @include fast-rem(margin, (-$FAST-button-small-padding-v) ($FAST-button-padding-h / 2) (-$FAST-button-small-padding-v) (-$FAST-button-padding-h / 2));
+        @include fast-rem(padding, $FAST-button-small-padding-v 0);
+        min-width: $FAST-button-small-height;
+        width: $FAST-button-small-height;
+    }
+
+    &:after {
+        @include fast-rem(margin-left, ($FAST-button-padding-h / 2));
+        @include fast-rem(margin-right, (-$FAST-button-padding-h / 2));
+    }
+}
+
+%btn-tiny {
+    @include fast-rem(padding, ($FAST-button-tiny-padding-v) ($FAST-button-padding-h / 2));
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0);
+    letter-spacing: 0;
+    text-transform: none;
+
+    &:hover {
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2);
+    }
+}
+
+%btn-split-tiny {
+    &:before, &:after {
+        @include fast-rem(margin, (-$FAST-button-tiny-padding-v) ($FAST-button-padding-h / 2) (-$FAST-button-tiny-padding-v) (-$FAST-button-padding-h / 2));
+        @include fast-rem(padding, $FAST-button-tiny-padding-v 0);
+        min-width: $FAST-button-tiny-height;
+        width: $FAST-button-tiny-height;
+    }
+
+    &:after {
+        @include fast-rem(margin-left, ($FAST-button-padding-h / 2));
+        @include fast-rem(margin-right, (-$FAST-button-padding-h / 2));
+    }
+}
+
+%btn-large {
+    @include fast-rem(padding, ($FAST-button-large-padding-v) ($FAST-button-padding-h * 2));
+}
+
+%btn-split-large {
+    &:before, &:after {
+        @include fast-rem(margin, (-$FAST-button-large-padding-v) ($FAST-button-padding-h * 2) (-$FAST-button-large-padding-v) (-$FAST-button-padding-h * 2));
+        @include fast-rem(padding, $FAST-button-large-padding-v 0);
+        min-width: $FAST-button-large-height;
+        width: $FAST-button-large-height;
+    }
+
+    &:after {
+        @include fast-rem(margin-left, ($FAST-button-padding-h * 2));
+        @include fast-rem(margin-right, (-$FAST-button-padding-h * 2));
     }
 }
 
@@ -108,33 +180,31 @@ $FAST-button-import: true !default;
     }
 
     .btn-small {
-        @include fast-rem(padding, (($FAST-button-height - $FAST-button-line-height) / 4) ($FAST-button-padding-h / 2));
-        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0);
-        letter-spacing: 0;
-        text-transform: none;
+        @extend %btn-small;
 
-        &:hover {
-            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2);
+        &.btn-split {
+            @extend %btn-split-small;
         }
     }
 
     .btn-tiny {
-        @include fast-rem(padding, (($FAST-button-height - $FAST-button-line-height) / 14) ($FAST-button-padding-h / 2));
-        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0);
-        letter-spacing: 0;
-        text-transform: none;
+        @extend %btn-tiny;
 
-        &:hover {
-            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2);
+        &.btn-split {
+            @extend %btn-split-tiny;
         }
     }
 
     .btn-large {
-        @include fast-rem(padding, ($FAST-button-height - $FAST-button-line-height) $FAST-button-padding-h * 2);
+        @extend %btn-large;
+
+        &.btn-split {
+            @extend %btn-split-large;
+        }
     }
 
     .btn.ico-only {
-        @include fast-rem(padding, (($FAST-button-height - $FAST-button-line-height) / 2) ($FAST-button-padding-h / 2));
+        @include fast-rem(padding, ($FAST-button-padding-v) ($FAST-button-padding-h / 2));
     }
 
     .btn-split {
